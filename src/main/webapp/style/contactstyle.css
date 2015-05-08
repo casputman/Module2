@@ -1,0 +1,180 @@
+.btn {
+  border-radius: 4px;
+  transition: all .3s;
+}
+
+.siteHeader {
+  border-bottom: 1px solid #eee;
+}
+.ex1 {
+margin-left: 70px;
+}
+.logo {
+  margin-bottom: 0;
+  height: 80px;
+}
+@media (min-width: 48em) {
+  .logo {
+    float: left;
+  }
+}
+.button {
+	font-style:none;
+	outline:0px;
+	width:120px;
+	height:80px;
+}
+
+.rightfloat {
+	float: left;
+	width: 50%;
+	
+	}
+
+.float {
+	float: left;
+	width: 50%;
+	}
+
+.buttonlink:link,
+.buttonlink:visited,
+.buttonlink:hover,
+.buttonlink:active {
+color:#000000; 
+background-color:transparent; 
+text-decoration:none
+}
+
+@media (min-width: 48em) {
+  .nav {
+	background-color: #ADADAD;
+	margin-top: 20px;
+    float: right;
+	border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 10px; 
+	border-bottom-right-radius: 10px
+  }
+}
+.nav li {
+  font-style: none;
+  font-weight: bold;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 2.5;
+  text-align: center;
+  margin: 0px;
+  width: 150px;
+  height: 40px;
+}
+.nav li:hover{
+  background-color: #BDBDBD;
+}
+.nav li:first-of-type {
+  margin-left: 0;
+}
+.nav a:first-child li {
+    border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
+}
+.nav a:last-child li{
+    border-top-right-radius: 10px; 
+	border-bottom-right-radius: 10px;
+}
+
+.masthead {
+  background: url("../images/Headerlogo.jpg") no-repeat center center;
+  height: 400px;
+  background-size: cover;
+  padding-bottom: 36px;
+  padding-top: 36px;
+}
+@media (min-width: 48em) {
+  .masthead {
+    padding: 75px 0;
+  }
+}
+
+.masthead-title {
+  margin-top: 0;
+}
+
+.siteContent {
+  padding: 50px;
+  
+}
+.siteContent .btn {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+}
+.siteContent .btn:hover {
+  background-color: #eee;
+}
+
+.siteFooter {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.image {
+width: 100%;
+}
+
+.forumImg {
+ width: 80%;
+ display: inline-block;
+ float: left;
+}
+
+.forumTips {
+ list-style: none;
+ font-style: bold;
+ display: inline-block;
+ float: right;
+ top: 0px;
+ margin: 0px;
+ width: 20%;
+ margin-top: 50px;
+} 
+
+.forumTips li{
+ font-weight: bold;
+ padding: 0px;
+ border: 1px solid black;
+}
+
+.forumHolder {
+display: inline-block;
+}
+
+.but {
+padding: 8px;
+width: 100%;
+height:100%;
+}
+
+#but1 {
+	display: none;
+	float: right;
+	width: 20%;
+	border: 1px solid black;
+	margin-top: 30px;
+	
+}
+
+#but1 p {
+	margin-left: 10px;
+}
+
+#but2 {
+	display: none;
+	float: right;
+	width: 20%;
+	border: 1px solid black;
+	margin-top: 30px;
+}
+
+#but2 p {
+	margin-left: 10px;
+}

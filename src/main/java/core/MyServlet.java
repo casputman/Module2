@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +30,9 @@ public abstract class MyServlet extends HttpServlet {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Connection connection;
+    
+    private String action;
+    private List<String> urlParts = new LinkedList<>();
     
     // --- Class usage -----------------------------------------------------------------------
 
@@ -52,25 +58,39 @@ public abstract class MyServlet extends HttpServlet {
     /**
      * @return the request
      */
-    public HttpServletRequest getRequest() {
-        return request;
+    protected HttpServletRequest getRequest() {
+        return this.request;
     }
 
     /**
      * @return the response
      */
-    public HttpServletResponse getResponse() {
-        return response;
+    protected HttpServletResponse getResponse() {
+        return this.response;
     }
     
     /**
      * @return the database connection
      */
-    public Connection getConnection() {
-        return connection;
+    protected Connection getConnection() {
+        return this.connection;
     }
     
+    /**
+     * @return The action parameter set in a GET or POST variable.
+     */
+    protected String getAction() {
+        return this.action;
+    }
     
+    /**
+     * @return The url parts, which were separated by "/". Any empty values are removed, as is a 
+     *         "ubercoaching" value before or after the first "/". If no valid values are left,
+     *         the list will still contain one empty value.
+     */
+    protected List<String> getUrlParts() {
+        return this.urlParts;
+    }
     
     // --- Request handlers ------------------------------------------------------------------
 
@@ -84,6 +104,8 @@ public abstract class MyServlet extends HttpServlet {
             throws ServletException, IOException {
         this.request = request;
         this.response = response;
+        parseGeneralRequestData();
+        System.out.println(urlParts);
     }
 
     /**
@@ -96,6 +118,7 @@ public abstract class MyServlet extends HttpServlet {
             throws ServletException, IOException {
         this.request = request;
         this.response = response;
+        parseGeneralRequestData();
     }
     
     @Override
@@ -109,6 +132,32 @@ public abstract class MyServlet extends HttpServlet {
         }
         
         super.destroy();
+    }
+    
+    /**
+     * Parse the general request data: the url parts and the optional action parameter.
+     */
+    private void parseGeneralRequestData() {
+        // Action parameter.
+        String actionParam = (String) request.getParameter("action");
+        this.action = actionParam == null ? "" : actionParam;
+        
+        // URL parts
+        // Arrays.asList(T...) returns an immutable List, so we put it in a new (mutable) List.
+        urlParts = new LinkedList<>();
+        urlParts.addAll(Arrays.asList(getRequest().getRequestURI().split("\\/")));
+        List<String> removableParts = new LinkedList<>();
+        for (int i = 0; i < urlParts.size(); i++) {
+            // Remove the entry if it's empty or one of the first two equals the company name.
+            if (urlParts.get(i).isEmpty() || (urlParts.get(i).equals("ubercoaching") && i <= 1)) {
+                removableParts.add(urlParts.get(i));
+            }
+        }
+        urlParts.removeAll(removableParts);
+        // Make sure the List is at least one size.
+        if (urlParts.size() == 0) {
+            urlParts.add("");
+        }
     }
     
     /**

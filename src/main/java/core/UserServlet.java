@@ -2,8 +2,6 @@ package core;
 
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +12,8 @@ public class UserServlet extends MyServlet {
 
     // --- Instance variables ----------------------------------------------------------------
     
-    
     // --- Getters ---------------------------------------------------------------------------
 
-    
-    
-    
     // --- Request handlers ------------------------------------------------------------------
     
     /**
@@ -28,42 +22,51 @@ public class UserServlet extends MyServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doGet(request, response);
-        
-        String action = (String) request.getParameter("action");
-        action = action == null ? "" : action;
-        
-        String[] parts = getRequest().getRequestURI().split("/");
-        String urlAction = parts[parts.length - 1];
-        
-        switch (urlAction) {
-        case "logout":
-            doLogout();
-            break;
-        case "login": default:
-            getRequest().getRequestDispatcher("/login.jsp").forward(getRequest(), getResponse());
-            break;
+        synchronized (request.getSession()) {
+            super.doGet(request, response);
+            
+            switch (getUrlParts().get(0)) {
+            case "logout":
+                doLogout();
+                break;
+            case "login":
+                forwardTo("/login.jsp");
+                break;
+            }
         }
     }
     
     /**
-     * Logging in.
+     * Any POST request concerning the user.
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doPost(request, response);
-        
-        switch ((String) request.getParameter("action")) {
-        case "login":
-            doLogin();
-            break;
-        case "register":
-            doRegister();
-            break;
+        synchronized (request.getSession()) {
+            super.doPost(request, response);
+            
+            switch (getUrlParts().get(0)) {
+            // page: /login     with parameters: action=login
+            case "login":
+                if (getAction().equals("login")) {
+                    doLogin();
+                }
+                break;
+            // page: /register  with parameters: action=register
+            case "register":
+                if (getAction().equals("register")) {
+                    doRegister();
+                }
+                break;
+            }
         }
     }
     
+    /**
+     * POST /login
+     * @throws ServletException
+     * @throws IOException
+     */
     private void doLogin() throws ServletException, IOException {
         String username = getRequest().getParameter("username");
         String password = getRequest().getParameter("password");
@@ -81,11 +84,21 @@ public class UserServlet extends MyServlet {
         }
     }
     
+    /**
+     * GET /logout
+     * @throws ServletException
+     * @throws IOException
+     */
     private void doLogout() throws ServletException, IOException {
         Validation.destroy(getRequest(), getResponse());
-        getRequest().getRequestDispatcher("/login.jsp").forward(getRequest(), getResponse());
+        forwardTo("/login.jsp");
     }
     
+    /**
+     * POST /register
+     * @throws ServletException
+     * @throws IOException
+     */
     private void doRegister() throws ServletException, IOException {
         
     }

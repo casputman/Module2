@@ -1,0 +1,173 @@
+﻿.btn {
+  border-radius: 4px;
+  transition: all .3s;
+}
+
+.siteHeader {
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  margin-bottom: 0;
+  height: 80px;
+}
+@media (min-width: 48em) {
+  .logo {
+    float: left;
+  }
+}
+.button {
+	font-style:none;
+	outline:0px;
+	width:120px;
+	height:80px;
+}
+
+.buttonlink:link,
+.buttonlink:visited,
+.buttonlink:hover,
+.buttonlink:active {
+color:#000000; 
+background-color:transparent; 
+text-decoration:none
+}
+.nav .buttonlink ul:first-of-type {
+    border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
+}
+
+@media (min-width: 48em) {
+  .nav {
+	background-color: #ADADAD;
+	margin-top: 20px;
+    float: right;
+	border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 10px; 
+	border-bottom-right-radius: 10px
+  }
+}
+.nav li {
+  font-style: none;
+  font-weight: bold;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 2.5;
+  text-align: center;
+  margin: 0px;
+  width: 150px;
+  height: 40px;
+}
+.nav li:hover{
+  background-color: #BDBDBD;
+}
+.nav li:hover:first-child {
+}
+.nav li:first-of-type {
+  margin-left: 0;
+}
+.nav a:first-child li {
+    border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
+}
+.nav a:last-child li{
+    border-top-right-radius: 10px; 
+	border-bottom-right-radius: 10px;
+}
+.masthead {
+  background: url("../images/Loginwallpaper.jpg") no-repeat center center;
+		
+  height: 600px;
+  font-weight: bold;
+  background-size: fit;
+  padding-bottom: 36px;
+  padding-top: 36px;
+  
+
+}
+.login {
+    border-radius: 25px;
+    background: #adadad;
+    padding: 10px;
+    width: 400px;
+    height: 500px;
+	border: 4px solid black;
+	margin-left: auto;
+	margin-right: auto;
+}
+	
+.fadein {
+    font-size: 16px;
+	
+    text-align: center;
+
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.mytext {
+width: 300px;
+height: 30px;
+border: 2px solid black;
+color: #666
+
+}
+
+@media (min-width: 48em) {
+  .masthead {
+    padding: 75px 0;
+  }
+}
+
+ /* unvisited link */
+a:link {
+    color: dimgray;
+}
+
+/* visited link */
+a:visited {
+    color: dimgray;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: yellow;
+}
+
+.masthead-title {
+  margin-top: 0;
+}
+
+.siteContent {
+  padding: 50px 0;
+}
+.siteContent .btn {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+}
+.siteContent .btn:hover {
+  background-color: #eee;
+}
+
+.siteFooter {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.image {
+width: 100%;
+}
