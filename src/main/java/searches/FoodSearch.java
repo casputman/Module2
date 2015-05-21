@@ -36,7 +36,7 @@ public class FoodSearch extends HttpServlet {
             System.out.println("Database connection could not be established: " + e);
             e.printStackTrace();
         }
-        //Validation.setConnection(connection);
+        FoodAdd.setConnection(connection);
     }
     
     // --- Getters ---------------------------------------------------------------------------
@@ -71,6 +71,7 @@ public class FoodSearch extends HttpServlet {
 	    			foods.add(rs.getString(1));
 	    			i++;
 	    		}
+	    		connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
