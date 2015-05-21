@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,7 @@ public abstract class MyServlet extends HttpServlet {
     private static final String DB_USERNAME = "di18";
     private static final String DB_PASSWORD = "Q.Z4J2CPz";
     private static final String DB_HOSTNAME = "farm14.ewi.utwente.nl";
+    private static final String DB_SCHEMA = "uber";
     private static final int DB_PORT = 5432;
     private static final String DATABASE = "di18";
     
@@ -46,10 +48,16 @@ public abstract class MyServlet extends HttpServlet {
             
             connection = DriverManager.getConnection(url, DB_USERNAME, DB_PASSWORD);
             //connection.setAutoCommit(false);
+            Statement st = getConnection().createStatement();
+            st.execute("SET search_path TO '" + DB_SCHEMA + "'");
+            st.close();
+            
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Database connection could not be established: " + e);
             e.printStackTrace();
         }
+        
+        
         Validation.setConnection(connection);
     }
     

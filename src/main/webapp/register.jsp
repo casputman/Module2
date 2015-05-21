@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -21,35 +21,36 @@
 	</a>
     <nav class="nav">
       <ul>
-		<a href="login" class="buttonlink" ><li>Login</li></a>
-        <a href="start" class="buttonlink" ><li>Home</li></a>
-        <a href="startAbout" class="buttonlink" ><li>About</li></a>
-        <a href="contact" class="buttonlink" ><li>Contact</li></a>
+		<li><a href="login" class="buttonlink">Login</a></li>
+        <li><a href="start" class="buttonlink">Home</a></li>
+        <li><a href="startAbout" class="buttonlink">About</a></li>
+        <li><a href="contact" class="buttonlink">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
 
-  <main class="siteContent container">
+  <div class="siteContent container">
 	<div>
 		<form method="post" action="webapp">
 		</form>
 		<p>
-		<b>Please insert your username:</b> </br>
+		<b>Please insert your username:</b> <br />
 		<input type="text" name="login" value="" placeholder=" Username" class="mytext">
 		</p>
 		<p>
-		<b>Please insert your password: </b></br>
+		<b>Please insert your password: </b><br />
 		<input type="password" name="password" value="" placeholder=" Password" class="mytext">
 		</P>
 		<p>
-		<b>Please insert your password again:</b></br>
+		<b>Please insert your password again:</b><br />
 		<input type="password" name="password" value="" placeholder=" Password" class="mytext">
 		</P>
-		<button  onclick="location.href='registerinfo.html'">
+		<button  onclick="location.href='registerInfo'">
 		<b>Register now!</b>
 		</button>
 	</div>
-  </main>
+  </div>
 
   <footer class="siteFooter container">
     <p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>

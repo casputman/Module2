@@ -1,4 +1,4 @@
-﻿.btn {
+.btn {
   border-radius: 4px;
   transition: all .3s;
 }
@@ -75,7 +75,7 @@ text-decoration:none
 	border-bottom-right-radius: 10px;
 }
 .masthead {
-  background: url("../images/Loginwallpaper.jpg") no-repeat center center;
+  background: url("../images/loginwallpaper.jpg") no-repeat center center;
 		
   height: 600px;
   font-weight: bold;

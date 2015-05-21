@@ -29,7 +29,7 @@ public class UserServlet extends MyServlet {
             case "logout":
                 doLogout();
                 break;
-            case "login":
+            case "login": default:
                 forwardTo("/login.jsp");
                 break;
             }
@@ -50,15 +50,20 @@ public class UserServlet extends MyServlet {
             case "login":
                 if (getAction().equals("login")) {
                     doLogin();
+                    return;
                 }
                 break;
             // page: /register  with parameters: action=register
             case "register":
                 if (getAction().equals("register")) {
                     doRegister();
+                    return;
                 }
                 break;
             }
+            
+            // No page selected.
+            doGet(getRequest(), getResponse());
         }
     }
     
@@ -70,14 +75,13 @@ public class UserServlet extends MyServlet {
     private void doLogin() throws ServletException, IOException {
         String username = getRequest().getParameter("username");
         String password = getRequest().getParameter("password");
-        boolean keepData = "keepData".equals(getRequest().getParameter("keepData"));
+        boolean remember = "1".equals(getRequest().getParameter("remember_me"));
         
         User user;
         if ((user = Validation.validate(username, password)) != null) {
-            //TODO: save login in session.
-            Validation.save(user, keepData, getRequest(), getResponse());
+            Validation.save(user, remember, getRequest(), getResponse());
             getRequest().setAttribute("user", user);
-            getRequest().getRequestDispatcher("/welcome.jsp").forward(getRequest(), getResponse());
+            getRequest().getRequestDispatcher("/start").forward(getRequest(), getResponse());
         } else {
             getRequest().setAttribute("loginError", true);
             getRequest().getRequestDispatcher("/login.jsp").forward(getRequest(), getResponse());

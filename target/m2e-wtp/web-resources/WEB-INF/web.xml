@@ -95,4 +95,8 @@
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/yourHomePage</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WebpageServlet</servlet-name>
+		<url-pattern>/registerInfo</url-pattern>
+	</servlet-mapping>
 </web-app>

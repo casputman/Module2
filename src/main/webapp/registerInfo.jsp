@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -49,7 +49,7 @@
 			<input type="age" name="age" value="" placeholder="Age" class="mytext">
 			years old
 		</p>
-		<button onclick="location.href='webapp.html'">
+		<button onclick="location.href='webapp'">
 			<b>Finish registration</b>
 		</button>
 	</div>

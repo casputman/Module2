@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Formatter;
 
 import javax.servlet.http.Cookie;
@@ -46,16 +47,16 @@ public class Validation {
         try {
             PreparedStatement ps = getConnection().prepareStatement(
                       " SELECT  * "
-                    + " FROM    Users "
+                    + " FROM    uber.user "
                     + " WHERE   username = ? "
-                    + "     AND passwordHash = ?; ");
+                    + "     AND password = ? ; ");  
+            
             ps.setString(1, username);
             ps.setString(2, hashPassword(password));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User();
                 user.setFrom(rs);
-                //TODO: set User object.
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,7 +110,7 @@ public class Validation {
         // Cookie will be comprised of the following format:
         // "UID:hash"
         // where hash is the sha1 hash of the user's hashed password, ip and user agent.
-        return    String.valueOf(user.getUID()) + ":"
+        return    String.valueOf(user.getIdUser()) + ":"
                 + hashCookie(
                         user.getPasswordHash() + ":"
                       + request.getRemoteAddr() + ":" 
@@ -148,7 +149,9 @@ public class Validation {
         }
     }
     
-    
+    public static void main(String[] args) {
+        System.out.println(hashPassword("root"));
+    }
     public static void validateOrForward(Connection connection, HttpServletRequest request) {
         // fetch UID from the cookie
         // fetch User from the UID

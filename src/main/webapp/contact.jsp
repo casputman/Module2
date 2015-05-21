@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -21,15 +21,16 @@
 	</a>
     <nav class="nav">
       <ul>
-		<a href="login" class="buttonlink" ><li>Login</li></a>
-        <a href="start" class="buttonlink" ><li>Home</li></a>
-        <a href="startAbout" class="buttonlink" ><li>About</li></a>
-        <a href="contact" class="buttonlink" ><li>Contact</li></a>
+		<li><a href="login" class="buttonlink">Login</a></li>
+        <li><a href="start" class="buttonlink">Home</a></li>
+        <li><a href="startAbout" class="buttonlink">About</a></li>
+        <li><a href="contact" class="buttonlink">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
 
-  <main class="siteContent container">
+  <div class="siteContent container">
     <div class="row">
 	<div class="rightfloat">
 		<div class="column-16">
@@ -49,10 +50,8 @@
 		<iframe width="600" height="450" frameborder="2px" style="border:solid black"
 src="https://www.google.com/maps/embed/v1/place?q=762%20Sunnyvale%20Saratoga%20Road%2C%20Sunnyvale%2C%20Californi%C3%AB%2C%20Verenigde%20Staten&key=AIzaSyDCdkQq_Q2ZBf-Cl01vaEHF4p9-bwE3Onk"></iframe>
 		</div>
-		</div>
-		
 	</div>
-  </main>
+  </div>
 
   <footer class="siteFooter container">
     <p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
