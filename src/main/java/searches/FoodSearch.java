@@ -55,9 +55,8 @@ public class FoodSearch extends core.MyServlet {
     	return foods;
     }
     
-    public static void main(String args[]) { 
-    	FoodSearch foodsearch = new FoodSearch();
-    	foodsearch.init();
+    public void main(String args[]) { 
+    	super.init();
     	ArrayList food = foodsearch("aar");
     	System.out.println(food.toString());
     }

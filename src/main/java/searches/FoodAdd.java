@@ -49,9 +49,8 @@ public class FoodAdd extends core.MyServlet{
 		}
 		
 	}
-	public static void main(String args[]) {
-		FoodSearch foodsearch = new FoodSearch();
-		foodsearch.init();
+	public void main(String args[]) {
+		super.init();
 		addFood("aardappelen", 3, 1);
 		System.out.println("shit is gefixed");
 	}
