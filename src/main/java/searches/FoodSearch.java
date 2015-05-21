@@ -7,42 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServlet;
 
 
 
-public class FoodSearch extends HttpServlet {
+public class FoodSearch extends core.MyServlet {
 	private static final long serialVersionUID = 1L;
 	
     private static Connection connection;
-    
-    private static final String DB_USERNAME = "di18";
-    private static final String DB_PASSWORD = "Q.Z4J2CPz";
-    private static final String DB_HOSTNAME = "farm14.ewi.utwente.nl";
-    private static final int DB_PORT = 5432;
-    private static final String DATABASE = "di18";
-    
-    
-    @Override
-    public void init() {
-        
-        // Via a main() method this works.
-        String url = "jdbc:postgresql://" + DB_HOSTNAME + ":" + DB_PORT + "/" + DATABASE;
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, DB_USERNAME, DB_PASSWORD);
-            //connection.setAutoCommit(false);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Database connection could not be established: " + e);
-            e.printStackTrace();
-        }
-        FoodAdd.setConnection(connection);
-    }
-    
+
     // --- Getters ---------------------------------------------------------------------------
     
     //TODO: make this thread safe.
-    public static Connection getConnection() {
+    public static Connection getThisConnection() {
         return connection;
     }
     
@@ -60,7 +36,7 @@ public class FoodSearch extends HttpServlet {
     	PreparedStatement ps;
     	ArrayList foods = new ArrayList();
 		try {
-			ps = getConnection().prepareStatement(
+			ps = getThisConnection().prepareStatement(
 					" SELECT  name "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? ");

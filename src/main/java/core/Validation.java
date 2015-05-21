@@ -58,6 +58,7 @@ public class Validation {
                 user = new User();
                 user.setFrom(rs);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import searches.ActivityAdd;
+import searches.ActivitySearch;
+import searches.FoodAdd;
+import searches.FoodSearch;
+
 public abstract class MyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -59,6 +64,10 @@ public abstract class MyServlet extends HttpServlet {
         
         
         Validation.setConnection(connection);
+        FoodSearch.setConnection(connection);
+        FoodAdd.setConnection(connection);
+        ActivitySearch.setConnection(connection);
+        ActivityAdd.setConnection(connection);
     }
     
     // --- Getters ---------------------------------------------------------------------------

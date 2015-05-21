@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import core.User;
 
-public class ActivitySearch {
+public class ActivitySearch extends core.MyServlet{
+    private static final long serialVersionUID = 1L;
 	// --- Class variables -------------------------------------------------------------------
 
     private static Connection connection;
@@ -14,7 +15,7 @@ public class ActivitySearch {
     // --- Getters ---------------------------------------------------------------------------
     
     //TODO: make this thread safe.
-    public static Connection getConnection() {
+    public static Connection getThisConnection() {
         return connection;
     }
     
@@ -31,7 +32,7 @@ public class ActivitySearch {
     public static User validate(String username, String password) {
         User user = null;
         try {
-            PreparedStatement ps = getConnection().prepareStatement(
+            PreparedStatement ps = getThisConnection().prepareStatement(
                       " SELECT Name "
                     + " FROM ? "
                     + " WHERE  "

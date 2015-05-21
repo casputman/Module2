@@ -5,13 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FoodAdd {
+public class FoodAdd extends core.MyServlet{
+    private static final long serialVersionUID = 1L;
 
 	 private static Connection connection;
     // --- Getters ---------------------------------------------------------------------------
     
     //TODO: make this thread safe.
-    public static Connection getConnection() {
+    public static Connection getThisConnection() {
         return connection;
     }
     
@@ -25,14 +26,14 @@ public class FoodAdd {
 	public static void addFood(String food, Integer userID, double amount) {
 		PreparedStatement ps;
 		try {
-			ps = getConnection().prepareStatement(
+			ps = getThisConnection().prepareStatement(
 					" SELECT  idfood "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name = ? ");
 			ps.setString(1, food);
 			ResultSet rs = ps.executeQuery();
 			
-			ps = getConnection().prepareStatement(
+			ps = getThisConnection().prepareStatement(
 					"INSERT INTO uber.intake (amount, user_iduser, idfood)" + 
 						" VALUES (?, ?, ?)");
 			ps.setDouble(1, amount);
@@ -53,6 +54,5 @@ public class FoodAdd {
 		foodsearch.init();
 		addFood("aardappelen", 3, 1);
 		System.out.println("shit is gefixed");
-		
 	}
 }
