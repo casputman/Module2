@@ -22,6 +22,10 @@
 	  }
 		return false;
    }
+  function textShizzle() {
+	  var text = document.getElementById("textinput").value; //|| document.getElementById("textinput").innerText;
+	  document.getElementById("textDing").innerHTML = text;
+  }
 	</script>
   
   
@@ -38,6 +42,7 @@
         <a href="InAbout" class="buttonlink" ><li>About</li></a>
         <a href="InContact" class="buttonlink" ><li>Contact</li></a>
 		<a href="#" class="buttonlink" onclick="logOut()"><li>Log Out</li></a>
+	  </ul>	
     </nav>
   </header>
 
@@ -46,13 +51,15 @@
     <p><b>Enter your food over here:</b></p>
 		<div id="tfheader">
 
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
-		</form>
-	<div class="tfclear"></div>
-	
+			<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
+		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" value="Search" class="tfbutton">
+			</form>
+		<div class="tfclear">
+		</div>
 	</div>
-	
+	<div id="textDing"> 
+		<p>hier komt text</p>
+	</div>
 	<div>
 		<ul>
 			<li>Vodka - 100 Kcal - 1x</li>
@@ -62,12 +69,13 @@
 	
 	<p><b>Enter your activities over here:</b></p>
 	<div id="tfheader">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
+		<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
 	<div>
+		
 		<ul>
 			<li>Chopping wood - 200 Kcal</li>
 			<li>Carrying tree logs - 500 Kcal</li>
@@ -76,7 +84,7 @@
 	
 	<p><b>Enter your hours of sleep here:</b></p>
 		<div id="tfheader">
-		From <input type="text" class="tftextinput" name="q" size="16" maxlength="60"> till <input type="text" class="tftextinput" name="q" size="16" maxlength="60"><input type="submit" value="Submit" class="tfbutton">
+		From <input type="text" class="tftextinput" name="q" size="16" maxlength="60"> till <input type="text" class="tftextinput" name="q" size="16" maxlength="60" autocomplete="on"><input type="submit" value="Submit" class="tfbutton">
 	<div class="tfclear"></div>
 	</div>
 	
