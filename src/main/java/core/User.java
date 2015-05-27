@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,7 +14,6 @@ public class User {
     private float length;
     private String username;
     private String passwordHash;
-    private String name;
     private String email;
     
 
@@ -70,14 +70,6 @@ public class User {
 
 
     /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-
-    /**
      * @return the email
      */
     public String getEmail() {
@@ -93,13 +85,35 @@ public class User {
      */
     public void setFrom(ResultSet resultSet) throws SQLException {
     
-        idUser = resultSet.getInt("uid");
+        idUser = resultSet.getInt("iduser");
         surname = resultSet.getString("surname");
         firstname = resultSet.getString("firstname");
         length = resultSet.getFloat("length");
         username = resultSet.getString("username");
-        passwordHash = resultSet.getString("password");
-        name = resultSet.getString("name");
         email = resultSet.getString("email");
+        passwordHash = resultSet.getString("password");
+    }
+    
+    
+    // --- Class Usage -----------------------------------------------------------------------
+    
+    public static User fromIdUser(int iduser) {
+        User user = null;
+        try {
+            PreparedStatement ps = Validation.getConnection().prepareStatement(
+                      " SELECT  * "
+                    + " FROM    uber.user "
+                    + " WHERE   iduser = ? ; ");  
+            
+            ps.setInt(1, iduser);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setFrom(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

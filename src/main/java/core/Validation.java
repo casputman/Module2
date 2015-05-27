@@ -1,5 +1,6 @@
 package core;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,14 +8,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Formatter;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Validation {
+    
+    // --- Constants -------------------------------------------------------------------------
+    
+    private final static String COOKIE_NAME = "auth";
+    
+    private final static String REDIRECT_URL = "/login";
+    
     
     // --- Class variables -------------------------------------------------------------------
 
@@ -58,7 +66,6 @@ public class Validation {
                 user = new User();
                 user.setFrom(rs);
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,7 +135,7 @@ public class Validation {
     public static void save(User user, boolean keepData,
             HttpServletRequest request, HttpServletResponse response) {
         request.getSession().setAttribute("user", user);
-        Cookie cookie = new Cookie("auth", generateCookieString(user, request));
+        Cookie cookie = new Cookie(COOKIE_NAME, generateCookieString(user, request));
         if (keepData) {
             cookie.setMaxAge(3600 * 24 * 365 * 5); // five years
         }
@@ -150,16 +157,66 @@ public class Validation {
         }
     }
     
-    public static void main(String[] args) {
-        System.out.println(hashPassword("root"));
+    
+    public static boolean validated(HttpServletRequest request) {
+        User user = null;
+        Integer iduser = null;
+        
+        // User is already logged in.
+        if ((user = (User) request.getSession().getAttribute("user")) != null) {
+            request.setAttribute("user", user);
+            return true;
+        }
+        
+        /* Fetch UID from the cookie. */
+        String cookieString = null;
+        // Get correct cookie.
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(COOKIE_NAME)) {
+                cookieString = cookie.getValue();
+                break;
+            }
+        }
+        // Redirect if cookie is invalid.
+        if (cookieString == null || !cookieString.contains(":")) {
+            return false;
+        }
+        String[] cookieStringParts = cookieString.split(":", 2);
+        try {
+            iduser = Integer.valueOf(cookieStringParts[0]);
+            // Fetch User from the idUser.
+            if ((user = User.fromIdUser(iduser)) == null) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        
+        // Generate cookie.
+        String generatedCookie = generateCookieString(user, request); 
+        
+        // Compare cookie.
+        // If cookie is the same, login. if not, redirect.
+        // Also, set the request attribute user to the correct one.
+        if (generatedCookie.equals(cookieString)) {
+            request.getSession().setAttribute("user", user);
+            request.setAttribute("user", user);
+            return true;
+        } else {
+            return false;
+        }
     }
-    public static void validateOrForward(Connection connection, HttpServletRequest request) {
-        // fetch UID from the cookie
-        // fetch User from the UID
-        // generate cookie
-        // compare cookie
-        // if cookie is the same, login. if not, redirect.
-        // also, set the request attribute user to the correct one.
+    
+    
+    public static boolean validateOrForward(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        
+        if (!validated(request)) {
+            request.getRequestDispatcher(REDIRECT_URL).forward(request, response);
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

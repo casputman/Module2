@@ -24,6 +24,11 @@ public class WebpageServlet extends MyServlet {
             throws ServletException, IOException {
         super.doGet(request, response);
         
+        if (!Validation.validateOrForward(request, response)) {
+            return;
+        }
+        
+        
         switch (getUrlParts().get(0)) {
         default:
             // Just show the page.
