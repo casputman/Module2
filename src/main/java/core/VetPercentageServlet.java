@@ -5,41 +5,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BmiServlet extends MyServlet {
+public class VetPercentageServlet extends MyServlet {
 	private static final long serialVersionUID = 1L;
 	
 	 // --- Instance variables ----------------------------------------------------------------
-	private double height;
+	private double middel;
 	private double weight;
-	private BMI bmi;
+	private VetPercentage vpt;
 	private User user;
+	private String gender;
 	
 	private static Connection connection;
 	
-	public BmiServlet() {
+	public VetPercentageServlet() {
 		this.init();
 	}
     // --- Getters ---------------------------------------------------------------------------
     
     //TODO: make this thread safe.
-    public static Connection getBMIConnection() {
-        return BmiServlet.connection;
+    public static Connection getVPTConnection() {
+        return VetPercentageServlet.connection;
     }
     
     // --- Setters ---------------------------------------------------------------------------
     
     public static void setConnection(Connection connection) {
-        BmiServlet.connection = connection;
+        VetPercentageServlet.connection = connection;
     }
 	
     /**
      * 
      */
-	public void determineBMI() {
+	public void determineVPT() {
 		PreparedStatement ps;
 		try {
-			ps = getBMIConnection().prepareStatement(
-					" SELECT  w.weight, u.height, ?, w.user_IDuser "
+			ps = getVPTConnection().prepareStatement(
+					" SELECT  w.weight, u.middel, ?, w.user_IDuser, u.gender "
 							+ " FROM    user u, weight w "
 							+ " WHERE w.user_IDuser = ? "
 							+ " AND w.date = ( SELECT MAX(w.date) FROM weight w, user u WHERE w.user_IDuser = ?");
@@ -49,38 +50,52 @@ public class BmiServlet extends MyServlet {
 			ps.setString(3, input );
 	    	ResultSet rs = ps.executeQuery();
 	    	while (rs.next()) {
-	    		height = rs.getDouble(1);
+	    		middel = rs.getDouble(1);
 	    		weight = rs.getDouble(2);
+	    		gender = rs.getString(5);
 	    	}
 	    		connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BMICalculate();
+		if (gender.equals("m")){
+		VPTCalculateMan();
+		}
+		else { VPTCalculateVrouw(); 
+		}
 	}
 	
 	/**
 	 * 
 	 */
-	public void BMICalculate() {
-		double heightArg = height;
+	public void VPTCalculateMan() {
+		double middelArg = middel;
 		double weightArg = weight;
-		double bmiArg = (weightArg/Math.pow((heightArg/100),2));
-		bmi.setBMI(bmiArg);
-		insertBMI(bmiArg);
+		double vptArg = (((-98.42+4.15*(middelArg/2.54)-0.082*(weightArg*2.2))/weightArg*2.2));
+		vpt.setVPT(vptArg);
+		insertVPT(vptArg);
 	}
-	
 	/**
 	 * 
 	 */
-	public void insertBMI(double bmiArg) {
+	public void VPTCalculateVrouw() {
+		double middelArg = middel;
+		double weightArg = weight;
+		double vptArg = (((-76.76+4.15*(middelArg/2.54)-0.082*(weightArg*2.2))/weightArg*2.2));
+		vpt.setVPT(vptArg);
+		insertVPT(vptArg);
+	}
+	/**
+	 * 
+	 */
+	public void insertVPT(double vptArg) {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"INSERT INTO bmi" + 
+					"INSERT INTO vpt" + 
 						" VALUES (?, ?)");
-			String input = String.valueOf(bmiArg);
+			String input = String.valueOf(vptArg);
 			ps.setString(1, input);
 			String input2 = String.valueOf(user.getIdUser());
 			ps.setString(2, input2);
@@ -92,5 +107,11 @@ public class BmiServlet extends MyServlet {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
 	
 }
