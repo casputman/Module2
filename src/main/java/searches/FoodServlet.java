@@ -28,6 +28,11 @@ import core.MyServlet;
             synchronized (request.getSession()) {
                 super.doGet(request, response);
    
+                switch (getUrlParts().get(0)) {
+                case "search":
+                    FoodSearch foodSearch = new FoodSearch();
+                    foodSearch.foodsearch("fuck");
+                }
             }
         }
         
@@ -39,27 +44,9 @@ import core.MyServlet;
                 throws ServletException, IOException {
             synchronized (request.getSession()) {
                 super.doPost(request, response);
-                
-                switch (getUrlParts().get(0)) {
-                // page: /login     with parameters: action=login
-                case "login":
-                    if (getAction().equals("login")) {
-                  
-                        return;
-                    }
-                    break;
-                // page: /register  with parameters: action=register
-                case "register":
-                    if (getAction().equals("register")) {
-                  
-                        return;
-                    }
-                    break;
-                }
-                
                 // No page selected.
                 doGet(getRequest(), getResponse());
-            }
+            } 
         }
         
         /**
