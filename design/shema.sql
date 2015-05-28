@@ -107,6 +107,7 @@ ALTER TABLE uber.usage
   email character varying(45) NOT NULL UNIQUE,
   password character varying(160) NOT NULL,
   gender character varying(1),
+  age integer,
   CONSTRAINT user_pkey PRIMARY KEY (iduser) 
 )
 WITH (
