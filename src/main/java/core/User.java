@@ -15,6 +15,8 @@ public class User {
     private String username;
     private String passwordHash;
     private String email;
+    private BMI bmi;
+    private VetPercentage vet;
     
 
     // --- Constructors ----------------------------------------------------------------------
@@ -75,11 +77,43 @@ public class User {
     public String getEmail() {
         return email;
     }
-
+    
+    /**
+     * 
+     * @return
+     */
+    public VetPercentage getUserVet() {
+		return vet;
+	}
+    
+    /**
+     * 
+     * @return
+     */
+	public BMI getUserBMI() {
+		return bmi;
+	}
     
     // --- Setters ---------------------------------------------------------------------------
 
-    /**
+	/**
+	 * 
+	 * @param vet
+	 */
+	public void setUserVet(VetPercentage vet) {
+		this.vet = vet;
+	}
+	
+	/**
+	 * 
+	 * @param bmi
+	 */
+	public void setUserBMI(BMI bmi) {
+		this.bmi = bmi;
+	}
+
+
+	/**
      * Store the values from a ResultSet
      * @param resultSet The result set which has the pointer at the correct row. 
      */
@@ -116,4 +150,5 @@ public class User {
         }
         return user;
     }
+
 }
