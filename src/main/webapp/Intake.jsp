@@ -25,7 +25,9 @@
   function textShizzle() {
 	  var text = document.getElementById("textinput").value; //|| document.getElementById("textinput").innerText;
 	  document.getElementById("textDing").innerHTML = text;
+	  
   }
+
 	</script>
   
   
@@ -51,8 +53,8 @@
     <p><b>Enter your food over here:</b></p>
 		<div id="tfheader">
 
-			<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
-		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" value="Search" class="tfbutton">
+			<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
+		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" value="search" class="tfbutton">
 			</form>
 		<div class="tfclear">
 		</div>

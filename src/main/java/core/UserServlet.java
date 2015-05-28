@@ -31,7 +31,7 @@ public class UserServlet extends MyServlet {
                 break;
             case "login": default:
                 if (Validation.validated(request)) {
-                    forwardTo("/start");
+                    forwardTo("/webapp");
                     return;
                 }
                 forwardTo("/login.jsp");
