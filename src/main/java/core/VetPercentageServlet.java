@@ -15,31 +15,13 @@ public class VetPercentageServlet extends MyServlet {
 	private User user;
 	private String gender;
 	
-	private static Connection connection;
-	
-	public VetPercentageServlet() {
-		this.init();
-	}
-    // --- Getters ---------------------------------------------------------------------------
-    
-    //TODO: make this thread safe.
-    public static Connection getVPTConnection() {
-        return VetPercentageServlet.connection;
-    }
-    
-    // --- Setters ---------------------------------------------------------------------------
-    
-    public static void setConnection(Connection connection) {
-        VetPercentageServlet.connection = connection;
-    }
-	
     /**
      * 
      */
 	public void determineVPT() {
 		PreparedStatement ps;
 		try {
-			ps = getVPTConnection().prepareStatement(
+			ps = getConnection().prepareStatement(
 					" SELECT  w.weight, u.middel, ?, w.user_IDuser, u.gender "
 							+ " FROM    user u, weight w "
 							+ " WHERE w.user_IDuser = ? "
@@ -54,7 +36,6 @@ public class VetPercentageServlet extends MyServlet {
 	    		weight = rs.getDouble(2);
 	    		gender = rs.getString(5);
 	    	}
-	    		connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +81,6 @@ public class VetPercentageServlet extends MyServlet {
 			String input2 = String.valueOf(user.getIdUser());
 			ps.setString(2, input2);
 			ps.execute();
-	    	connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

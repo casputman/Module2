@@ -14,31 +14,13 @@ public class BmiServlet extends MyServlet {
 	private BMI bmi;
 	private User user;
 	
-	private static Connection connection;
-	
-	public BmiServlet() {
-		this.init();
-	}
-    // --- Getters ---------------------------------------------------------------------------
-    
-    //TODO: make this thread safe.
-    public static Connection getBMIConnection() {
-        return BmiServlet.connection;
-    }
-    
-    // --- Setters ---------------------------------------------------------------------------
-    
-    public static void setConnection(Connection connection) {
-        BmiServlet.connection = connection;
-    }
-	
     /**
      * 
      */
 	public void determineBMI() {
 		PreparedStatement ps;
 		try {
-			ps = getBMIConnection().prepareStatement(
+			ps = getConnection().prepareStatement(
 					" SELECT  w.weight, u.height, ?, w.user_IDuser "
 							+ " FROM    user u, weight w "
 							+ " WHERE w.user_IDuser = ? "
@@ -52,7 +34,6 @@ public class BmiServlet extends MyServlet {
 	    		height = rs.getDouble(1);
 	    		weight = rs.getDouble(2);
 	    	}
-	    		connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +66,6 @@ public class BmiServlet extends MyServlet {
 			String input2 = String.valueOf(user.getIdUser());
 			ps.setString(2, input2);
 			ps.execute();
-	    	connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
