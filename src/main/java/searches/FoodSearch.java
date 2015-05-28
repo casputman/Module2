@@ -13,30 +13,15 @@ import java.util.ArrayList;
 public class FoodSearch extends core.MyServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private static Connection connection;
-
-    // --- Getters ---------------------------------------------------------------------------
-    
-    //TODO: make this thread safe.
-    public static Connection getThisConnection() {
-        return connection;
-    }
-    
-    // --- Setters ---------------------------------------------------------------------------
-    
-    public static void setConnection(Connection connection) {
-        FoodSearch.connection = connection;
-    }
-    
     
     // --- Commands --------------------------------------------------------------------------
     
 
-    public static ArrayList foodsearch(String food) {
+    public ArrayList foodsearch(String food) {
     	PreparedStatement ps;
     	ArrayList foods = new ArrayList();
 		try {
-			ps = getThisConnection().prepareStatement(
+			ps = getConnection().prepareStatement(
 					" SELECT  name "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? ");
@@ -47,7 +32,6 @@ public class FoodSearch extends core.MyServlet {
 	    			foods.add(rs.getString(1));
 	    			i++;
 	    		}
-	    		connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
