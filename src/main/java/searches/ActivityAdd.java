@@ -2,14 +2,11 @@ package searches;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import core.User;
 
 public class ActivityAdd extends core.MyServlet {
     private static final long serialVersionUID = 1L;
-	// --- Class variables -------------------------------------------------------------------
+    // --- Class variables -------------------------------------------------------------------
 
     private static Connection connection;
     
@@ -19,33 +16,37 @@ public class ActivityAdd extends core.MyServlet {
     public static Connection getThisConnection() {
         return connection;
     }
+      
+    // --- Commands --------------------------------------------------------------------------
     
-    // --- Setters ---------------------------------------------------------------------------
     
     public static void setConnection(Connection connection) {
         ActivityAdd.connection = connection;
     }
     
     
-    // --- Commands --------------------------------------------------------------------------
-    
-    
-    public static User validate(String username, String password) {
-        User user = null;
+    public static void addActivity(String activity, Integer userID, double amount) {
+        PreparedStatement ps;
         try {
-            PreparedStatement ps = getThisConnection().prepareStatement(
-                      " SELECT  * "
-                    + " FROM    Users "
-                    + " WHERE   username = ? "
-                    + "     AND passwordHash = ?; ");
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            }
-        catch (SQLException e) {
+            ps = getThisConnection().prepareStatement(
+                    "INSERT INTO uber.usage (amount, user_iduser, activities_name)" + 
+                        " VALUES (?, ?, ?)");
+            ps.setDouble(1, amount);
+            ps.setInt(2, userID);
+            ps.setString(3, activity);
+            ps.execute();
+            connection.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return user;
+        
     }
-
+    public static void main(String args[]) {
+        ActivityAdd activityAdd = new ActivityAdd();
+        activityAdd.init();
+        addActivity("Walk/run, playing with children, moderate", 3, 1);
+        System.out.println("Ya nigga nigga fixed allo dem chizzle, beef hooked"); 
+    }
 }
 

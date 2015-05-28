@@ -32,7 +32,6 @@ public class FoodAdd extends core.MyServlet{
 							+ " WHERE   name = ? ");
 			ps.setString(1, food);
 			ResultSet rs = ps.executeQuery();
-			
 			ps = getThisConnection().prepareStatement(
 					"INSERT INTO uber.intake (amount, user_iduser, idfood)" + 
 						" VALUES (?, ?, ?)");
