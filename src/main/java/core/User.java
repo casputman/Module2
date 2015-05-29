@@ -175,14 +175,14 @@ public class User {
     	double vet = 0;
     	try {
             PreparedStatement ps = Validation.getConnection().prepareStatement(
-                      " SELECT  bmi "
-                    + " FROM    uber.bmi "
+                      " SELECT  fatpercentage "
+                    + " FROM    uber.fat "
                     + " WHERE   iduser = ? ; ");  
             
             ps.setInt(1, iduser);
             rs = ps.executeQuery();
             while(rs.next()) {
-            	vet = rs.getDouble("bmi");
+            	vet = rs.getDouble("fatpercentage");
             }
         } catch (SQLException e) {
             e.printStackTrace();
