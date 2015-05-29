@@ -24,7 +24,6 @@ public class UserServlet extends MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
-            
             switch (getUrlParts().get(0)) {
             case "logout":
                 doLogout();

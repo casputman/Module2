@@ -16,18 +16,23 @@ public class FoodSearch extends core.MyServlet {
     
 
     public ArrayList<String> foodsearch(String food) {
+        super.init();
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
-			ps = getConnection().prepareStatement(
+			ps = super.getConnection().prepareStatement(
 					" SELECT  name "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? ");
-	    	ps.setString(1, food + "%");
+	    	ps.setString(1, food + "%"); 
 	    	ResultSet rs = ps.executeQuery();
 	    	int i = 0;
 	    		while (rs.next() && i<=5) {
-	    			foods.add(rs.getString(1));
+	    		    if (i == 5) {
+	    		        foods.add(rs.getString(1));
+	    		    } else {
+	    			foods.add(rs.getString(1) + ":");
+	    		    }
 	    			i++;
 	    		}
 		} catch (SQLException e) {
@@ -37,9 +42,9 @@ public class FoodSearch extends core.MyServlet {
     	return foods;
     }
     
-    public void main(String args[]) { 
-    	super.init();
-    	ArrayList<String> food = foodsearch("aar");
-    	System.out.println(food.toString());
-    }
+//    public static void main(String args[]) { 
+//    	super.init();
+//    	ArrayList<String> food = foodsearch("aar");
+//    	System.out.println(food.toString());
+//    }
 }
