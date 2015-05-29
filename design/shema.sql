@@ -39,7 +39,7 @@ ALTER TABLE uber.bmi
  CREATE TABLE uber.intake
 (
   amount double precision NOT NULL,
-  "Datetime" timestamp with time zone NOT NULL DEFAULT now(),
+  intaketime timestamp with time zone NOT NULL DEFAULT now(),
   user_iduser integer NOT NULL,
   idintake bigserial NOT NULL,
   idfood integer NOT NULL,
