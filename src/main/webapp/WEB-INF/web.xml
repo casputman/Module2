@@ -83,6 +83,7 @@
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/statistics</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/webapp</url-pattern>
