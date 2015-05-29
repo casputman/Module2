@@ -126,7 +126,7 @@ public class User {
         username = resultSet.getString("username");
         email = resultSet.getString("email");
         passwordHash = resultSet.getString("password");
-        setBMIVPT(resultSet);
+        setBMIVPT(idUser);
     }
     
     
@@ -197,20 +197,42 @@ public class User {
         return user;
     }
     
-    public void setBMIVPT(ResultSet resultSet) {
-    	double bmi = 0;
-    	double vet = 0;
-		try {
-			bmi = resultSet.getDouble("bmi");
-			vet = resultSet.getDouble("weight");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		BMI bmiArg = new BMI(bmi);
-		this.bmi = bmiArg;
-    	VetPercentage vetArg = new VetPercentage(vet);
-    	this.vet = vetArg;
+    public void setBMIVPT(int iduser) {
+     	ResultSet rs = null;
+       	double bmi = 0;
+       	try {
+       		 PreparedStatement ps = Validation.getConnection().prepareStatement(
+       		                      " SELECT  bmi "
+       		                    + " FROM    uber.bmi "
+       		                    + " WHERE   user_iduser = ? ; ");  
+       		            
+       		 ps.setInt(1, iduser);
+       		 rs = ps.executeQuery();
+       		            while (rs.next()) {
+       		            	bmi = rs.getDouble("bmi");
+       		            }
+       		        } catch (SQLException e) {
+       		            e.printStackTrace();
+       		        }
+       		    	BMI bmiArg = new BMI(bmi);
+       		 		this.bmi = bmiArg;
+       		    	double vet = 0;
+       		    	try {
+       		            PreparedStatement ps = Validation.getConnection().prepareStatement(
+       		                      " SELECT  bmi "
+       		                    + " FROM    uber.bmi "
+       		                    + " WHERE   iduser = ? ; ");  
+       		            
+       		            ps.setInt(1, iduser);
+       		            rs = ps.executeQuery();
+       		            while(rs.next()) {
+       		            	vet = rs.getDouble("bmi");
+       		            }
+       		        } catch (SQLException e) {
+       		            e.printStackTrace();
+       		        }
+       		     	VetPercentage vetArg = new VetPercentage(vet);
+       		     	this.vet = vetArg;
     }
 
 }
