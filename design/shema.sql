@@ -39,7 +39,7 @@ ALTER TABLE uber.bmi
  CREATE TABLE uber.intake
 (
   amount double precision NOT NULL,
-  "Datetime" timestamp with time zone NOT NULL DEFAULT now(),
+  intaketime timestamp with time zone NOT NULL DEFAULT now(),
   user_iduser integer NOT NULL,
   idintake bigserial NOT NULL,
   idfood integer NOT NULL,
@@ -133,4 +133,21 @@ WITH (
 );
 ALTER TABLE uber.weight
   OWNER TO di18;
+  
+  CREATE TABLE uber.fat
+  (
+  fatpercentage double precision NOT NULL,
+  "Date" date NOT NULL DEFAULT ('now'::text)::date,
+  user_iduser integer NOT NULL,
+  idfat bigserial NOT NULL,
+  CONSTRAINT fat_pkey PRIMARY KEY (idfat),
+  CONSTRAINT fat_user_iduser_fkey FOREIGN KEY (user_iduser)
+	REFERENCES uber."user" (iduser) MATCH SIMPLE
+	ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+ OIDS = FALSE
+);
+ALTER TABLE uber.fat
+	OWNER TO di18;
   
