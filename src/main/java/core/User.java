@@ -153,6 +153,50 @@ public class User {
         return user;
     }
     
+    public static User fromUsername(String username) {
+        User user = null;
+        try {
+            PreparedStatement ps = Validation.getConnection().prepareStatement(
+                      "SELECT   * "
+                    + "FROM     uber.user "
+                    + "WHERE    username = ? ;");
+            
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setFrom(rs);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
+    public static User fromEmail(String email) {
+        User user = null;
+        try {
+            PreparedStatement ps = Validation.getConnection().prepareStatement(
+                      "SELECT   * "
+                    + "FROM     uber.user "
+                    + "WHERE    email = ? ;");
+            
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setFrom(rs);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
     public void setBMIVPT(ResultSet resultSet) {
     	double bmi = 0;
     	double vet = 0;

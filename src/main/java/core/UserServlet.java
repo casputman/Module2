@@ -3,8 +3,9 @@ package core;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ public class UserServlet extends MyServlet {
         synchronized (request.getSession()) {
             super.doGet(request, response);
             switch (getUrlParts().get(0)) {
+            case "register":
+                forwardTo("/register.jsp");
+                break;
             case "logout":
                 doLogout();
                 break;
@@ -60,13 +64,10 @@ public class UserServlet extends MyServlet {
                     return;
                 }
                 break;
-            // page: /register  with parameters: action=register
+            // page: /register
             case "register":
-                if (getAction().equals("register")) {
-                    doRegister();
-                    return;
-                }
-                break;
+                doRegister();
+                return;
             }
             
             // No page selected.
@@ -120,29 +121,55 @@ public class UserServlet extends MyServlet {
         String email = getRequest().getParameter("email");
         String gender = getRequest().getParameter("gender");
         int age = Integer.parseInt(getRequest().getParameter("age"));
-        if(getRequest().getParameter("password1").equals(getRequest().getParameter("password2"))){
-        	PreparedStatement ps;
-        	try{
-        		ps = getConnection().prepareStatement("INSERT INTO uber.user (surname, firstname, Length, username, email, password, gender, age)" + 
-        				" VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        		ps.setString(1, surname);
-        		ps.setString(2, firstname);
-        		ps.setDouble(3, length);
-        		ps.setString(4, username);
-        		ps.setString(5, email);
-        		ps.setString(6, hashpassword);
-        		ps.setString(7, gender);
-        		ps.setString(8, surname);
-        		ps.execute();
-        		ps.close();
-        		getRequest().getRequestDispatcher("/start").forward(getRequest(), getResponse());
-        	}catch (SQLException e) {
-    			// TODO Auto-generated catch block 
-    			e.printStackTrace();
-    		}
-        } else {
-        	 getRequest().setAttribute("passNotEqual", true);
-        	 getRequest().getRequestDispatcher("/register.jsp").forward(getRequest(), getResponse());
+        
+        // Save values in map for use in the feedback form (if something went wrong).
+        Map<String, String> returnValues = new HashMap<String, String>();
+        for (Map.Entry<String, String[]> map : getRequest().getParameterMap().entrySet()) {
+            if (map.getKey().startsWith("password")) {
+                continue;
+            }
+            if (map.getValue().length > 0) {
+                returnValues.put(map.getKey(), map.getValue()[0]);
+            }
         }
+        getRequest().setAttribute("return", returnValues);
+        
+        if (!getRequest().getParameter("password1").equals(getRequest().getParameter("password2"))) {
+            getRequest().setAttribute("passNotEqual", true);
+            forwardTo("/register.jsp");
+            return;
+        }
+        
+        if (User.fromUsername(username) != null) {
+            getRequest().setAttribute("usernameInUse", true);
+            forwardTo("/register.jsp");
+            return;
+        }
+        
+        if (User.fromEmail(email) != null) {
+            getRequest().setAttribute("emailInUse", true);
+            forwardTo("/register.jsp");
+            return;
+        }
+        
+    	try{
+    	    PreparedStatement ps = getConnection().prepareStatement(
+    	            "INSERT INTO uber.user (surname, firstname, length, username, email, password, gender, age)" + 
+    				" VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    		ps.setString(1, surname);
+    		ps.setString(2, firstname);
+    		ps.setDouble(3, length);
+    		ps.setString(4, username);
+    		ps.setString(5, email);
+    		ps.setString(6, hashpassword);
+    		ps.setString(7, gender);
+    		ps.setInt(8, age);
+    		ps.execute();
+    		ps.close();
+    	}catch (SQLException e) { 
+			e.printStackTrace();
+		}
+    	
+        forwardTo("/login");
     }
 }
