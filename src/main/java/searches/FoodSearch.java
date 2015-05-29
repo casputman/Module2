@@ -28,7 +28,7 @@ public class FoodSearch extends core.MyServlet {
 	    	ResultSet rs = ps.executeQuery();
 	    	int i = 0;
 	    		while (rs.next() && i<=5) {
-	    		    if (i == 5) {
+	    		    if (rs.isLast() || i == 5) {
 	    		        foods.add(rs.getString(1));
 	    		    } else {
 	    			foods.add(rs.getString(1) + ":");
