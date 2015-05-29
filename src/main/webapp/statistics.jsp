@@ -68,9 +68,9 @@
 	  }
   }
   %>
-		<p> Uw BMI: <%= bmi %></p><meter class="meter" min="15" low="19" optimum="22" high="50" max="100" value="<%= bmi%>"></meter>
+		<p> Uw BMI: <%= bmi %></p><meter class="meter" min="0" low="19" optimum="22" high="30" max="50" value="<%= bmi%>"></meter>
 	
-		<p> Uw Vetpercentage: <%= vet %> </p><meter class="meter" min="0" low="10" optimum="50" high="90" max="100" value="<%= vet%>"></meter>
+		<p> Uw Vetpercentage: <%= vet %> </p><meter class="meter" min="0" low="10" optimum="50" high="70" max="100" value="<%= vet%>"></meter>
 		
 		
 		
