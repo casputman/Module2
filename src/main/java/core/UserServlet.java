@@ -1,6 +1,5 @@
 package core;
 
-
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

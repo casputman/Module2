@@ -19,8 +19,6 @@
 		<servlet-name>WebpageServlet</servlet-name>
 		<servlet-class>core.WebpageServlet</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-class>searches.FoodServlet</servlet-class>	
 
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
@@ -30,11 +28,8 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping> 
-		<servlet-mapping> 
+	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
-		<servlet-mapping> 
-	
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
 	
