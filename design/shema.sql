@@ -103,11 +103,12 @@ ALTER TABLE uber.usage
   surname character varying(45) NOT NULL,
   firstname character varying(45) NOT NULL,
   "Length" double precision,
-  username character varying(45) NOT NULL,
-  email character varying(45) NOT NULL,
+  username character varying(45) NOT NULL UNIQUE,
+  email character varying(45) NOT NULL UNIQUE,
   password character varying(160) NOT NULL,
   gender character varying(1),
-  CONSTRAINT user_pkey PRIMARY KEY (iduser)
+  age integer,
+  CONSTRAINT user_pkey PRIMARY KEY (iduser) 
 )
 WITH (
   OIDS=FALSE
