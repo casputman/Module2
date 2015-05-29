@@ -45,15 +45,27 @@
 
   <main class="siteContent container">
   <%
-  System.out.println("lolol");
-  core.User user = core.User.fromIdUser(4);
-  System.out.println("lolol2");
+  core.User user = null;
+  if (request.getSession().getAttribute("user") != null) {
+  	user = core.User.fromIdUser(((core.User) request.getSession().getAttribute("user")).getIdUser());
+  }
   //TODO user koppelen.
   double bmi = 0;
   double vet = 0;
   if (user != null) {
-  	bmi = user.getUserBMI().getBMI();
-  	vet = user.getUserVet().getVPT();
+	  System.out.println("user is not null");
+	  if (user.getUserBMI() != null) {
+  		bmi = user.getUserBMI().getBMI();
+  		System.out.println("BMI is written" + bmi);
+	  } else {
+		  bmi = -1;
+		  System.out.println("BMI is -1");
+	  }
+	  if (user.getUserVet() != null) {
+  		vet = user.getUserVet().getVPT();
+	  } else {
+		  vet = -1;
+	  }
   }
   %>
 		<p> Uw BMI: <%= bmi%></p>
