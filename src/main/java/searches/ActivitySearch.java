@@ -37,7 +37,6 @@ public class ActivitySearch extends core.MyServlet{
             System.out.println("Database connection could not be established: " + e);
             e.printStackTrace();
         }
-        FoodAdd.setConnection(connection);
     }
     
     // --- Getters ---------------------------------------------------------------------------

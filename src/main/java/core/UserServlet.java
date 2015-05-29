@@ -2,6 +2,9 @@ package core;
 
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,7 @@ public class UserServlet extends MyServlet {
     
     // --- Getters ---------------------------------------------------------------------------
 
+    
     // --- Request handlers ------------------------------------------------------------------
     
     /**

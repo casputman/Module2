@@ -100,16 +100,16 @@ public class User {
 	 * 
 	 * @param vet
 	 */
-	public void setUserVet(VetPercentage vet) {
-		this.vet = vet;
+	public void setUserVet(double vet) {
+		this.vet.setVPT(vet);;
 	}
 	
 	/**
 	 * 
 	 * @param bmi
 	 */
-	public void setUserBMI(BMI bmi) {
-		this.bmi = bmi;
+	public void setUserBMI(double bmi) {
+		this.bmi.setBMI(bmi);
 	}
 
 
@@ -126,6 +126,7 @@ public class User {
         username = resultSet.getString("username");
         email = resultSet.getString("email");
         passwordHash = resultSet.getString("password");
+        setBMIVPT(resultSet);
     }
     
     
@@ -133,6 +134,7 @@ public class User {
     
     public static User fromIdUser(int iduser) {
         User user = null;
+        ResultSet rs = null;
         try {
             PreparedStatement ps = Validation.getConnection().prepareStatement(
                       " SELECT  * "
@@ -140,7 +142,7 @@ public class User {
                     + " WHERE   iduser = ? ; ");  
             
             ps.setInt(1, iduser);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User();
                 user.setFrom(rs);
@@ -149,6 +151,22 @@ public class User {
             e.printStackTrace();
         }
         return user;
+    }
+    
+    public void setBMIVPT(ResultSet resultSet) {
+    	double bmi = 0;
+    	double vet = 0;
+		try {
+			bmi = resultSet.getDouble("bmi");
+			vet = resultSet.getDouble("weight");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BMI bmiArg = new BMI(bmi);
+		this.bmi = bmiArg;
+    	VetPercentage vetArg = new VetPercentage(vet);
+    	this.vet = vetArg;
     }
 
 }
