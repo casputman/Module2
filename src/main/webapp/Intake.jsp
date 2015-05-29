@@ -25,7 +25,7 @@
    }
   function textShizzle() {
 	  var text = document.getElementById("textinput").value; //|| document.getElementById("textinput").innerText;
-	  document.getElementById("textDing").innerHTML = text;
+	  //document.getElementById("textDing").innerHTML = text;
 	  
 	  $ajax({ 
 		  url: 'localhost:8080/ubercoaching/Intake',

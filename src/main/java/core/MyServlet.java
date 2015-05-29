@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 public abstract class MyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -180,8 +179,7 @@ public abstract class MyServlet extends HttpServlet {
      * @throws IOException
      */
     public void forwardTo(String url) throws ServletException, IOException {
-    	System.out.println(url);
-    	System.out.println("------------------------------------------------------------------------");
+    	System.out.println("Redirect to " + url);
         getRequest().getRequestDispatcher(url).forward(getRequest(), getResponse());
     }
 

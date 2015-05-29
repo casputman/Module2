@@ -27,9 +27,9 @@
 .buttonlink:visited,
 .buttonlink:hover,
 .buttonlink:active {
-color:#000000; 
-background-color:transparent; 
-text-decoration:none
+	color:#000000; 
+	background-color:transparent; 
+	text-decoration:none
 }
 .nav .buttonlink ul:first-of-type {
     border-top-left-radius: 10px; 
@@ -66,11 +66,11 @@ text-decoration:none
 .nav li:first-of-type {
   margin-left: 0;
 }
-.nav a:first-child li {
+.nav li:first-child, .nav li:first-child:hover {
     border-top-left-radius: 10px; 
 	border-bottom-left-radius: 10px;
 }
-.nav a:last-child li{
+.nav li:last-child, .nav li:last-child:hover {
     border-top-right-radius: 10px; 
 	border-bottom-right-radius: 10px;
 }
