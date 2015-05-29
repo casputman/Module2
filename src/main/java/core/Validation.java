@@ -171,10 +171,12 @@ public class Validation {
         /* Fetch UID from the cookie. */
         String cookieString = null;
         // Get correct cookie.
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals(COOKIE_NAME)) {
-                cookieString = cookie.getValue();
-                break;
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals(COOKIE_NAME)) {
+                    cookieString = cookie.getValue();
+                    break;
+                }
             }
         }
         // Redirect if cookie is invalid.
