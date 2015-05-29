@@ -116,7 +116,7 @@ public abstract class MyServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.request = request;
+        this.request = request; 
         this.response = response;
         parseGeneralRequestData();
         System.out.println(urlParts);

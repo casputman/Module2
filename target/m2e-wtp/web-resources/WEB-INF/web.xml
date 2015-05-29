@@ -19,6 +19,10 @@
 		<servlet-name>WebpageServlet</servlet-name>
 		<servlet-class>core.WebpageServlet</servlet-class>
 	</servlet>
+	<servlet> 
+		<servlet-name>FoodServlet</servlet-name>
+		<servlet-class>searches.FoodServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
@@ -28,13 +32,24 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FoodServlet</servlet-name>
+		<url-pattern>/Intake</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FoodServlet</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FoodServlet</servlet-name>
+		<url-pattern>/intake</url-pattern>
+	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name><!-- update this -->
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
-	
-	
-	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/contact</url-pattern>
@@ -50,10 +65,6 @@
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/InContact</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WebpageServlet</servlet-name>
-		<url-pattern>/Intake</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>

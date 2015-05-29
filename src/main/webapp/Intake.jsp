@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="HandheldFriendly" content="True">
-
+	
+  <%@ page import="java.util.ArrayList" %>
   <title>&Uuml;ber-coaching</title>
 
   <link rel="stylesheet" type="text/css" media="screen" href="style/concise.min.css" />
@@ -25,7 +26,14 @@
   function textShizzle() {
 	  var text = document.getElementById("textinput").value; //|| document.getElementById("textinput").innerText;
 	  document.getElementById("textDing").innerHTML = text;
+	  
+	  $ajax({ 
+		  url: 'localhost:8080/ubercoaching/Intake',
+		  method: 'GET',
+		  dataType: 'html' 
+	  });
   }
+
 	</script>
   
   
@@ -51,14 +59,30 @@
     <p><b>Enter your food over here:</b></p>
 		<div id="tfheader">
 
-			<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
-		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" value="Search" class="tfbutton">
+			<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
+					<input type="hidden" name="action" value="search" />
+		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" name="commit" value="search" class="tfbutton">
 			</form>
 		<div class="tfclear">
 		</div>
 	</div>
 	<div id="textDing"> 
-		<p>hier komt text</p>
+			<% Object f = request.getAttribute("foodList");
+		if (f != null) {
+		String probFood = f.toString();
+		probFood = probFood.substring(1, probFood.length() - 1);
+			String[] x = probFood.split(":,"); %>
+	<form id="tfnewFood" method="POST" action="intake">
+	<input type="hidden" name="action" value="intake"/>
+			<ul class="foodSearchOptions"> 
+			<% 
+			for (int i = 0; i < x.length; i++) {
+			    %> <li><input type="text" name="amount" value="1"><input type="submit" type="text" name="food" value="<%= x[i] %>" class="tfbutton"> </li>  <%
+			}
+		}	
+		%>
+			</ul>
+		</form>
 	</div>
 	<div>
 		<ul>
@@ -70,7 +94,8 @@
 	<p><b>Enter your activities over here:</b></p>
 	<div id="tfheader">
 		<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
+
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" name="commit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>

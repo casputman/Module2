@@ -13,7 +13,8 @@ import core.User;
 
 public class ActivitySearch extends core.MyServlet{
     
-    private static final long serialVersionUID = 1L;    
+
+    private static final long serialVersionUID = 1L;   
     
     public ArrayList activitySearch(String activity) {
         PreparedStatement ps;

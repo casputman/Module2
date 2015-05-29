@@ -1,7 +1,5 @@
 package searches;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,19 +15,24 @@ public class FoodSearch extends core.MyServlet {
     // --- Commands --------------------------------------------------------------------------
     
 
-    public ArrayList foodsearch(String food) {
+    public ArrayList<String> foodsearch(String food) {
+        super.init();
     	PreparedStatement ps;
-    	ArrayList foods = new ArrayList();
+    	ArrayList<String> foods = new ArrayList<String>();
 		try {
-			ps = getConnection().prepareStatement(
+			ps = super.getConnection().prepareStatement(
 					" SELECT  name "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? ");
-	    	ps.setString(1, food + "%");
+	    	ps.setString(1, food + "%"); 
 	    	ResultSet rs = ps.executeQuery();
 	    	int i = 0;
 	    		while (rs.next() && i<=5) {
-	    			foods.add(rs.getString(1));
+	    		    if (rs.isLast() || i == 5) {
+	    		        foods.add(rs.getString(1));
+	    		    } else {
+	    			foods.add(rs.getString(1) + ":");
+	    		    }
 	    			i++;
 	    		}
 		} catch (SQLException e) {
@@ -39,9 +42,9 @@ public class FoodSearch extends core.MyServlet {
     	return foods;
     }
     
-    public void main(String args[]) { 
-    	super.init();
-    	ArrayList food = foodsearch("aar");
-    	System.out.println(food.toString());
-    }
+//    public static void main(String args[]) { 
+//    	super.init();
+//    	ArrayList<String> food = foodsearch("aar");
+//    	System.out.println(food.toString());
+//    }
 }

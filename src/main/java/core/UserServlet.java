@@ -28,14 +28,13 @@ public class UserServlet extends MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
-            
             switch (getUrlParts().get(0)) {
             case "logout":
                 doLogout();
                 break;
             case "login": default:
                 if (Validation.validated(request)) {
-                    forwardTo("/start");
+                    forwardTo("/webapp");
                     return;
                 }
                 forwardTo("/login.jsp");
