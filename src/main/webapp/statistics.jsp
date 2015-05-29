@@ -1,4 +1,6 @@
-﻿
+
+
+
 <!doctype html>
 <html>
 <head>
@@ -42,14 +44,22 @@
   </header>
 
   <main class="siteContent container">
-		<div>
-		<img src="images/bargraph.jpg" tabindex="0" class="barStats">
-		</div>
-		<div>
-		<img src="images/circlegraph.jpg" tabindex="0" class="circlegraph">
-		<img src="images/weightgraph.png" tabindex="0" class="graphStats">
-		</div>
-		<div class="graphHolder"> </div>
+  <%
+  System.out.println("lolol");
+  core.User user = core.User.fromIdUser(4);
+  System.out.println("lolol2");
+  //TODO user koppelen.
+  double bmi = 0;
+  double vet = 0;
+  if (user != null) {
+  	bmi = user.getUserBMI().getBMI();
+  	vet = user.getUserVet().getVPT();
+  }
+  %>
+		<p> Uw BMI: <%= bmi%></p>
+		
+		<p> Uw Vetpercentage: <%= vet%> </p>
+		
   </main>
 
   <footer class="siteFooter container">

@@ -178,3 +178,7 @@ height:100%;
 #but2 p {
 	margin-left: 10px;
 }
+
+.foodSearchOptions {
+	list-style-type: none;
+}

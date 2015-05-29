@@ -103,11 +103,12 @@ ALTER TABLE uber.usage
   surname character varying(45) NOT NULL,
   firstname character varying(45) NOT NULL,
   "Length" double precision,
-  username character varying(45) NOT NULL,
-  email character varying(45) NOT NULL,
+  username character varying(45) NOT NULL UNIQUE,
+  email character varying(45) NOT NULL UNIQUE,
   password character varying(160) NOT NULL,
   gender character varying(1),
-  CONSTRAINT user_pkey PRIMARY KEY (iduser)
+  age integer,
+  CONSTRAINT user_pkey PRIMARY KEY (iduser) 
 )
 WITH (
   OIDS=FALSE
@@ -132,4 +133,21 @@ WITH (
 );
 ALTER TABLE uber.weight
   OWNER TO di18;
+  
+  CREATE TABLE uber.fat
+  (
+  fatpercentage double precision NOT NULL,
+  "Date" date NOT NULL DEFAULT ('now'::text)::date,
+  user_iduser integer NOT NULL,
+  idfat bigserial NOT NULL,
+  CONSTRAINT fat_pkey PRIMARY KEY (idfat),
+  CONSTRAINT fat_user_iduser_fkey FOREIGN KEY (user_iduser)
+	REFERENCES uber."user" (iduser) MATCH SIMPLE
+	ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+ OIDS = FALSE
+);
+ALTER TABLE uber.fat
+	OWNER TO di18;
   

@@ -32,23 +32,25 @@
 
   <div class="siteContent container">
 	<div>
-		<form method="post" action="webapp">
-		</form>
+		<form method="post" action="registerInfo">
+		<% if (request.getAttribute("passNotEqual") != null && (Boolean) request.getAttribute("passNotEqual")) { %>
+	  	<p style="color:red">Passwords don't match.</p>
+	  	<% } %>
 		<p>
 		<b>Please insert your username:</b> <br />
 		<input type="text" name="login" value="" placeholder=" Username" class="mytext">
 		</p>
 		<p>
 		<b>Please insert your password: </b><br />
-		<input type="password" name="password" value="" placeholder=" Password" class="mytext">
+		<input type="password" name="password1" value="" placeholder=" Password" class="mytext">
 		</P>
 		<p>
 		<b>Please insert your password again:</b><br />
-		<input type="password" name="password" value="" placeholder=" Password" class="mytext">
+		<input type="password" name="password2" value="" placeholder=" Password" class="mytext">
 		</P>
-		<button  onclick="location.href='registerInfo'">
-		<b>Register now!</b>
-		</button>
+		    <p><input type="submit" name="commit" value="Register"></p>
+		</form>
+		
 	</div>
   </div>
 

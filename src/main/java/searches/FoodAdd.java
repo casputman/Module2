@@ -8,42 +8,33 @@ import java.sql.SQLException;
 public class FoodAdd extends core.MyServlet{
     private static final long serialVersionUID = 1L;
 
-	 private static Connection connection;
-    // --- Getters ---------------------------------------------------------------------------
+
+   
     
-    //TODO: make this thread safe.
-    public static Connection getThisConnection() {
-        return connection;
-    }
-    
-    // --- Setters ---------------------------------------------------------------------------
-    
-    public static void setConnection(Connection connection) {
-        FoodAdd.connection = connection;
-    }
-    
-    
-	public static void addFood(String food, Integer userID, double amount) {
-		PreparedStatement ps;
+	public void addFood(String food, Integer userID, double amount) {
+	    super.init();
+	    PreparedStatement ps;
 		try {
-			ps = getThisConnection().prepareStatement(
+		    System.out.println("fuck1:" + food.trim());
+			ps = getConnection().prepareStatement(
 					" SELECT  idfood "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name = ? ");
-			ps.setString(1, food);
+			ps.setString(1, food.trim());
 			ResultSet rs = ps.executeQuery();
-			ps = getThisConnection().prepareStatement(
+			rs.next();
+			System.out.println("fuck: " + rs.getFetchSize());
+			ps = getConnection().prepareStatement(
 					"INSERT INTO uber.intake (amount, user_iduser, idfood)" + 
 						" VALUES (?, ?, ?)");
 			ps.setDouble(1, amount);
 			ps.setInt(2, userID);
-			rs.next();
+			System.out.println("fuck: " + rs.getInt(1));
 			ps.setInt(3, rs.getInt(1));
 			ps.execute();
-			connection.close();
 			// amount date user_iduser id intake idfood 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block 
 			e.printStackTrace();
 		}
 		

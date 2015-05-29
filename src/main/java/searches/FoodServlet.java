@@ -3,6 +3,7 @@ package searches;
 
 
     import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,22 @@ import core.MyServlet;
                 throws ServletException, IOException {
             synchronized (request.getSession()) {
                 super.doGet(request, response);
-   
+                System.out.println("text:" + getUrlParts().get(0));
+                switch (getUrlParts().get(0)) {
+                case "Intake": 
+                    forwardTo("/Intake.jsp");
+                    break;
+                case "search":
+                    FoodSearch foodSearch = new FoodSearch();
+                    String food = getRequest().getParameter("q");
+                    ArrayList<String> probFood = foodSearch.foodsearch(food);
+                    System.out.println("hier komt eten: " + probFood + " dit was de zoekterm: " + food);
+                    if (food != null) {
+                        request.setAttribute("foodList", probFood);
+                    }
+                    forwardTo("/Intake.jsp");
+                    break;
+                } 
             }
         }
         
@@ -39,33 +55,17 @@ import core.MyServlet;
                 throws ServletException, IOException {
             synchronized (request.getSession()) {
                 super.doPost(request, response);
-                
                 switch (getUrlParts().get(0)) {
-                // page: /login     with parameters: action=login
-                case "login":
-                    if (getAction().equals("login")) {
-                  
-                        return;
-                    }
-                    break;
-                // page: /register  with parameters: action=register
-                case "register":
-                    if (getAction().equals("register")) {
-                  
-                        return;
-                    }
+                case "intake": 
+                    FoodAdd foodAdd = new FoodAdd();
+                    System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
+                    );
+                    foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
+                    forwardTo("/Intake.jsp");
                     break;
                 }
-                
                 // No page selected.
                 doGet(getRequest(), getResponse());
-            }
+            } 
         }
-        
-        /**
-         * POST /login
-         * @throws ServletException
-         * @throws IOException
-         */
- 
 }
