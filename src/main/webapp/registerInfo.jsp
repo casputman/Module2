@@ -31,27 +31,43 @@
 
   <main class="siteContent container">
 	<div>
-		<p>
+	<form method ="post" action = "register"><p>
 			<b>To help you with your health we first need to know a little bit about you.</b>
 		</p>
-		<p>
-			<b>Please insert your weight:</b> </br>
-			<input type="weight" name="weight" value="" placeholder="Weight" class="mytext">
-			kg
-		</p>
+
 		<p> 
 			<b>Please insert your length:</b> </br>
-			<input type="length" name="length" value="" placeholder="Length" class="mytext">
+			<input type="number" name="length" value="" placeholder="Length" class="mytext">
 			cm
 		</p>
 		<p>
 			<b>Please insert your age: </b></br>
-			<input type="age" name="age" value="" placeholder="Age" class="mytext">
+			<input type="number" name="age" value="" placeholder="Age" class="mytext">
 			years old
 		</p>
-		<button onclick="location.href='webapp'">
-			<b>Finish registration</b>
-		</button>
+		<p>
+			<b>Please insert your Surname: </b></br>
+			<input type="text" name="surname" value="" placeholder="Surname" class="mytext">
+		
+		</p>
+		<p>
+			<b>Please insert your First Name: </b></br>
+			<input type="text" name="firstname" value="" placeholder="First Name" class="mytext">
+		
+		</p>
+		<p>
+			<b>Please insert your email: </b></br>
+			<input type="email" name="email" value="" placeholder="" class="mytext">
+			
+		</p>
+		<p>
+			<b>Please insert your gender: </b></br>
+			<input type="radio" name="gender" value="m" placeholder="" class="mytext">Male
+			<input type="radio" name="gender" value="f" placeholder="" class="mytext">Female
+		</p>
+	       <p><input type="submit" name="commit" value="register"></p>
+	</form>
+		
 	</div>
   </main>
 
