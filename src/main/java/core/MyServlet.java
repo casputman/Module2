@@ -180,6 +180,8 @@ public abstract class MyServlet extends HttpServlet {
      * @throws IOException
      */
     public void forwardTo(String url) throws ServletException, IOException {
+    	System.out.println(url);
+    	System.out.println("------------------------------------------------------------------------");
         getRequest().getRequestDispatcher(url).forward(getRequest(), getResponse());
     }
 

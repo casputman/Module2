@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServlet;
+
 import core.User;
 
 public class ActivitySearch extends core.MyServlet{

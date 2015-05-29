@@ -3,7 +3,10 @@ package core;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+<<<<<<< HEAD
 import java.sql.ResultSet;
+=======
+>>>>>>> 7e705df4a51735fdba92f8837729b6e8ad9357a1
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -28,13 +31,14 @@ public class UserServlet extends MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
+            
             switch (getUrlParts().get(0)) {
             case "logout":
                 doLogout();
                 break;
             case "login": default:
                 if (Validation.validated(request)) {
-                    forwardTo("/webapp");
+                    forwardTo("/start");
                     return;
                 }
                 forwardTo("/login.jsp");

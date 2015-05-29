@@ -44,10 +44,17 @@
   </header>
 
   <main class="siteContent container">
-  <%core.User user = (core.User) request.getSession().getAttribute("user");
+  <%
+  System.out.println("lolol");
+  core.User user = core.User.fromIdUser(4);
+  System.out.println("lolol2");
   //TODO user koppelen.
-  double bmi = user.getUserBMI().getBMI();
-  double vet = user.getUserVet().getVPT();
+  double bmi = 0;
+  double vet = 0;
+  if (user != null) {
+  	bmi = user.getUserBMI().getBMI();
+  	vet = user.getUserVet().getVPT();
+  }
   %>
 		<p> Uw BMI: <%= bmi%></p>
 		
