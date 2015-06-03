@@ -18,9 +18,13 @@
 <br />
 <br />Cookies: 
 <ul>
-<% for (Cookie cookie : request.getCookies()) { %>
+<% if (request.getCookies() == null) { %>
+<li>none</li>
+<% } else {
+	for (Cookie cookie : request.getCookies()) { %>
 <li><%= cookie.getName() %> : <%= cookie.getValue() %></li>
-<% } %>
+<% }
+} %>
 </ul>
 
 </body>
