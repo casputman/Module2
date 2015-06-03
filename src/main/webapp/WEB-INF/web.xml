@@ -66,10 +66,7 @@
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/InContact</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WebpageServlet</servlet-name>
-		<url-pattern>/Intake</url-pattern>
-	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/registerinfo</url-pattern>
