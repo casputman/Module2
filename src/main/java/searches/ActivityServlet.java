@@ -1,8 +1,5 @@
 package searches;
 
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 
