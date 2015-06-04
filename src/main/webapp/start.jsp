@@ -1,6 +1,4 @@
-<jsp:include page="_header.jsp">
-	<jsp:param value="" name="pageTitle"/>
-</jsp:include>
+<%@include file="_header.jsp" %>
 
   <div class="masthead">
     <div class="container">

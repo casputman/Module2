@@ -2,6 +2,9 @@
 String pageTitle = request.getParameter("pageTitle");
 pageTitle = pageTitle == null || pageTitle.length() == 0 ? null : pageTitle;
 
+final core.User user = (core.User) request.getAttribute("user");
+final boolean authorized = user != null;
+
 
  %>
 <!doctype html>
@@ -17,6 +20,9 @@ pageTitle = pageTitle == null || pageTitle.length() == 0 ? null : pageTitle;
 
   <link rel="stylesheet" type="text/css" media="screen" href="style/concise.min.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="style/login.css" />
+  
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </head>
 
 <body>
@@ -26,10 +32,17 @@ pageTitle = pageTitle == null || pageTitle.length() == 0 ? null : pageTitle;
 	</a>
     <nav class="nav">
       <ul>
-		<li><a href="login" class="buttonlink" <%=request.getAttribute("user") == null ? "" : "style=\"text-decoration:line-through;\""%>>Login</a></li>
+<% if (authorized) { %>
+        <li><a href="webapp" class="buttonlink">Personal Home</a></li>
+        <li><a href="InAbout" class="buttonlink">About</a></li>
+        <li><a href="InContact" class="buttonlink">Contact</a></li>
+		<li><a href="logout" class="confirm buttonlink">Log Out</a></li>
+<% } else { %>
+		<li><a href="login" class="buttonlink">Login</a></li>
         <li><a href="start" class="buttonlink">Home</a></li>
         <li><a href="startAbout" class="buttonlink">About</a></li>
         <li><a href="contact" class="buttonlink">Contact</a></li>
+<% } %>
       </ul>
     </nav>
   </header>

@@ -88,10 +88,10 @@ public class UserServlet extends MyServlet {
         if ((user = Validation.validate(username, password)) != null) {
             Validation.save(user, remember, getRequest(), getResponse());
             getRequest().setAttribute("user", user);
-            getRequest().getRequestDispatcher("/start").forward(getRequest(), getResponse());
+            forwardTo("/webapps");
         } else {
             getRequest().setAttribute("loginError", true);
-            getRequest().getRequestDispatcher("/login.jsp").forward(getRequest(), getResponse());
+            forwardTo("/login.jsp");
         }
     }
     

@@ -149,6 +149,10 @@ public class Validation {
      */
     public static void destroy(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("user");
+        request.removeAttribute("user");
+        if (request.getCookies() == null) {
+            return;
+        }
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals("auth")) {
                 cookie.setMaxAge(0);
