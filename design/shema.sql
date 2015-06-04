@@ -119,7 +119,7 @@ ALTER TABLE uber."user"
   CREATE TABLE uber.weight
 (
   weight double precision NOT NULL,
-  "Date" date NOT NULL DEFAULT ('now'::text)::date,
+  weightdate date NOT NULL DEFAULT ('now'::text)::date,
   user_iduser integer NOT NULL,
   width double precision,
   idweight bigserial NOT NULL,
