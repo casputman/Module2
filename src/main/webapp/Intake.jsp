@@ -1,4 +1,4 @@
-<!doctype html>
+"di18/src/main/webapp/Intake.jsp"<!doctype html>
 <html>
 <head>
   <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -66,6 +66,7 @@
 		<div class="tfclear">
 		</div>
 	</div>
+	
 	<div id="textDing"> 
 			<% Object f = request.getAttribute("foodList");
 		if (f != null) {
@@ -84,11 +85,33 @@
 			</ul>
 		</form>
 	</div>
+	
 	<div>
-		<ul>
-			<li>Vodka - 100 Kcal - 1x</li>
-			<li>curryWürst - 300 Kcal - 2x</li>
-		</ul>
+	<ul>
+	<% Object z = request.getAttribute("myFood");
+	if (z != null) {
+	   String myFoodList = z.toString();
+	   myFoodList = myFoodList.substring(1, myFoodList.length() - 1);
+	   String[] c = myFoodList.split(":]");
+	   int totaal = 0;
+	   for (int i = 0; i < c.length; i++) {
+	       c[i] = c[i].substring(1);
+	       String foodjes = c[i].split(":,")[1];
+	       String caltjes = c[i].split(":,")[2];
+	       totaal += Integer.parseInt(caltjes.trim());
+	       %>
+	       <li> <%= foodjes %> :  <%= caltjes %></li>
+	       <%	
+	       }
+	   %>
+	   <li>
+	   Totaal aantal Kcal vandaag: <%= totaal %>
+	   </li>
+	   <%
+	}
+	%>
+	</ul>
+	
 	</div>
 	
 	<p><b>Enter your activities over here:</b></p>
