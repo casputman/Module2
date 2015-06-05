@@ -10,9 +10,9 @@ public class ActivitySearch extends core.MyServlet{
 
     private static final long serialVersionUID = 1L;   
     
-    public ArrayList activitySearch(String activity) {
+    public ArrayList<String> activitySearch(String activity) {
         PreparedStatement ps;
-        ArrayList activities = new ArrayList();
+        ArrayList<String> activities = new ArrayList<String>();
         try {
             ps = getConnection().prepareStatement(
                     " SELECT  name "
@@ -22,7 +22,7 @@ public class ActivitySearch extends core.MyServlet{
             ResultSet rs = ps.executeQuery();
             int i = 0;
                 while (rs.next() && i<=5) {
-                    activities.add(rs.getString(1) + " |");
+                    activities.add(rs.getString(1));
                     i++;
                 }
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class ActivitySearch extends core.MyServlet{
     public void main(String args[]) { 
         ActivitySearch activitySearch = new ActivitySearch();
         activitySearch.init();
-        ArrayList activity = activitySearch("Walk");
+        ArrayList<String> activity = activitySearch("Walk");
         System.out.println(activity.toString());
     }
 }

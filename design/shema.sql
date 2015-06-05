@@ -119,7 +119,7 @@ ALTER TABLE uber."user"
   CREATE TABLE uber.weight
 (
   weight double precision NOT NULL,
-  "Date" date NOT NULL DEFAULT ('now'::text)::date,
+  weightdate date NOT NULL DEFAULT ('now'::text)::date,
   user_iduser integer NOT NULL,
   width double precision,
   idweight bigserial NOT NULL,
@@ -150,4 +150,20 @@ WITH (
 );
 ALTER TABLE uber.fat
 	OWNER TO di18;
+	
+CREATE TABLE uber.goal
+(
+  idgoal bigserial NOT NULL,
+  goalweight integer NOT NULL,
+  currentdate date NOT NULL DEFAULT now(),
+  goaldate date,
+  user_iduser integer NOT NULL,
+  CONSTRAINT goalpk PRIMARY KEY (idgoal)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE uber.goal
+  OWNER TO di18;
+
   

@@ -23,6 +23,14 @@
 		<servlet-name>FoodServlet</servlet-name>
 		<servlet-class>searches.FoodServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>REST Service</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+		    <param-name>jersey.config.server.provider.packages</param-name>
+		    <param-value>statistics</param-value>
+		</init-param>
+  	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
@@ -107,5 +115,9 @@
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>
 		<url-pattern>/registerInfo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>REST Service</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 </web-app>
