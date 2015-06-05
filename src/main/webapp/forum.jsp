@@ -58,7 +58,7 @@
 			<b>&Uuml;-Forum</b>
 		</h3>
 	</center>
-	<div class="forumHolder">
+	<div>
 		<a id="nabblelink" href="http://ubercoaching.73261.x6.nabble.com/">Übercoaching</a>
 		<script src="http://ubercoaching.73261.x6.nabble.com/embed/f1"></script>
 
