@@ -9,16 +9,9 @@ import java.util.Date;
 
 import core.User;
 
-public class CalculateGoal extends core.MyServlet {
+public class GoalServelt extends core.MyServlet {
 	private User user;
-	private int goalweight;
-	private java.util.Date goaldate;
-	private int weight;
 	private static final long serialVersionUID = 1L;
-	
-	public CalculateGoal(int id, int goalweight, Date goaldate){
-	setGoal(goalweight, goaldate, id);
-	}
 	
 	//Retrieves the goalweight, goaldate and last entered weight of a user
 	public void setGoal(int goalweight, Date goaldate, int id){
@@ -40,6 +33,7 @@ public class CalculateGoal extends core.MyServlet {
 	
 	public void getGoal(){
 		super.init();
+		Goal goal = null;
 		PreparedStatement ps;
 	    try {
             ps = super.getConnection().prepareStatement(
@@ -48,33 +42,48 @@ public class CalculateGoal extends core.MyServlet {
             + " WHERE weight.weightdate = ( SELECT MAX(w.weightdate) FROM weight w, user u WHERE w.user_IDuser = ?)" + 
             "AND goal.user_iduser = ? "
         );
-        String input = String.valueOf(user.getIdUser());
+        String input = null;
+        if (user != null) {
+        input = String.valueOf(user.getIdUser());
+        } else {
+        	input = null;
+        	error("user is empty, line 47 GoalServlet");
+        }
 		ps.setString(1, input);
 		ps.setString(2, input); 
 		ResultSet rs = ps.executeQuery();
     	while (rs.next()) {
-    		goalweight = rs.getInt(1);
-    		goaldate = rs.getDate(2);
-    		weight = rs.getInt(3);
+    		goal = new Goal();
+    		goal.setGoalweight(rs.getInt(1));
+    		goal.setGoaldate(rs.getDate(2));
+    		goal.setCurrentWeight(rs.getInt(3));
     	}
-    	System.out.println("goalweight: " + goalweight + " " + "goaldate: " + goaldate + " " + "weight: " + weight );
+    	System.out.println("goalweight: " + goal.getGoalweight() + " " + "goaldate: " + goal.getGoaldate() + " " + "weight: " + goal.getGoalweight() );
 	    } catch (SQLException e) {
 			e.printStackTrace();
 	    }
+	    calculateGoal(goal);
 	}
 	
-	public int calculateGoal(){
+	public int calculateGoal(Goal goal){
 		java.util.Date currentDate = new Date();
-		java.util.Date dategoal = goaldate;
+		java.util.Date dategoal = goal.getGoaldate();
 		long diff = Math.abs(dategoal.getTime() - currentDate.getTime());
 		long diffDays = diff/(24 * 60 * 60 * 1000);
 		System.out.println("diffDays: "+ diffDays);
-		int diffweight = weight - goalweight;
+		int diffweight = goal.getCurrentWeight() - goal.getGoalweight();
 		long toBurnCalorie = diffweight * 7700;
 		long toBurnDay = toBurnCalorie/diffDays;
 		System.out.println("Calories needed to burn each day: " + toBurnDay);
 		return (int)toBurnDay;
 	}
+	
+	public void error(String arg) {
+		System.err.println("ERROR: " + arg);
+		
+	}
+
+
 	public static void main(String[] args){
 		 String expectedPattern = "dd/MM/yyyy";
 		    SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
@@ -92,6 +101,5 @@ public class CalculateGoal extends core.MyServlet {
 		    {
 		      e.printStackTrace();
 		    }
-		new CalculateGoal(4, 65, date);
 	}
 }

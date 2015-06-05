@@ -34,7 +34,7 @@ public class BmiServlet extends MyServlet {
 	    		weight = rs.getDouble(2);
 	    	}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			error("determineBMI()");
 			e.printStackTrace();
 		}
 		BMICalculate();
@@ -66,9 +66,14 @@ public class BmiServlet extends MyServlet {
 			ps.setString(2, input2);
 			ps.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			error("insertBMI()");
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void error(String arg) {
+		System.err.println("ERROR: " + arg);
 		
 	}
 	

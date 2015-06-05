@@ -36,7 +36,7 @@ public class VetPercentageServlet extends MyServlet {
 	    		gender = rs.getString(5);
 	    	}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			error("determineVPT");
 			e.printStackTrace();
 		}
 		if (gender.equals("m")){
@@ -81,9 +81,14 @@ public class VetPercentageServlet extends MyServlet {
 			ps.setString(2, input2);
 			ps.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			error("insertVPT");
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void error(String arg) {
+		System.err.println("ERROR: " + arg);
 		
 	}
 	
