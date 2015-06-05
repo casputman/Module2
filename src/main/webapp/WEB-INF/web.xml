@@ -49,11 +49,11 @@
 		<servlet-name>FoodServlet</servlet-name>
 		<url-pattern>/Intake</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>FoodServlet</servlet-name>
 		<url-pattern>/search</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>FoodServlet</servlet-name>
 		<url-pattern>/intake</url-pattern>
 	</servlet-mapping>

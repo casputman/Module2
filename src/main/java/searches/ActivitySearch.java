@@ -32,6 +32,50 @@ public class ActivitySearch extends core.MyServlet{
         return activities;
     }
     
+    public ArrayList<ArrayList<String>> activityShow(int iduser) {
+        super.init();
+        PreparedStatement ps;
+        PreparedStatement gs;
+        ArrayList<ArrayList<String>> activitjes = new ArrayList<ArrayList<String>>();
+        try {
+            System.out.println("dit werkt " + iduser);
+            ps = getConnection().prepareStatement (
+                    "SELECT activities_name, amount"
+                    + "FROM    uber.intake " 
+                    + "WHERE user_iduser = ?"
+                    + "AND date = current_date"
+                    );
+            System.out.println("hier komt ie ook");
+            ps.setInt(1, iduser);
+            System.out.println("hier komt ie ook");
+            ResultSet rs = ps.executeQuery();
+            System.out.println("haha komen");
+            while (rs.next()) {
+                ArrayList<String> activitjez = new ArrayList<String>();
+                System.out.println("1:" + rs.getString(1));
+                activitjez.add(rs.getString(2));
+                System.out.println("2:" + rs.getString(2));
+                gs = super.getConnection().prepareStatement(
+                        "SELECT name, calorie"
+                        + "FROM uber.activities"
+                        + "WHERE activities_name = ?"
+                        );
+                gs.setInt(1, Integer.parseInt(rs.getString(1)));
+                ResultSet hs = gs.executeQuery();
+                while (hs.next()) {
+                    activitjez.add(hs.getString(1));
+                    System.out.println("2.1:" + rs.getString(1));
+                    activitjez.add(rs.getString(2));
+                    System.out.println("2.2:" + rs.getString(2));       
+                }
+                activitjes.add(activitjez);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activitjes;
+    }
+    
     public void main(String args[]) { 
         ActivitySearch activitySearch = new ActivitySearch();
         activitySearch.init();

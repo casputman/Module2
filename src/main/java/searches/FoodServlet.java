@@ -28,20 +28,23 @@ import core.MyServlet;
                 throws ServletException, IOException {
             synchronized (request.getSession()) {
                 super.doGet(request, response);
+                FoodSearch foodSearch = new FoodSearch();
                 System.out.println("text:" + getUrlParts().get(0));
                 switch (getUrlParts().get(0)) {
                 case "Intake": 
+                    ArrayList<ArrayList<String>> Foodlist = foodSearch.foodShow(1);
+                    request.setAttribute("myFood", Foodlist);
                     forwardTo("/Intake.jsp");
                     break;
                 case "search":
-                    FoodSearch foodSearch = new FoodSearch();
+                   
                     String food = getRequest().getParameter("q");
                     ArrayList<String> probFood = foodSearch.foodsearch(food);
                     System.out.println("hier komt eten: " + probFood + " dit was de zoekterm: " + food);
                     if (food != null) {
                         request.setAttribute("foodList", probFood);
                     }
-                    forwardTo("/Intake.jsp");
+                    forwardTo("/Intake");
                     break;
                 } 
             }
@@ -58,10 +61,10 @@ import core.MyServlet;
                 switch (getUrlParts().get(0)) {
                 case "intake": 
                     FoodAdd foodAdd = new FoodAdd();
-                    System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
+                   System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
                     );
                     foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
-                    forwardTo("/Intake.jsp");
+                    forwardTo("/Intake");
                     break;
                 }
                 // No page selected.

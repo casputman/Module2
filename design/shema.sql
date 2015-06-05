@@ -79,7 +79,7 @@ ALTER TABLE uber.stdfood
   CREATE TABLE uber.usage
 (
   amount double precision NOT NULL,
-  "Date" date NOT NULL DEFAULT ('now'::text)::date,
+  usagedate date NOT NULL DEFAULT ('now'::text)::date,
   user_iduser integer NOT NULL,
   activities_name character varying(100) NOT NULL,
   idusage bigserial NOT NULL,

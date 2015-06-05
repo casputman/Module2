@@ -50,33 +50,34 @@ public class FoodSearch extends core.MyServlet {
         try {
             System.out.println("dit werkt " + iduser);
             ps = getConnection().prepareStatement (
-                    "SELECT idfood, amount"
-                    + "FROM    uber.intake " 
-                    + "WHERE user_iduser = ?"
-                    + "AND intaketime::timestamp::date = current_date"
+                    "SELECT idfood, amount "
+                    + "FROM uber.intake " 
+                    + "WHERE user_iduser = ? "
+                    + "AND intaketime::timestamp::date = current_date "
                     );
             System.out.println("hier komt ie ook");
             ps.setInt(1, iduser);
             System.out.println("hier komt ie ook");
             ResultSet rs = ps.executeQuery();
             System.out.println("haha komen");
+            System.out.println("fuck");
             while (rs.next()) {
                 ArrayList<String> foodjez = new ArrayList<String>();
                 System.out.println("1:" + rs.getString(1));
-                foodjez.add(rs.getString(2));
+                foodjez.add(rs.getString(2) + ":");
                 System.out.println("2:" + rs.getString(2));
                 gs = super.getConnection().prepareStatement(
-                        "SELECT name, calorie"
-                        + "FROM uber.stdfood"
+                        "SELECT name, calorie "
+                        + "FROM uber.stdfood "
                         + "WHERE idfood = ?"
                         );
                 gs.setInt(1, Integer.parseInt(rs.getString(1)));
                 ResultSet hs = gs.executeQuery();
                 while (hs.next()) {
-                    foodjez.add(hs.getString(1));
-                    System.out.println("2.1:" + rs.getString(1));
-                    foodjez.add(rs.getString(2));
-                    System.out.println("2.2:" + rs.getString(2));       
+                    foodjez.add(hs.getString(1) + ":");
+                    System.out.println("2.1:" + hs.getString(1));
+                    foodjez.add(hs.getString(2) + ":");
+                    System.out.println("2.2:" + hs.getString(2));       
                 }
                 foodjes.add(foodjez);
             }
@@ -89,6 +90,6 @@ public class FoodSearch extends core.MyServlet {
     public static void main(String args[]) { 
         FoodSearch foodSearch = new FoodSearch();
     	ArrayList<ArrayList<String>> foodshizzle = foodSearch.foodShow(1);
-    	System.out.println(foodshizzle.get(1).get(1));
+    	System.out.println(foodshizzle.toString());
     }
 }
