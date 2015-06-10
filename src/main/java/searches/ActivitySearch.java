@@ -38,18 +38,19 @@ public class ActivitySearch extends core.MyServlet{
         PreparedStatement gs;
         ArrayList<ArrayList<String>> activitjes = new ArrayList<ArrayList<String>>();
         try {
-            System.out.println("Twerks " + iduser);
+            System.out.println("dit werkt " + iduser);
             ps = getConnection().prepareStatement (
                     "SELECT activities_name, amount "
                     + "FROM    uber.usage " 
                     + "WHERE user_iduser = ? "
                     + "AND usagedate = current_date"
                     );
-            System.out.println("Gelukt 1");
+            System.out.println("hier komt ie ook");
             ps.setInt(1, iduser);
-            System.out.println("Rekt 2");
+            System.out.println("hier komt ie ook");
             ResultSet rs = ps.executeQuery();
-            System.out.println("GG WP");
+            System.out.println("haha komen");
+            System.out.println("fuck");
             while (rs.next()) {
                 ArrayList<String> activitjez = new ArrayList<String>();
                 System.out.println("1:" + rs.getString(1));

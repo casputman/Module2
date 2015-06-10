@@ -24,6 +24,10 @@
 		<servlet-class>searches.FoodServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>ActivityServlet</servlet-name>
+		<servlet-class>searches.ActivityServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>REST Service</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
@@ -57,6 +61,20 @@
 		<servlet-name>FoodServlet</servlet-name>
 		<url-pattern>/intake</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ActivityServlet</servlet-name>
+		<url-pattern>/IntakeA</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ActivityServlet</servlet-name>
+		<url-pattern>/SearchA</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ActivityServlet</servlet-name>
+		<url-pattern>/intakeA</url-pattern>
+	</servlet-mapping>
+	
 	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>

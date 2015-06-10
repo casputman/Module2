@@ -17,18 +17,21 @@ public class ActivityServlet extends MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
+            ActivitySearch activitySearch = new ActivitySearch();
             System.out.println("text:" + getUrlParts().get(0));
             switch (getUrlParts().get(0)) {
-            case "Intake": 
+            case "IntakeA":
+                ArrayList<ArrayList<String>> Activitylist = activitySearch.activityShow(1);
+                request.setAttribute("myFood", Activitylist);
+                System.out.println(Activitylist);
                 forwardTo("/Intake.jsp");
                 break;
-            case "search":
-                ActivitySearch activitySearch = new ActivitySearch();
+            case "SearchA":
                 String activity = getRequest().getParameter("q");
                 ArrayList<String> probActivity = activitySearch.activitySearch(activity);
                 System.out.println("hier komen activities: " + probActivity + " dit was de zoekterm: " + activity);
                 if (activity != null) {
-                    request.setAttribute("activityList", probActivity);
+                    request.setAttribute("foodList", probActivity);
                 }
                 forwardTo("/Intake.jsp");
                 break;
@@ -45,10 +48,10 @@ public class ActivityServlet extends MyServlet {
         synchronized (request.getSession()) {
             super.doPost(request, response);
             switch (getUrlParts().get(0)) {
-            case "intake": 
+            case "intakeA": 
                 ActivityAdd activityAdd = new ActivityAdd();
-                System.out.println("activity = " + getRequest().getParameter("activity") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
-                );
+                //System.out.println("activity = " + getRequest().getParameter("activity") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
+                //);
                 activityAdd.addActivity(getRequest().getParameter("activity"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
                 forwardTo("/Intake.jsp");
                 break;
