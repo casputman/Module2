@@ -55,7 +55,7 @@ public class GoalServelt extends core.MyServlet {
     	while (rs.next()) {
     		goal = new Goal();
     		goal.setGoalweight(rs.getInt(1));
-    		goal.setGoaldate(rs.getDate(2));
+    		goal.createGoalDate(rs.getDate(2));
     		goal.setCurrentWeight(rs.getInt(3));
     	}
     	System.out.println("goalweight: " + goal.getGoalweight() + " " + "goaldate: " + goal.getGoaldate() + " " + "weight: " + goal.getGoalweight() );
@@ -66,16 +66,7 @@ public class GoalServelt extends core.MyServlet {
 	}
 	
 	public int calculateGoal(Goal goal){
-		java.util.Date currentDate = new Date();
-		java.util.Date dategoal = goal.getGoaldate();
-		long diff = Math.abs(dategoal.getTime() - currentDate.getTime());
-		long diffDays = diff/(24 * 60 * 60 * 1000);
-		System.out.println("diffDays: "+ diffDays);
-		int diffweight = goal.getCurrentWeight() - goal.getGoalweight();
-		long toBurnCalorie = diffweight * 7700;
-		long toBurnDay = toBurnCalorie/diffDays;
-		System.out.println("Calories needed to burn each day: " + toBurnDay);
-		return (int)toBurnDay;
+		return 0;
 	}
 	
 	public void error(String arg) {

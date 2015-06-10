@@ -5,7 +5,7 @@ public class Goal {
 	// --- Instance variables ----------------------------------------------------------------
 	
     private int goalWeight;
-	private java.util.Date goalDate;
+	private searches.GoalDate goalDate;
 	private int currentWeight;
 	
 	
@@ -15,7 +15,7 @@ public class Goal {
 		return goalWeight;
 	}
     
-    public java.util.Date getGoaldate() {
+    public searches.GoalDate getGoaldate() {
 		return goalDate;
 	}
     
@@ -29,7 +29,7 @@ public class Goal {
 		this.goalWeight = goalweight;
 	}
 	
-	public void setGoaldate(java.util.Date goaldate) {
+	public void setGoaldate(searches.GoalDate goaldate) {
 		this.goalDate = goaldate;
 	}
 	
@@ -37,9 +37,19 @@ public class Goal {
 		this.currentWeight = weight;
 	}
 	
-	
-	
-	
-	
+	public void createGoalDate(int year, int month, int day) {
+		goalDate = new GoalDate();
+		goalDate.setYear(year);
+		goalDate.setMonth(month);
+		goalDate.setDay(day);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void createGoalDate(java.sql.Date date) {
+		goalDate = new GoalDate();
+		goalDate.setYear(date.getYear());
+		goalDate.setMonth(date.getMonth());
+		goalDate.setDay(date.getDay());
+	}
 	
 }

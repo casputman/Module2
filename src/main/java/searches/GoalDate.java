@@ -1,60 +1,49 @@
 package searches;
 
-import java.util.GregorianCalendar;
 
-public class GoalDate extends GregorianCalendar{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void computeTime() {
-		// TODO Auto-generated method stub
-		
+public class GoalDate {
+	
+	// --- Instance variables ----------------------------------------------------------------
+	
+	private int year;
+	private int month;
+	private int week;
+	private int day;
+	
+	// --- Getters ---------------------------------------------------------------------------
+	
+	public int getYear() {
+		return year;
+	}
+	
+	public int getMonth() {
+		return month;
+	}
+	
+	public int getWeek() {
+		return week;
+	}
+	
+	public int getDay() {
+		return day;
 	}
 
-	@Override
-	protected void computeFields() {
-		// TODO Auto-generated method stub
-		
+	// --- Setters ---------------------------------------------------------------------------
+	
+	public void setYear(int year) {
+		this.year = year;
 	}
 
-	@Override
-	public void add(int field, int amount) {
-		// TODO Auto-generated method stub
-		
+	public void setMonth(int month) {
+		this.month = month;
 	}
 
-	@Override
-	public void roll(int field, boolean up) {
-		// TODO Auto-generated method stub
-		
+	public void setWeek(int week) {
+		this.week = week;
 	}
 
-	@Override
-	public int getMinimum(int field) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setDay(int day) {
+		this.day = day;
 	}
-
-	@Override
-	public int getMaximum(int field) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getGreatestMinimum(int field) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getLeastMaximum(int field) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 }
