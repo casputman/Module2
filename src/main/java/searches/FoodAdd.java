@@ -31,6 +31,7 @@ public class FoodAdd extends core.MyServlet{
 			System.out.println("fuck: " + rs.getInt(1));
 			ps.setInt(3, rs.getInt(1));
 			ps.execute();
+			ps.close();
 			// amount date user_iduser id intake idfood 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block 
@@ -38,9 +39,30 @@ public class FoodAdd extends core.MyServlet{
 		}
 		
 	}
+	
+	public void addFoodToDB(double calorie, double amount, String unit, double protein, double carbon, double fat, double iduser, String name) {
+	    super.init();
+	    PreparedStatement ps;
+	    try {
+	        ps = getConnection().prepareStatement(
+	                "INSERT INTO uber.stdfood (calorie, amount, unit, protein, carbon, fat, iduser, name) "
+	                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
+	                ps.setDouble(1, calorie);
+	                ps.setDouble(2, amount);
+	                ps.setString(3, unit);
+	                ps.setDouble(4, protein);
+	                ps.setDouble(5, carbon);
+	                ps.setDouble(6, fat);
+	                ps.setDouble(7, iduser);
+	                ps.setString(8, name);
+	                ps.execute();
+	                ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 	public void main(String args[]) {
 		super.init();
-		addFood("aardappelen", 3, 1);
 		System.out.println("shit is gefixed");
 	}
 }
