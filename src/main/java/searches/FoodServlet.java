@@ -34,6 +34,7 @@ import core.MyServlet;
                 case "Intake": 
                     ArrayList<ArrayList<String>> Foodlist = foodSearch.foodShow(1);
                     request.setAttribute("myFood", Foodlist);
+                    System.out.println(Foodlist);
                     forwardTo("/Intake.jsp");
                     break;
                 case "search":
@@ -61,8 +62,8 @@ import core.MyServlet;
                 switch (getUrlParts().get(0)) {
                 case "intake": 
                     FoodAdd foodAdd = new FoodAdd();
-                   System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
-                    );
+                  // System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
+                    //);
                     foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
                     forwardTo("/Intake");
                     break;

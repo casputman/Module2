@@ -221,7 +221,7 @@ public class User {
        		            PreparedStatement ps = Validation.getConnection().prepareStatement(
        		                      " SELECT  bmi "
        		                    + " FROM    uber.bmi "
-       		                    + " WHERE   iduser = ? ; ");  
+       		                    + " WHERE   user_iduser = ? ; ");  
        		            
        		            ps.setInt(1, iduser);
        		            rs = ps.executeQuery();

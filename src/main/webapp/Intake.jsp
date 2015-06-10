@@ -85,35 +85,36 @@
 			</ul>
 		</form>
 	</div>
-	
+
 	<div>
-	<ul>
-	<% Object z = request.getAttribute("myFood");
-	if (z != null) {
-	   String myFoodList = z.toString();
-	   myFoodList = myFoodList.substring(1, myFoodList.length() - 1);
-	   String[] c = myFoodList.split(":]");
-	   int totaal = 0;
-	   for (int i = 0; i < c.length; i++) {
-	       c[i] = c[i].substring(1);
-	       String foodjes = c[i].split(":,")[1];
-	       String caltjes = c[i].split(":,")[2];
-	       totaal += Integer.parseInt(caltjes.trim());
-	       %>
-	       <li> <%= foodjes %> :  <%= caltjes %></li>
-	       <%	
-	       }
-	   %>
-	   <li>
-	   Totaal aantal Kcal vandaag: <%= totaal %>
-	   </li>
-	   <%
-	}
-	%>
-	</ul>
-	
+		<ul>
+			<%
+			    Object z = request.getAttribute("myFood");
+			    String myFoodList = z.toString();
+			    myFoodList = myFoodList.substring(1, myFoodList.length() - 1).trim();
+			    System.out.println("fuckerdefuck: " + myFoodList);
+			    if (myFoodList.length() != 0) {
+			        String[] c = myFoodList.split(":]");
+			        int totaal = 0;
+			        for (int i = 0; i < c.length; i++) {
+			            c[i] = c[i].substring(1);
+			            String foodjes = c[i].split(":,")[1];
+			            String caltjes = c[i].split(":,")[2];
+			            totaal += Integer.parseInt(caltjes.trim());
+			%>
+			<li><%=foodjes%> : <%=caltjes%></li>
+			<%
+			    }
+			%>
+			<li>Totaal aantal Kcal vandaag: <%=totaal%>
+			</li>
+			<%
+			    }
+			%>
+		</ul>
+
 	</div>
-	
+
 	<p><b>Enter your activities over here:</b></p>
 	<div id="tfheader">
 		<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
