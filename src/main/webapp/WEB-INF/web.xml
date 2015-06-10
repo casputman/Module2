@@ -61,6 +61,10 @@
 		<servlet-name>FoodServlet</servlet-name>
 		<url-pattern>/intake</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FoodServlet</servlet-name>
+		<url-pattern>/moreFood</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>ActivityServlet</servlet-name>

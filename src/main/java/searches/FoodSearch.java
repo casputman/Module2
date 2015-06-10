@@ -35,6 +35,7 @@ public class FoodSearch extends core.MyServlet {
 	    		    }
 	    			i++;
 	    		}
+	    	ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +81,9 @@ public class FoodSearch extends core.MyServlet {
                     System.out.println("2.2:" + hs.getString(2));       
                 }
                 foodjes.add(foodjez);
+                gs.close();
             }
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

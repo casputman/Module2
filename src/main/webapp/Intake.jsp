@@ -114,6 +114,15 @@
 		</ul>
 
 	</div>
+	
+	<form id="tfFoodjes" method="POST" action="moreFood">
+		<input type="hidden" name="action" value="intake"/>
+		name of the food: <input type="text" class="tftextinput" name="name" value="bier">
+		Calorie per amount: <input type="text" class="tftextinput" name="calorie" value="100">
+		amount: <input type="text" class="tftextinput" name="amount" value="100">
+		unit of amount: <input type="text" class="tftextinput" name="unit" value="gr.">
+		<input type="submit" name="commit" value="addFood" class="tfbutton">
+	</form>
 
 	<p><b>Enter your activities over here:</b></p>
 	<div id="tfheader">
