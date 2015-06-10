@@ -8,6 +8,7 @@ public class Goal {
 	private java.util.Date goalDate;
 	private int currentWeight;
 	
+	
     // --- Getters ---------------------------------------------------------------------------
 
     public int getGoalweight() {
