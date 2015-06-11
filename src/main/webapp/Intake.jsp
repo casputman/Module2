@@ -81,7 +81,7 @@
 			    System.out.println("CHeck deza shizlle: " + x[i]);
 			    x[i].trim();
 			   String[] y = x[i].split("::");
-			    %> <li><input type="text" name="amount" value="1" class="nfinput" size="3"><input type="submit" type="text" name="food" value="<%= y[0] %> : <%= y[1] %>" class="tfbutton"> </li>  <%
+			    %> <li><input type="text" name="amount" value="1" class="nfinput" size="3">X<input type="submit" type="text" name="food" value="<%= y[0] + " " + y[1] %> : <%= y[2] %>" class="tfbutton"> </li>  <%
 			}
 		}	
 		%>
