@@ -28,6 +28,10 @@
 		<servlet-class>searches.ActivityServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>GoalServlet</servlet-name>
+		<servlet-class>searches.GoalServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>REST Service</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
@@ -78,7 +82,10 @@
 		<servlet-name>ActivityServlet</servlet-name>
 		<url-pattern>/intakeA</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>GoalServlet</servlet-name>
+		<url-pattern>/SetGoal</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>

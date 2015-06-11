@@ -1,77 +1,72 @@
 package searches;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import core.User;
 
-public class GoalServelt extends core.MyServlet {
+public class GoalServlet extends core.MyServlet {
 	private User user;
 	private static final long serialVersionUID = 1L;
 	
-	//Retrieves the goalweight, goaldate and last entered weight of a user
-	public void setGoal(int goalweight, Date goaldate, int id){
-		super.init();
-		PreparedStatement ps;
-		try {
-			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
-				+ " VALUES(?, ?, ?)");
-			ps.setInt(1, goalweight);
-			java.sql.Date sqlDate = new java.sql.Date(goaldate.getTime());
-			ps.setDate(2, sqlDate);
-			ps.setInt(3, id);
-			ps.execute();
-			System.out.println("Goal is set");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void getGoal(){
-		super.init();
-		Goal goal = null;
-		PreparedStatement ps;
-	    try {
-            ps = super.getConnection().prepareStatement(
-            " SELECT  goal.goalweight, goal.goaldate, weight.weight "
-            + " FROM uber.goal, uber.weight "
-            + " WHERE weight.weightdate = ( SELECT MAX(w.weightdate) FROM weight w, user u WHERE w.user_IDuser = ?)" + 
-            "AND goal.user_iduser = ? "
-        );
-        String input = null;
-        if (user != null) {
-        input = String.valueOf(user.getIdUser());
-        } else {
-        	input = null;
-        	error("user is empty, line 47 GoalServlet");
+	/**
+     * Any GET requests concerning the food.
+     */
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        synchronized (request.getSession()) {
+            super.doGet(request, response);
+            GoalShow goalShow = new GoalShow();
+            System.out.println("text:" + getUrlParts().get(0));
+            switch (getUrlParts().get(0)) {
+            case "SetGoal":
+                forwardTo("/SetGoal.jsp");
+                break;
+            case "GoalDetails":
+                forwardTo("/GoalDetails");
+                break;
+            } 
         }
-		ps.setString(1, input);
-		ps.setString(2, input); 
-		ResultSet rs = ps.executeQuery();
-    	while (rs.next()) {
-    		goal = new Goal();
-    		goal.setGoalweight(rs.getInt(1));
-    		goal.createGoalDate(rs.getDate(2));
-    		goal.setCurrentWeight(rs.getInt(3));
-    	}
-    	System.out.println("goalweight: " + goal.getGoalweight() + " " + "goaldate: " + goal.getGoaldate() + " " + "weight: " + goal.getGoalweight() );
-	    } catch (SQLException e) {
-			e.printStackTrace();
-	    }
-	    calculateGoal(goal);
-	}
-	
-	public int calculateGoal(Goal goal){
-		return 0;
-	}
-	
-	public void error(String arg) {
-		System.err.println("ERROR: " + arg);
-		
-	}
+    }
+    
+    /**
+     * Any POST request concerning the user.
+     */
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        synchronized (request.getSession()) {
+            super.doPost(request, response);
+            FoodAdd foodAdd = new FoodAdd();
+            switch (getUrlParts().get(0)) {
+            case "intake": 
+              // System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
+                //);
+                foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
+                forwardTo("/Intake");
+                break;
+            case "moreFood":
+                System.out.println("holooaos: " + getRequest().getParameter("calorie") );
+                System.out.println("holooaos1: " + getRequest().getParameter("amount") );
+                System.out.println("holooaos2: " + getRequest().getParameter("unit") );
+                foodAdd.addFoodToDB(Double.parseDouble(getRequest().getParameter("calorie")),Double.parseDouble(getRequest().getParameter("amount")), getRequest().getParameter("unit"), 0, 0, 0, ((core.User) request.getSession().getAttribute("user")).getIdUser(), getRequest().getParameter("name"));
+                forwardTo("/Intake");
+                break;
+            }
+            // No page selected.
+            doGet(getRequest(), getResponse());
+        } 
+    }
 
 }
