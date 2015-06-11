@@ -126,24 +126,51 @@
 
 	<p><b>Enter your activities over here:</b></p>
 	<div id="tfheader">
-		<form id="tfnewsearch" method="GET" action="http://www.google.com" autocomplete="on">
 
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" name="commit" value="Search" class="tfbutton">
-		</form>
-	<div class="tfclear"></div>
+			<form id="tfnewsearch" method="GET" action="Search" autocomplete="on">
+					<input type="hidden" name="action" value="Search" />
+		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" name="commit" value="actsearch" class="tfbutton">
+			</form>
+		<div class="tfclear">
+		</div>
 	</div>
+	
+	<div id="textDing"> 
+			<% Object a = request.getAttribute("activityList");
+		if (a != null) {
+		String probActivity = a.toString();
+		probActivity = probActivity.substring(1, probActivity.length() - 1);
+			String[] x = probActivity.split(":,"); %>
+	<form id="tfnewActivity" method="POST" action="intakeA">
+	<input type="hidden" name="action" value="intakeA"/>
+			<ul class="activitySearchOptions"> 
+			<% 
+			for (int i = 0; i < x.length; i++) {
+			    %> <li><input type="text" name="amount" value="1"><input type="submit" type="text" name="activity" value="<%= x[i] %>" class="tfbutton"> </li>  <%
+			}
+		}	
+		%>
+			</ul>
+		</form>
+	</div>
+
 	<div>
-		
 		<ul>
-			<li>Chopping wood - 200 Kcal</li>
-			<li>Carrying tree logs - 500 Kcal</li>
+			<%
+			    Object y = request.getAttribute("myActivity");
+			    String myActivityList = z.toString();
+			    myActivityList = myActivityList.substring(1, myActivityList.length() - 1).trim();
+			    System.out.println("fuckerdefuck: " + myActivityList);
+			%>
 		</ul>
+
 	</div>
 	
 	<p><b>Enter your hours of sleep here:</b></p>
 		<div id="tfheader">
 		From <input type="text" class="tftextinput" name="q" size="16" maxlength="60"> till <input type="text" class="tftextinput" name="q" size="16" maxlength="60" autocomplete="on"><input type="submit" value="Submit" class="tfbutton">
 	<div class="tfclear"></div>
+	
 	</div>
 	
   </main>
