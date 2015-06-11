@@ -61,8 +61,9 @@ public class FoodAdd extends core.MyServlet{
 	        e.printStackTrace();
 	    }
 	}
-	public void main(String args[]) {
-		super.init();
+	public static void main(String args[]) {
+		FoodAdd foodadd = new FoodAdd();
+		foodadd.addFoodToDB(100,100,"gr.",0,0,0,1,"bier");
 		System.out.println("shit is gefixed");
 	}
 }
