@@ -74,23 +74,4 @@ public class GoalServelt extends core.MyServlet {
 		
 	}
 
-
-	public static void main(String[] args){
-		 String expectedPattern = "dd/MM/yyyy";
-		    SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
-		    Date date = null;
-		    try
-		    {
-		      // (2) give the formatter a String that matches the SimpleDateFormat pattern
-		      String userInput = "22/09/2015";
-		      date = formatter.parse(userInput);
-		 
-		      // (3) prints out "Tue Sep 22 00:00:00 EDT 2009"
-		      System.out.println(date);
-		    }
-		    catch (ParseException e)
-		    {
-		      e.printStackTrace();
-		    }
-	}
 }

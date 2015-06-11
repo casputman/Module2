@@ -81,7 +81,14 @@
         <a href="forum" class="btn bg-small">PROCEED &raquo;</a>
       </div>
     </div>
+    <div>
+    	<a href="SetGoal" class="btn bg-small">
+    	Set Goal
+    	</a> 
+    </div>
+    
   </main>
+  
 
   <footer class="siteFooter container">
     <p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
