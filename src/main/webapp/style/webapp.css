@@ -76,7 +76,14 @@ text-decoration:none
   background-size: cover;
   padding-bottom: 36px;
   padding-top: 36px;
+  
 }
+
+.backgroundstatistics {
+  background: url
+}
+
+
 @media (min-width: 48em) {
   .masthead {
     padding: 75px 0;
