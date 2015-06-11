@@ -72,7 +72,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ActivityServlet</servlet-name>
-		<url-pattern>/SearchA</url-pattern>
+		<url-pattern>/Search</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ActivityServlet</servlet-name>

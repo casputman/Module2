@@ -15,27 +15,36 @@ public class FoodSearch extends core.MyServlet {
     // --- Commands --------------------------------------------------------------------------
     
 
-    public ArrayList<String> foodsearch(String food) {
+    public ArrayList<String> foodsearch(String food, int userID) {
         super.init();
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
-			ps = super.getConnection().prepareStatement(
-					" SELECT  name "
+			ps = getConnection().prepareStatement(
+					" SELECT  name, unit "
 							+ " FROM    uber.stdfood "
-							+ " WHERE   name LIKE ? ");
+							+ " WHERE   name LIKE ? "
+							+ " AND ( iduser IS NULL "
+							+ " OR iduser = ? )");
 	    	ps.setString(1, food + "%"); 
+	    	ps.setInt(2, userID);
 	    	ResultSet rs = ps.executeQuery();
 	    	int i = 0;
-	    		while (rs.next() && i<=5) {
+	    		while (rs.next() && i<5) {
+	    		    String value = rs.getString(2);
+                    if (value == null) {
+                        value = "stuk";
+                    }
 	    		    if (rs.isLast() || i == 5) {
-	    		        foods.add(rs.getString(1));
+	    		        foods.add(value + "::" + rs.getString(1));
 	    		    } else {
-	    			foods.add(rs.getString(1) + ":");
+	    		        System.out.println("kijk deza: " + rs.getString(2) + " +  " + rs.getString(1));
+	    		     
+	    			foods.add(value + "::" + rs.getString(1) + ":");
 	    		    }
 	    			i++;
 	    		}
-	    	ps.close();
+	    		ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,6 +93,7 @@ public class FoodSearch extends core.MyServlet {
                 gs.close();
             }
             ps.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
