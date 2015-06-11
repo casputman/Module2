@@ -1,4 +1,4 @@
-"di18/src/main/webapp/Intake.jsp"<!doctype html>
+<!doctype html>
 <html>
 <head>
   <link rel="shortcut icon" type="image/ico" href="favicon.ico">
