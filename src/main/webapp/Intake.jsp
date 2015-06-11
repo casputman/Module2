@@ -174,10 +174,10 @@
 		<p><b>If you can't find your meal enter it here</b></p>
 		<form id="tfFoodjes" method="POST" action="moreFood">
 		<input type="hidden" name="action" value="intake"/>
-		name of the food:<input type="text" class="tftextinput" name="name" value="bier"><br>
-		Calorie per amount:<input type="text" class="tftextinput" name="calorie" value="100"><br>
-		amount:<input type="text" class="tftextinput" name="amount" value="100"><br>
-		unit of amount:<input type="text" class="tftextinput" name="unit" value="gr."><br>
+		name of the food:<input type="text" class="tftextinput" name="name" value="bier" required><br>
+		Calorie per amount:<input type="text" class="tftextinput" name="calorie" value="100" required><br>
+		amount:<input type="text" class="tftextinput" name="amount" value="100" required><br>
+		unit of amount:<input type="text" class="tftextinput" name="unit" value="gr." required><br>
 		<input type="submit" name="commit" value="addFood" class="tfbutton">
 	</form>
 	</div>
