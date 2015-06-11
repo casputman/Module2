@@ -38,9 +38,9 @@ import core.MyServlet;
                     forwardTo("/Intake.jsp");
                     break;
                 case "search":
-                   
                     String food = getRequest().getParameter("q");
-                    ArrayList<String> probFood = foodSearch.foodsearch(food);
+                    int userID = ((core.User) request.getSession().getAttribute("user")).getIdUser();
+                    ArrayList<String> probFood = foodSearch.foodsearch(food, userID);
                     System.out.println("hier komt eten: " + probFood + " dit was de zoekterm: " + food);
                     if (food != null) {
                         request.setAttribute("foodList", probFood);

@@ -11,6 +11,7 @@ public class ActivitySearch extends core.MyServlet{
     private static final long serialVersionUID = 1L;   
     
     public ArrayList<String> activitySearch(String activity) {
+        super.init();
         PreparedStatement ps;
         ArrayList<String> activities = new ArrayList<String>();
         try {
@@ -22,7 +23,11 @@ public class ActivitySearch extends core.MyServlet{
             ResultSet rs = ps.executeQuery();
             int i = 0;
                 while (rs.next() && i<=5) {
-                    activities.add(rs.getString(1));
+                    if (rs.isLast() || i == 5) {
+                        activities.add(rs.getString(1));
+                    } else {
+                    activities.add(rs.getString(1) + ":");
+                    }
                     i++;
                 }
         } catch (SQLException e) {
