@@ -45,6 +45,7 @@
 	</header>
 
 	<main class="siteContent container"> <%
+	
  	core.User user = null;
  	if (request.getSession().getAttribute("user") != null) {
  		user = core.User.fromIdUser(((core.User) request.getSession()
@@ -71,6 +72,7 @@
  %>
 	<center>
 		<p>
+		<div class="backgroundstatistics">
 		<div class="siteContent container statistics">
 			Your current <b>BMI</b>:
 			<%=bmi%></p>
@@ -100,6 +102,7 @@
 			<meter class="meter" min="0" low="5" optimum="17" high="30"
 				max="60" value="18"></meter>
 
+		</div>
 		</div>
 	</center>
 	</main>
