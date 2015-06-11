@@ -1,8 +1,6 @@
 package searches;
 
-
-
-    import java.io.IOException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -14,12 +12,6 @@ import core.MyServlet;
     public class FoodServlet extends MyServlet {
         private static final long serialVersionUID = 1L;
 
-        // --- Instance variables ----------------------------------------------------------------
-        
-        // --- Getters ---------------------------------------------------------------------------
-
-        // --- Request handlers ------------------------------------------------------------------
-        
         /**
          * Any GET requests concerning the food.
          */

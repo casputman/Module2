@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" media="screen" href="style/contactstyle.css" />
   
 </head>
-
 <body>
   <header class="siteHeader container clearfix">
     <a href="start">
