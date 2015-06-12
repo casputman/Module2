@@ -32,7 +32,6 @@ public class FoodAdd extends core.MyServlet{
 			System.out.println("fuck: " + rs.getInt(1));
 			ps.setInt(3, rs.getInt(1));
 			ps.execute();
-			ps.close();
 			// amount date user_iduser id intake idfood 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block 
@@ -57,7 +56,6 @@ public class FoodAdd extends core.MyServlet{
 	                ps.setDouble(7, iduser);
 	                ps.setString(8, name);
 	                ps.execute();
-	                ps.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

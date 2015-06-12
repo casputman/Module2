@@ -71,28 +71,46 @@
 	</div>
 
 	<div id="textDing">
-		<% Object f = request.getAttribute("foodList");
-		if (f != null) {
-		String probFood = f.toString();
-		probFood = probFood.substring(1, probFood.length() - 1);
-			String[] x = probFood.split(":,"); %>
+		<%
+		    Object f = request.getAttribute("foodList");
+		    if (f != null) {
+		        String probFood = f.toString();
+		        probFood = probFood.substring(1, probFood.length() - 1);
+		        System.out.println("checkem:" + probFood + ":");
+		        if (probFood.trim() != null) {
+		            System.out.println("vage shit 1 " + probFood);
+		            String[] x = probFood.split(":,");
+		%>
 		<form id="tfnewFood" method="POST" action="intake">
 			<input type="hidden" name="action" value="intake" />
 			<ul class="foodSearchOptions">
-				<% 
-			for (int i = 0; i < x.length; i++) {
-			    System.out.println("CHeck deza shizlle: " + x[i]);
-			    x[i].trim();
-			   String[] y = x[i].split("::");
-			    %>
+				<%
+				    System.out.println("vage shit 2 " + x.length);
+				            for (int i = 0; i < x.length; i++) {
+				                System.out.println("CHeck deza shizlle: " + x[i]);
+				                x[i].trim();
+				                if ( x[i].length() != 0) {
+
+				                    System.out.println("vage shit 3 " + x[i].length());
+				                    String[] y = x[i].split("::");
+				%>
 				<li><input type="text" name="amount" value="1" class="nfinput"
 					size="3">X<input type="submit" type="text" name="food"
-					value="<%= y[0] + " " + y[1] %> : <%= y[2] %>" class="tfbutton">
+					value="<%=y[0] + " " + y[1]%> : <%=y[2]%>" class="tfbutton">
 				</li>
 				<%
-			}
-		}	
-		%>
+				    }
+				                else {
+				                    %> 
+				                    <p>food not found in the database, 
+				                    please add it yourself or contact us at food@ubercoaching.com </p>
+				                    <%
+				                }
+				            }
+
+				        }
+				    }
+				%>
 			</ul>
 		</form>
 	</div>
@@ -166,7 +184,7 @@
 		</form>
 	</div>
 	<div>
-		<ul>
+		<ul> 
 			<%
 // 			    Object y = request.getAttribute("myActivity");
 // 			    String myActivityList = z.toString();
@@ -195,20 +213,17 @@
 			<b>If you can't find your meal enter it here</b>
 		</p>
 		<form id="tfFoodjes" method="POST" action="moreFood">
-			<input type="hidden" name="action" value="intake" /> name of the
-			food:<input type="text" class="tftextinput" name="name" value="bier"
-				required><br> Calorie per amount:<input type="text"
-				class="tftextinput" name="calorie" value="100" required><br>
-			amount:<input type="text" class="tftextinput" name="amount"
-				value="100" required><br> unit of amount:<input
-				type="text" class="tftextinput" name="unit" value="gr." required><br>
+			<input type="hidden" name="action" value="intake" /> 
+			name of the food:<input type="text" class="tftextinput" name="name" value="bier" required> <br>
+			Calorie per amount:<input type="text" class="tftextinput" name="calorie" value="100" required> <br>
+			amount:<input type="text" class="tftextinput" name="amount" value="100" required> <br>
+			unit of amount:<input type="text" class="tftextinput" name="unit" value="gr." required> <br>
 			<input type="submit" name="commit" value="addFood" class="tfbutton">
 			</form>
 	</div>
 	<div>
-		
-		<p>look up the amount of Kilocalories here
-		<p>
+		<br>
+		<p>look up the amount of Kilocalories here<p>
 		<form method="GET" action="http://www.google.com/search"
 			target="blank">
 			<input type="text" name="q" value=""><input type="submit"
