@@ -31,8 +31,8 @@ public class GoalShow extends core.MyServlet{
 				+ " VALUES(?, ?, ?)");
 			ps.setInt(1, goalweight);
 			@SuppressWarnings("unused")
-			java.sql.Date sqlDate = new java.sql.Date(year, month, day);
-			ps.setString(2, goaldate);
+			java.sql.Date goalDate = new java.sql.Date(year, month, day);
+			ps.setDate(2, goalDate);
 			ps.setInt(3, id);
 			ps.execute();
 			System.out.println("Goal is set");
