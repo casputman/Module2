@@ -55,33 +55,41 @@
   </header>
 
 
-  <main class="siteContent container">
-    <p><b>Enter your food over here:</b></p>
-		<div id="tfheader">
+	<main class="siteContent container">
+	<p>
+		<b>Enter your food over here:</b>
+	</p>
+	<div id="tfheader">
 
-			<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
-					<input type="hidden" name="action" value="search" />
-		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" name="commit" value="search" class="tfbutton">
-			</form>
-		<div class="tfclear">
-		</div>
+		<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
+			<input type="hidden" name="action" value="search" /> <input
+				type="text" id="textinput" class="tftextinput" name="q" size="21"
+				maxlength="120" oninput="textShizzle()"><input type="submit"
+				name="commit" value="search" class="tfbutton">
+		</form>
+		<div class="tfclear"></div>
 	</div>
-	
-	<div id="textDing"> 
-			<% Object f = request.getAttribute("foodList");
+
+	<div id="textDing">
+		<% Object f = request.getAttribute("foodList");
 		if (f != null) {
 		String probFood = f.toString();
 		probFood = probFood.substring(1, probFood.length() - 1);
 			String[] x = probFood.split(":,"); %>
-	<form id="tfnewFood" method="POST" action="intake">
-	<input type="hidden" name="action" value="intake"/>
-			<ul class="foodSearchOptions"> 
-			<% 
+		<form id="tfnewFood" method="POST" action="intake">
+			<input type="hidden" name="action" value="intake" />
+			<ul class="foodSearchOptions">
+				<% 
 			for (int i = 0; i < x.length; i++) {
 			    System.out.println("CHeck deza shizlle: " + x[i]);
 			    x[i].trim();
 			   String[] y = x[i].split("::");
-			    %> <li><input type="text" name="amount" value="1" class="nfinput" size="3">X<input type="submit" type="text" name="food" value="<%= y[0] + " " + y[1] %> : <%= y[2] %>" class="tfbutton"> </li>  <%
+			    %>
+				<li><input type="text" name="amount" value="1" class="nfinput"
+					size="3">X<input type="submit" type="text" name="food"
+					value="<%= y[0] + " " + y[1] %> : <%= y[2] %>" class="tfbutton">
+				</li>
+				<%
 			}
 		}	
 		%>
@@ -117,32 +125,39 @@
 		</ul>
 
 	</div>
-	
 
 
-	<p><b>Enter your activities over here:</b></p>
+
+	<p>
+		<b>Enter your activities over here:</b>
+	</p>
 	<div id="tfheader">
 
-			<form id="tfnewsearch" method="GET" action="Search" autocomplete="on">
-					<input type="hidden" name="action" value="Search" />
-		        <input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" oninput="textShizzle()"><input type="submit" name="commit" value="actsearch" class="tfbutton">
-			</form>
-		<div class="tfclear">
-		</div>
+		<form id="tfnewsearch" method="GET" action="Search" autocomplete="on">
+			<input type="hidden" name="action" value="Search" /> <input
+				type="text" id="textinput" class="tftextinput" name="q" size="21"
+				maxlength="120" oninput="textShizzle()"><input type="submit"
+				name="commit" value="actsearch" class="tfbutton">
+		</form>
+		<div class="tfclear"></div>
 	</div>
-	
-	<div id="textDing"> 
-			<% Object a = request.getAttribute("activityList");
+
+	<div id="textDing">
+		<% Object a = request.getAttribute("activityList");
 		if (a != null) {
 		String probActivity = a.toString();
 		probActivity = probActivity.substring(1, probActivity.length() - 1);
 			String[] x = probActivity.split(":,"); %>
-	<form id="tfnewActivity" method="POST" action="intakeA">
-	<input type="hidden" name="action" value="intakeA"/>
-			<ul class="activitySearchOptions"> 
-			<% 
+		<form id="tfnewActivity" method="POST" action="intakeA">
+			<input type="hidden" name="action" value="intakeA" />
+			<ul class="activitySearchOptions">
+				<% 
 			for (int i = 0; i < x.length; i++) {
-			    %> <li><input type="text" name="amount" value="1"><input type="submit" type="text" name="activity" value="<%= x[i] %>" class="tfbutton"> </li>  <%
+			    %>
+				<li><input type="text" name="amount" value="1"><input
+					type="submit" type="text" name="activity" value="<%= x[i] %>"
+					class="tfbutton"></li>
+				<%
 			}
 		}	
 		%>
@@ -161,32 +176,47 @@
 
 	</div>
 	<div>
-	<p><b>Enter your hours of sleep here:</b></p>
+		<p>
+			<b>Enter your hours of sleep here:</b>
+		</p>
 		<div id="tfheader">
-		From <input type="text" class="tftextinput" name="q" size="16" maxlength="60"> till <input type="text" class="tftextinput" name="q" size="16" maxlength="60" autocomplete="on"><input type="submit" value="Submit" class="tfbutton">
+			From <input type="text" class="tftextinput" name="q" size="16"
+				maxlength="60"> till <input type="text" class="tftextinput"
+				name="q" size="16" maxlength="60" autocomplete="on"><input
+				type="submit" value="Submit" class="tfbutton">
+		</div>
+		<div class="tfclear"></div>
+
 	</div>
-	<div class="tfclear"></div>
-	
-	</div>
-	
+
 	<div>
-		<p><b>If you can't find your meal enter it here</b></p>
+		<p>
+			<b>If you can't find your meal enter it here</b>
+		</p>
 		<form id="tfFoodjes" method="POST" action="moreFood">
-		<input type="hidden" name="action" value="intake"/>
-		name of the food:<input type="text" class="tftextinput" name="name" value="bier" required><br>
-		Calorie per amount:<input type="text" class="tftextinput" name="calorie" value="100" required><br>
-		amount:<input type="text" class="tftextinput" name="amount" value="100" required><br>
-		unit of amount:<input type="text" class="tftextinput" name="unit" value="gr." required><br>
-		<input type="submit" name="commit" value="addFood" class="tfbutton">
-	</form>
-		<p>look up the amount of Kilocalories here<p>
-		<form method="GET" action="http://www.google.com/search" target="blank">
-		<input type="text" name="q" value=""><input type="submit" name="commit" value="search">
+			<input type="hidden" name="action" value="intake" /> name of the
+			food:<input type="text" class="tftextinput" name="name" value="bier"
+				required><br> Calorie per amount:<input type="text"
+				class="tftextinput" name="calorie" value="100" required><br>
+			amount:<input type="text" class="tftextinput" name="amount"
+				value="100" required><br> unit of amount:<input
+				type="text" class="tftextinput" name="unit" value="gr." required><br>
+			<input type="submit" name="commit" value="addFood" class="tfbutton">
+			</form>
+	</div>
+	<div>
+		
+		<p>look up the amount of Kilocalories here
+		<p>
+		<form method="GET" action="http://www.google.com/search"
+			target="blank">
+			<input type="text" name="q" value=""><input type="submit"
+				name="commit" value="search">
 		</form>
 	</div>
-  </main>
+	</main>
 
-  <footer class="siteFooter container">
+	<footer class="siteFooter container">
     <p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
   </footer>
 
