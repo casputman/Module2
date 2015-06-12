@@ -34,13 +34,35 @@ public class GoalServlet extends core.MyServlet {
                 forwardTo("/SetGoal.jsp");
                 break;
             case "GoalDetails":
-                forwardTo("/GoalDetails");
+             	if (request.getSession().getAttribute("user") != null) {
+             		user = core.User.fromIdUser(((core.User) request.getSession()
+             				.getAttribute("user")).getIdUser());
+             	} else {
+             		error("User not read from session");
+             	}
+            	doSetGoal(goalShow);
+                forwardTo("/GoalDetails.jsp");
                 break;
             } 
         }
     }
     
-    /**
+    private void doSetGoal(GoalShow goalShow) {
+    	int goalWeight = Integer.parseInt(getRequest().getParameter("goalWeight"));
+    	String goalDate = getRequest().getParameter("goalDate");
+    	if (user != null) {
+    		int id = user.getIdUser();
+    		goalShow.setGoal(goalWeight, goalDate, id);
+    	} else {
+    		error("User is null");
+    	}
+	}
+    
+    public void error(String arg) {
+		System.err.println("ERROR: " + arg);	
+	}
+
+	/**
      * Any POST request concerning the user.
      */
     @Override

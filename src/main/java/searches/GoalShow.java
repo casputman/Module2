@@ -3,7 +3,6 @@ package searches;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import core.User;
 
@@ -17,20 +16,29 @@ public class GoalShow extends core.MyServlet{
 	private static final long serialVersionUID = 1L;
 
 	//Retrieves the goalweight, goaldate and last entered weight of a user
-	public void setGoal(int goalweight, Date goaldate, int id){
+	public void setGoal(int goalweight, String goaldate, int id){
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		String[] date = goaldate.split("-");
+		day = Integer.parseInt(date[0]);
+		month = Integer.parseInt(date[1]);
+		year = Integer.parseInt(date[2]);
 		super.init();
 		PreparedStatement ps;
 		try {
 			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
 				+ " VALUES(?, ?, ?)");
 			ps.setInt(1, goalweight);
-			java.sql.Date sqlDate = new java.sql.Date(goaldate.getTime());
-			ps.setDate(2, sqlDate);
+			@SuppressWarnings("unused")
+			java.sql.Date sqlDate = new java.sql.Date(year, month, day);
+			ps.setString(2, goaldate);
 			ps.setInt(3, id);
 			ps.execute();
 			System.out.println("Goal is set");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			error("Goal set error");
 		}
 	}
 	
@@ -64,6 +72,7 @@ public class GoalShow extends core.MyServlet{
     	System.out.println("goalweight: " + goal.getGoalweight() + " " + "goaldate: " + goal.getGoaldate() + " " + "weight: " + goal.getGoalweight() );
 	    } catch (SQLException e) {
 			e.printStackTrace();
+			error("problem in get goal");
 	    }
 	    calculateGoal(goal);
 	}

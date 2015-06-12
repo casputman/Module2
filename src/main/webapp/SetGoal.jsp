@@ -32,29 +32,22 @@
     </nav>
   </header>
 <%
-
-searches.GoalShow goal = new GoalShow();
-
 final java.util.Map<String, String> returnMap = (java.util.Map<String, String>) request.getAttribute("return");
-final int goalWeight = returnMap == null ? "" : Integer.parseInt("12");
-final java.util.Date goalDate = returnMap == null ? "" : returnMap.get("GoalDate");
-final int id = 
-goal.setGoal(goalWeight, goalDate, id);
-
-
+final String goalWeight =  returnMap == null ? "" : returnMap.get("GoalWeight");
+final String goalDate =  returnMap == null ? "" : returnMap.get("GoalDate");
 %>
 
   <div class="siteContent container">
 	<div>
-		<form method="post" action="register">
+		<form method="post" action="GoalDetails">
 		<p><b>Goal information:</b></p>
 		<p>
 			<p>What weight do want to achieve?</p>
-			<input type="text" name="GoalWeight" value="<%=goalWeight%>" placeholder=" Username" class="mytext" required/>
+			<input type="text" name="goalWeight" value="<%=goalWeight%>" placeholder=" Username" class="mytext" required/>
 		</p>
 		<p>
 			<p>For when do you want to set this goal?</p>
-			<input type="date" name="GoalDate" value="<%=goalDate%>" placeholder=" DD/MM/YYYY" class="mytext" required />
+			<input type="date" name="goalDate" value="<%=goalDate%>" placeholder=" DD/MM/YYYY" class="mytext" required />
 		</P>
 		    <p><input type="submit" value="Set Goal"></p>
 		</form>
