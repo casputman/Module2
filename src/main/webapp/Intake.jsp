@@ -180,7 +180,7 @@
 		<input type="submit" name="commit" value="addFood" class="tfbutton">
 	</form>
 		<p>look up the amount of Kilocalories here<p>
-		<form method="GET" action="http://www.google.com/search">
+		<form method="GET" action="http://www.google.com/search" target="blank">
 		<input type="text" name="q" value=""><input type="submit" name="commit" value="search">
 		</form>
 	</div>

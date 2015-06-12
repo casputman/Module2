@@ -21,8 +21,8 @@ public class ActivityServlet extends MyServlet {
             System.out.println("text:" + getUrlParts().get(0));
             switch (getUrlParts().get(0)) {
             case "IntakeA":
-                ArrayList<ArrayList<String>> Activitylist = activitySearch.activityShow(1);
-                request.setAttribute("myFood", Activitylist);
+                ArrayList<ArrayList<String>> Activitylist = activitySearch.activityShow(((core.User) request.getSession().getAttribute("user")).getIdUser());
+                request.setAttribute("myAct", Activitylist);
                 System.out.println(Activitylist);
                 forwardTo("/Intake.jsp");
                 break;
@@ -31,7 +31,7 @@ public class ActivityServlet extends MyServlet {
                 ArrayList<String> probActivity = activitySearch.activitySearch(activity);
                 System.out.println("hier komen activities: " + probActivity + " dit was de zoekterm: " + activity);
                 if (activity != null) {
-                    request.setAttribute("foodList", probActivity);
+                    request.setAttribute("ActivityList", probActivity);
                 }
                 forwardTo("/Intake.jsp");
                 break;
