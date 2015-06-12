@@ -140,6 +140,7 @@
 				name="commit" value="actsearch" class="tfbutton">
 		</form>
 		<div class="tfclear"></div>
+
 	</div>
 
 	<div id="textDing">
@@ -167,10 +168,10 @@
 	<div>
 		<ul>
 			<%
-			    Object y = request.getAttribute("myActivity");
-			    String myActivityList = z.toString();
-			    myActivityList = myActivityList.substring(1, myActivityList.length() - 1).trim();
-			    System.out.println("fuckerdefuck: " + myActivityList);
+// 			    Object y = request.getAttribute("myActivity");
+// 			    String myActivityList = z.toString();
+// 			    myActivityList = myActivityList.substring(1, myActivityList.length() - 1).trim();
+// 			    System.out.println("fuckerdefuck: " + myActivityList);
 			%>
 		</ul>
 

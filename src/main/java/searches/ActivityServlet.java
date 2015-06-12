@@ -26,7 +26,7 @@ public class ActivityServlet extends MyServlet {
                 System.out.println(Activitylist);
                 forwardTo("/Intake.jsp");
                 break;
-            case "Search":
+            case "actsearch":
                 String activity = getRequest().getParameter("q");
                 ArrayList<String> probActivity = activitySearch.activitySearch(activity);
                 System.out.println("hier komen activities: " + probActivity + " dit was de zoekterm: " + activity);
