@@ -43,7 +43,7 @@ final String goalDate =  returnMap == null ? "" : returnMap.get("GoalDate");
 		<p><b>Goal information:</b></p>
 		<p>
 			<p>What weight do want to achieve?</p>
-			<input type="text" name="goalWeight" value="<%=goalWeight%>" placeholder=" Username" class="mytext" required/>
+			<input type="text" name="goalWeight" value="<%=goalWeight%>" placeholder=" Weight in KG" class="mytext" required/>
 		</p>
 		<p>
 			<p>For when do you want to set this goal?</p>

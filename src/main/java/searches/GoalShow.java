@@ -42,7 +42,7 @@ public class GoalShow extends core.MyServlet{
 		}
 	}
 	
-	public void getGoal(){
+	public Goal getGoal(User user){
 		super.init();
 		Goal goal = null;
 		PreparedStatement ps;
@@ -74,7 +74,7 @@ public class GoalShow extends core.MyServlet{
 			e.printStackTrace();
 			error("problem in get goal");
 	    }
-	    calculateGoal(goal);
+	    return goal;
 	}
 	
 	public int calculateGoal(Goal goal){

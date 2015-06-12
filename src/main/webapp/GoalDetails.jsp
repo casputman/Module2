@@ -1,4 +1,5 @@
 <!doctype html>
+<%@page import="searches.GoalShow"%>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -48,40 +49,31 @@
 	
 	<%
 	
-	
-	
+	core.User user = null;
+	if (request.getSession().getAttribute("user") != null) {
+ 		user = core.User.fromIdUser(((core.User) request.getSession()
+ 				.getAttribute("user")).getIdUser());
+ 	}
+	searches.GoalShow goalShow = new GoalShow();
+	searches.Goal goal = null;
+	goal = goalShow.getGoal(user);
+	//TODO
+	int goalWeight = 75;
+	String goalDate = "12" + " / " + "07" + " / " + "2015";
 	%>
 	<center>
 		<p>
 		<div class="backgroundstatistics">
 		<div class="siteContent container statistics">
-			Your current <b>BMI</b>:
-			<%=bmi%></p>
-
-			<meter class="meter" min="0" low="19" optimum="22" high="30" max="50"
-				value="<%=bmi%>"></meter>
-
 			<p>
-				Your calculated optimal <b>BMI</b>:
-				<%=""%></p>
-			<meter class="meter" min="0" low="19" optimum="22" high="30" max="50"
-				value="25"></meter>
-			<br> <br>
-
-			<p>
-				Your current <b>fat-percentage</b>:
-				<%=vet%>
+			Your current Goal is:
+			<%=goalWeight%>
 			</p>
 
-			<meter class="meter" min="0" low="5" optimum="17" high="30"
-				max="60" value="<%=vet%>"></meter>
-
 			<p>
-				Your calculated optimal <b>fat-percentage</b>:
-				<%=""%>
+				You have until:	<%=goalDate%>
+				To complete your goal
 			</p>
-			<meter class="meter" min="0" low="5" optimum="17" high="30"
-				max="60" value="18"></meter>
 
 		</div>
 		</div>
