@@ -24,7 +24,7 @@ import core.MyServlet;
                 System.out.println("text:" + getUrlParts().get(0));
                 switch (getUrlParts().get(0)) {
                 case "Intake": 
-                    ArrayList<ArrayList<String>> Foodlist = foodSearch.foodShow(1);
+                    ArrayList<ArrayList<String>> Foodlist = foodSearch.foodShow(((core.User) request.getSession().getAttribute("user")).getIdUser());
                     request.setAttribute("myFood", Foodlist);
                     System.out.println(Foodlist);
                     forwardTo("/Intake.jsp");

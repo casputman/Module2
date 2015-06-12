@@ -21,7 +21,7 @@ public class FoodSearch extends core.MyServlet {
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
 			ps = getConnection().prepareStatement(
-					" SELECT  name, unit "
+					" SELECT  name, unit, amount "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? "
 							+ " AND ( iduser IS NULL "
@@ -32,15 +32,16 @@ public class FoodSearch extends core.MyServlet {
 	    	int i = 0;
 	    		while (rs.next() && i<5) {
 	    		    String value = rs.getString(2);
+	    		    int amount = rs.getInt(3);
                     if (value == null) {
                         value = "stuk";
                     }
 	    		    if (rs.isLast() || i == 5) {
-	    		        foods.add(value + "::" + rs.getString(1));
+	    		        foods.add(amount + "::" + value + "::" + rs.getString(1));
 	    		    } else {
-	    		        System.out.println("kijk deza: " + rs.getString(2) + " +  " + rs.getString(1));
+	    		        System.out.println("kijk deza: " + " + " + amount + rs.getString(2) + " +  " + rs.getString(1));
 	    		     
-	    			foods.add(value + "::" + rs.getString(1) + ":");
+	    			foods.add(amount + "::" + value + "::" + rs.getString(1) + ":");
 	    		    }
 	    			i++;
 	    		}
