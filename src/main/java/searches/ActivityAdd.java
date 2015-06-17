@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ActivityAdd extends core.MyServlet {
     
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
     
     public void addActivity(String activity, Integer userID, double amount) {
         PreparedStatement ps;
@@ -28,6 +28,7 @@ public class ActivityAdd extends core.MyServlet {
             System.out.println("fuck: " + rs.getInt(1));
             ps.setString(3, activity);
             ps.execute();
+            ps.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -35,7 +36,6 @@ public class ActivityAdd extends core.MyServlet {
         
     }
     public void main(String args[]) {
-        ActivityAdd activityAdd = new ActivityAdd();
         addActivity("Walk/run, playing with children, moderate", 3, 1);
         System.out.println("Ya nigga nigga fixed allo dem chizzle, beef hooked"); 
     }

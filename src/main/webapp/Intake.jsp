@@ -151,8 +151,8 @@
 	</p>
 	<div id="tfheader">
 
-		<form id="tfnewsearch" method="GET" action="Search" autocomplete="on">
-			<input type="hidden" name="action" value="Search" /> <input
+		<form id="tfnewsearch" method="GET" action="actsearch" autocomplete="on">
+			<input type="hidden" name="action" value="actsearch" /> <input
 				type="text" id="textinput" class="tftextinput" name="q" size="21"
 				maxlength="120" oninput="textShizzle()"><input type="submit"
 				name="commit" value="actsearch" class="tfbutton">
@@ -166,30 +166,64 @@
 		if (a != null) {
 		String probActivity = a.toString();
 		probActivity = probActivity.substring(1, probActivity.length() - 1);
-			String[] x = probActivity.split(":,"); %>
+			String[] k = probActivity.split(":,"); %>
+			
 		<form id="tfnewActivity" method="POST" action="intakeA">
 			<input type="hidden" name="action" value="intakeA" />
 			<ul class="activitySearchOptions">
 				<% 
-			for (int i = 0; i < x.length; i++) {
+				System.out.println("vage shit 2 " + k.length);
+	            for (int i = 0; i < k.length; i++) {
+	                System.out.println("CHeck deza shizlle: " + k[i]);
+	                k[i].trim();
+	                if ( k[i].length() != 0) {
+
+	                    System.out.println("vage shit 3 " + k[i].length());
+	                    String[] m = k[i].split("::");
 			    %>
-				<li><input type="text" name="amount" value="1"><input
-					type="submit" type="text" name="activity" value="<%= x[i] %>"
-					class="tfbutton"></li>
+				<li><input type="text" name="amount" value="1" class="nfinput"
+					size="3">X<input type="submit" type="text" name="food"
+					value="<%=m[0] + " " + m[1]%> : <%=m[2]%>" class="tfbutton">
+				</li>
 				<%
-			}
-		}	
-		%>
+				    }
+				                else {
+				                    %> 
+				                    <p>food not found in the database, 
+				                    please add it yourself or contact us at food@ubercoaching.com </p>
+				                    <%
+				                }
+				            }
+
+				        }
+				%>
 			</ul>
 		</form>
 	</div>
 	<div>
-		<ul> 
+		<ul>
 			<%
-// 			    Object y = request.getAttribute("myActivity");
-// 			    String myActivityList = z.toString();
-// 			    myActivityList = myActivityList.substring(1, myActivityList.length() - 1).trim();
-// 			    System.out.println("fuckerdefuck: " + myActivityList);
+			    Object d = request.getAttribute("myAct");
+			    String myActivityList = d.toString();
+			    myActivityList = myActivityList.substring(1, myActivityList.length() - 1).trim();
+			    System.out.println("fuckerdefuck: " + myActivityList);
+			    if (myActivityList.length() != 0) {
+			        String[] e = myActivityList.split(":]");
+			        int totaal = 0;
+			        for (int i = 0; i < e.length; i++) {
+			            e[i] = e[i].substring(1);
+			            String actjes = e[i].split(":,")[1];
+			            String calties = e[i].split(":,")[2];
+			            totaal += Integer.parseInt(calties.trim());
+			%>
+			<li><%=actjes%> : <%=calties%></li>
+			<%
+			    }
+			%>
+			<li>Totaal aantal Kcal vandaag: <%=totaal%>
+			</li>
+			<%
+			    }
 			%>
 		</ul>
 
