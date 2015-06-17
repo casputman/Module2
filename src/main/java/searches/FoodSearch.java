@@ -19,7 +19,7 @@ public class FoodSearch extends core.MyServlet {
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
-			ps = getConnection().prepareStatement(
+			ps = super.getConnection().prepareStatement(
 					" SELECT  name, unit, amount "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? "
@@ -44,6 +44,7 @@ public class FoodSearch extends core.MyServlet {
 	    		    }
 	    			i++;
 	    		}
+	    		ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class FoodSearch extends core.MyServlet {
         ArrayList<ArrayList<String>> foodjes = new ArrayList<ArrayList<String>>();
         try {
             System.out.println("dit werkt " + iduser);
-            ps = getConnection().prepareStatement (
+            ps = super.getConnection().prepareStatement (
                     "SELECT idfood, amount "
                     + "FROM uber.intake " 
                     + "WHERE user_iduser = ? "
@@ -84,12 +85,14 @@ public class FoodSearch extends core.MyServlet {
                 while (hs.next()) {
                     foodjez.add(hs.getString(1) + ":");
                     System.out.println("2.1:" + hs.getString(1));
+                    
                     foodjez.add(hs.getString(2) + ":");
                     System.out.println("2.2:" + hs.getString(2));       
                 }
                 foodjes.add(foodjez);
+                gs.close();
             }
-            
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
