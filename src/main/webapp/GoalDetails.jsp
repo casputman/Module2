@@ -1,4 +1,5 @@
 <!doctype html>
+<%@page import="searches.GoalDate"%>
 <%@page import="searches.GoalShow"%>
 <html>
 <head>
@@ -48,7 +49,8 @@
 	<main class="siteContent container">
 	
 	<%
-	
+	int goalWeight = -1;
+	String goalDate = "-1";
 	core.User user = null;
 	if (request.getSession().getAttribute("user") != null) {
  		user = core.User.fromIdUser(((core.User) request.getSession()
@@ -56,10 +58,13 @@
  	}
 	searches.GoalShow goalShow = new GoalShow();
 	searches.Goal goal = null;
-	goal = goalShow.getGoal(user);
-	//TODO
-	int goalWeight = 75;
-	String goalDate = "12" + " / " + "07" + " / " + "2015";
+	searches.GoalDate goalDateIn = null;
+	if (goalShow.getGoal(user) != null && goal.getGoaldate() != null) {
+		goal = goalShow.getGoal(user);
+		goalWeight = goal.getGoalweight();
+		goalDate = goal.getGoaldate().toString();
+	}
+	
 	%>
 	<center>
 		<p>

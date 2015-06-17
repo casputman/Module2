@@ -1,5 +1,7 @@
 package searches;
 
+import java.util.Calendar;
+
 public class Goal {
 
 	// --- Instance variables ----------------------------------------------------------------
@@ -15,7 +17,7 @@ public class Goal {
 		return goalWeight;
 	}
     
-    public searches.GoalDate getGoaldate() {
+    public Calendar getGoaldate() {
 		return goalDate;
 	}
     
@@ -33,23 +35,25 @@ public class Goal {
 		this.goalDate = goaldate;
 	}
 	
+	public void setGoaldate(java.util.Date goaldate) {
+		GoalDate goalDateArg = new GoalDate();
+		goalDateArg.setTime(goaldate);
+	}
+	
 	public void setCurrentWeight(int weight) {
 		this.currentWeight = weight;
 	}
 	
-	public void createGoalDate(int year, int month, int day) {
-		goalDate = new GoalDate();
-		goalDate.setYear(year);
-		goalDate.setMonth(month);
-		goalDate.setDay(day);
-	}
-
-	@SuppressWarnings("deprecation")
-	public void createGoalDate(java.sql.Date date) {
-		goalDate = new GoalDate();
-		goalDate.setYear(date.getYear());
-		goalDate.setMonth(date.getMonth());
-		goalDate.setDay(date.getDay());
+	public void createCalendar(String arg) {
+		System.out.println(arg);
+		String[] date = arg.split("-");
+		GoalDate goalDateArg = new GoalDate();
+		int year = Integer.parseInt(date[0]);
+		int month = Integer.parseInt(date[1]);
+		int day = Integer.parseInt(date[2]);
+		goalDateArg.set(year, month, day);
+		goalDate = goalDateArg;
+		System.out.println("goal is created");
 	}
 	
 }
