@@ -165,5 +165,22 @@ WITH (
 );
 ALTER TABLE uber.goal
   OWNER TO di18;
+  
+CREATE TABLE uber.sleep
+(
+  sleepdate date NOT NULL DEFAULT now(),
+  user_iduser integer NOT NULL,
+  sleep double precision NOT NULL,
+  idsleep bigserial NOT NULL,
+  CONSTRAINT idsleep PRIMARY KEY (idsleep),
+  CONSTRAINT user_iduser FOREIGN KEY (user_iduser)
+      REFERENCES uber."user" (iduser) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE uber.sleep
+  OWNER TO di18;
 
   
