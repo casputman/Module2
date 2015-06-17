@@ -25,7 +25,8 @@ public class GoalShow extends core.MyServlet{
 			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
 				+ " VALUES(?, ?, ?)");
 			ps.setInt(1, goalweight);
-			java.sql.Date goalDate = (Date) goal.getGoaldate().getTime();
+			java.util.Date utilDate = goal.getGoaldate().getTime();
+		    java.sql.Date goalDate = new java.sql.Date(utilDate.getTime());
 			ps.setDate(2, goalDate);
 			ps.setInt(3, id);
 			ps.execute();
@@ -36,16 +37,15 @@ public class GoalShow extends core.MyServlet{
 		}
 	}
 	
-	public Goal getGoal(User user){
+	public void makeGoal(User user){
 		Goal goal = null;
-		boolean done = false;
 		PreparedStatement ps;
 	    try {
             ps = super.getConnection().prepareStatement(
             " SELECT  goal.goalweight, goal.goaldate, weight.weight "
             + " FROM uber.goal, uber.weight "
             + " WHERE weight.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?)" + 
-            "AND goal.user_iduser = ? "
+            " AND goal.user_iduser = ? "
         );
         int input = 0;
         if (user != null) {
@@ -57,20 +57,17 @@ public class GoalShow extends core.MyServlet{
 		ps.setInt(1, input);
 		ps.setInt(2, input); 
 		ResultSet rs = ps.executeQuery();
-    	while (rs.next() && !done) {
-    		goal = new Goal();
-    		goal.setGoalweight(rs.getInt(1));
-    		goal.setGoaldate(rs.getDate(2));
-    		goal.setCurrentWeight(rs.getInt(3));
-    		System.out.println("goal is created");
-    		done = true;
-    	}
-    	System.out.println("goalweight: " + goal.getGoalweight() + " " + "goaldate: " + goal.getGoaldate().toString() + " " + "weight: " + goal.getGoalweight() );
+    	goal = new Goal();
+    	rs.next();
+    	goal.setGoalweight(rs.getInt(1));
+    	goal.setGoaldate(rs.getDate(2));
+    	goal.setCurrentWeight(rs.getInt(3));
+    	System.out.println("goal is created");
+    	user.setGoal(goal);
 	    } catch (SQLException e) {
 			e.printStackTrace();
 			error("problem in get goal");
 	    }
-	    return goal;
 	}
 	
 	public int calculateGoal(Goal goal){

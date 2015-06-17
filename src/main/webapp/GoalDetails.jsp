@@ -1,4 +1,5 @@
 <!doctype html>
+<%@page import="searches.Goal"%>
 <%@page import="searches.GoalDate"%>
 <%@page import="searches.GoalShow"%>
 <html>
@@ -57,13 +58,11 @@
  				.getAttribute("user")).getIdUser());
  	}
 	searches.GoalShow goalShow = new GoalShow();
-	searches.Goal goal = null;
-	searches.GoalDate goalDateIn = null;
-	if (goalShow.getGoal(user) != null && goal.getGoaldate() != null) {
-		goal = goalShow.getGoal(user);
-		goalWeight = goal.getGoalweight();
-		goalDate = goal.getGoaldate().toString();
-	}
+	goalShow.makeGoal(user);
+	System.out.println("Goal made");
+	searches.Goal goal = user.getGoal();
+	goalWeight = goal.getGoalweight();
+	goalDate = goal.getGoaldate().toString();
 	
 	%>
 	<center>

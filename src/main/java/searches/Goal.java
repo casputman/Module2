@@ -38,6 +38,7 @@ public class Goal {
 	public void setGoaldate(java.util.Date goaldate) {
 		GoalDate goalDateArg = new GoalDate();
 		goalDateArg.setTime(goaldate);
+		goalDate = goalDateArg;
 	}
 	
 	public void setCurrentWeight(int weight) {
@@ -53,7 +54,6 @@ public class Goal {
 		int day = Integer.parseInt(date[2]);
 		goalDateArg.set(year, month, day);
 		goalDate = goalDateArg;
-		System.out.println("goal is created");
 	}
 	
 }
