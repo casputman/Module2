@@ -20,12 +20,8 @@
 		<servlet-class>core.WebpageServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>FoodServlet</servlet-name>
-		<servlet-class>searches.FoodServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>ActivityServlet</servlet-name>
-		<servlet-class>searches.ActivityServlet</servlet-class>
+		<servlet-name>IntakeServlet</servlet-name>
+		<servlet-class>searches.IntakeServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GoalServlet</servlet-name>
@@ -54,32 +50,31 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>FoodServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/Intake</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FoodServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/search</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FoodServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/intake</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FoodServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/moreFood</url-pattern>
 	</servlet-mapping>
-	
 	<servlet-mapping>
-		<servlet-name>ActivityServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/IntakeA</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>ActivityServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/actsearch</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>ActivityServlet</servlet-name>
+		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/intakeA</url-pattern>
 	</servlet-mapping>
 	
