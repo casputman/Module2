@@ -2,9 +2,7 @@ package core;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,51 +18,17 @@ public abstract class MyServlet extends HttpServlet {
     
     // --- Class variables -------------------------------------------------------------------
     
-    private static final String DB_USERNAME = "di18";
-    private static final String DB_PASSWORD = "Q.Z4J2CPz";
-    private static final String DB_HOSTNAME = "farm14.ewi.utwente.nl";
-    private static final String DB_SCHEMA = "uber";
-    private static final int DB_PORT = 5432;
-    private static final String DATABASE = "di18";
     
 
     // --- Instance variables ----------------------------------------------------------------
     
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private Connection connection;
     
     private String action;
     private List<String> urlParts = new LinkedList<>();
     
     // --- Class usage -----------------------------------------------------------------------
-
-    @Override
-    public void init() {
-        
-        // Via a main() method this works.
-        String url = "jdbc:postgresql://" + DB_HOSTNAME + ":" + DB_PORT + "/" + DATABASE;
-        try {
-            Class.forName("org.postgresql.Driver");
-            
-            connection = DriverManager.getConnection(url, DB_USERNAME, DB_PASSWORD);
-            //connection.setAutoCommit(false);
-            Statement st = getConnection().createStatement();
-            st.execute("SET search_path TO '" + DB_SCHEMA + "'");
-            st.close();
-            
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Database connection could not be established: " + e);
-            e.printStackTrace();
-        }
-        
-        
-        Validation.setConnection(connection);
-//        FoodSearch.setConnection(connection);
-//        FoodAdd.setConnection(connection);
-//        ActivitySearch.setConnection(connection);
-//        ActivityAdd.setConnection(connection);
-    }
     
     // --- Getters ---------------------------------------------------------------------------
 
@@ -86,7 +50,7 @@ public abstract class MyServlet extends HttpServlet {
      * @return the database connection
      */
     protected Connection getConnection() {
-        return this.connection;
+        return Validation.getConnection();
     }
     
     /**

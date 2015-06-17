@@ -16,7 +16,6 @@ public class FoodSearch extends core.MyServlet {
     
 
     public ArrayList<String> foodsearch(String food, int userID) {
-        super.init();
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
@@ -53,7 +52,6 @@ public class FoodSearch extends core.MyServlet {
     }
     
     public ArrayList<ArrayList<String>> foodShow(int iduser) {
-        super.init();
         PreparedStatement ps;
         PreparedStatement gs;
         ArrayList<ArrayList<String>> foodjes = new ArrayList<ArrayList<String>>();

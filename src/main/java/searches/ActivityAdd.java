@@ -9,7 +9,6 @@ public class ActivityAdd extends core.MyServlet {
     private static final long serialVersionUID = 1L;
     
     public void addActivity(String activity, Integer userID, double amount) {
-        super.init();
         PreparedStatement ps;
         try {
             System.out.println("fuck1:" + activity.trim());
@@ -37,7 +36,6 @@ public class ActivityAdd extends core.MyServlet {
     }
     public void main(String args[]) {
         ActivityAdd activityAdd = new ActivityAdd();
-        activityAdd.init();
         addActivity("Walk/run, playing with children, moderate", 3, 1);
         System.out.println("Ya nigga nigga fixed allo dem chizzle, beef hooked"); 
     }

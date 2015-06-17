@@ -11,7 +11,6 @@ public class FoodAdd extends core.MyServlet{
    
     
 	public void addFood(String food, Integer userID, double amount) {
-	    super.init();
 	    PreparedStatement ps;
 		try {
 		    System.out.println("fuck1:" + food.trim());
@@ -41,7 +40,6 @@ public class FoodAdd extends core.MyServlet{
 	}
 	
 	public void addFoodToDB(double calorie, double amount, String unit, double protein, double carbon, double fat, double iduser, String name) {
-	    super.init();
 	    PreparedStatement ps;
 	    try {
 	        ps = getConnection().prepareStatement(
