@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="style/concise.min.css" />
 <link rel="stylesheet" type="text/css" media="screen"
-	href="style/contactstyle.css" />
+	href="style/webapp.css" />
 
 <script type="text/javascript">
 	function logOut() {
@@ -32,9 +32,7 @@
 		}
 	}
 </script>
-
 </head>
-
 <body>
 	<header class="siteHeader container clearfix">
 		<a href="webapp"> <img class="logo" src="images/Ubercoaching.png"
@@ -45,44 +43,32 @@
 				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
 				<a href="InAbout" class="buttonlink"><li>About</li></a>
 				<a href="InContact" class="buttonlink"><li>Contact</li></a>
-				<a href="#" class="buttonlink" onclick="logOut()"><li>Log
-						Out</li></a>
+				<a href="#" class="buttonlink" onclick="logOut()"><li>LogOut</li></a>
 		</nav>
 	</header>
-
-
-	<main class="siteContent container">
-	<center>
+	<div class="calculator">
 		<h3>
-			<b>Calculator Demo</b>
+			<b>CALCULATOR</b>
 		</h3>
-	</center>
-	<div>
-	<b>BMI CALCULATOR</b>
-	<br>
-		<FORM METHOD="LINK" ACTION="bmicalculator.jsp">
-			Type your weight: <INPUT TYPE="integer" NAME="weight"><br>
-			<br> Type your length: <INPUT TYPE="integer" NAME="length"><br>
-			<br> <INPUT TYPE="submit" VALUE="Calculate your BMI!">
+		<b>BMI CALCULATOR</b>
+		<FORM ACTION="bmicalculator.jsp">
+			<br> Type your weight: <INPUT TYPE="text" NAME="weight"><br>
+			<br> Type your length: <INPUT TYPE="text" NAME="length"><br>
+			<br> <b><INPUT TYPE="submit" VALUE="Calculate your BMI!"></b>
 		</FORM>
-		<br> <b>FAT PERCENTAGE CALCULATOR</b> <br>
-
-		<FORM METHOD="LINK" ACTION="vptcalculator.jsp">
-			Type your weight:<INPUT TYPE="integer" NAME="weight"><br>
-			<br> Type your waistline: <INPUT TYPE="integer" NAME="waistline"><br>
-			<br> Are you a man or a woman? <br> <br> <input
+		<br> <b>FAT PERCENTAGE CALCULATOR</b> <br> <br>
+		<FORM ACTION="vptcalculator.jsp">
+			Type your weight: <INPUT TYPE="text" NAME="weight"><br>
+			<br> Type your waistline: <INPUT TYPE="text" NAME="waistline"><br>
+			<br> Are you a man or a woman?<br> <br> <input
 				type="radio" name="sex" value="male"> Male<br> <input
 				type="radio" name="sex" value="female"> Female <br> <br>
-			<INPUT TYPE="submit" VALUE="Calculate your fat percentage!">
+			<b><INPUT TYPE="submit" VALUE="Calculate your fat percentage!"></b>
 		</FORM>
-
 	</div>
-	</main>
-
 	<footer class="siteFooter container">
 		<p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
 	</footer>
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="js/concise.min.js"></script>
