@@ -20,7 +20,6 @@ public class GoalShow extends core.MyServlet{
 	public void setGoal(int goalweight, String goaldate, int id){
 		Goal goal = new Goal();
 		goal.createCalendar(goaldate);
-		super.init();
 		PreparedStatement ps;
 		try {
 			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
@@ -38,7 +37,6 @@ public class GoalShow extends core.MyServlet{
 	}
 	
 	public Goal getGoal(User user){
-		super.init();
 		Goal goal = null;
 		boolean done = false;
 		PreparedStatement ps;

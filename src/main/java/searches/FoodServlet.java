@@ -29,7 +29,7 @@ import core.MyServlet;
                     System.out.println(Foodlist);
                     forwardTo("/Intake.jsp");
                     break;
-                case "search":
+                case "search":  
                     String food = getRequest().getParameter("q");
                     int userID = ((core.User) request.getSession().getAttribute("user")).getIdUser();
                     ArrayList<String> probFood = foodSearch.foodsearch(food, userID);

@@ -11,12 +11,11 @@ public class FoodAdd extends core.MyServlet{
    
     
 	public void addFood(String food, Integer userID, double amount) {
-	    super.init();
 	    PreparedStatement ps;
 		try {
 		    System.out.println("fuck1:" + food.trim());
 		    food = food.split(":")[1].trim();
-			ps = getConnection().prepareStatement(
+			ps = super.getConnection().prepareStatement(
 					" SELECT  idfood "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name = ? ");
@@ -32,6 +31,7 @@ public class FoodAdd extends core.MyServlet{
 			System.out.println("fuck: " + rs.getInt(1));
 			ps.setInt(3, rs.getInt(1));
 			ps.execute();
+			ps.close();
 			// amount date user_iduser id intake idfood 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block 
@@ -41,7 +41,6 @@ public class FoodAdd extends core.MyServlet{
 	}
 	
 	public void addFoodToDB(double calorie, double amount, String unit, double protein, double carbon, double fat, double iduser, String name) {
-	    super.init();
 	    PreparedStatement ps;
 	    try {
 	        ps = getConnection().prepareStatement(
@@ -56,6 +55,7 @@ public class FoodAdd extends core.MyServlet{
 	                ps.setDouble(7, iduser);
 	                ps.setString(8, name);
 	                ps.execute();
+	                ps.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

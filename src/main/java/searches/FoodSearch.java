@@ -16,7 +16,6 @@ public class FoodSearch extends core.MyServlet {
     
 
     public ArrayList<String> foodsearch(String food, int userID) {
-        super.init();
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
@@ -45,6 +44,7 @@ public class FoodSearch extends core.MyServlet {
 	    		    }
 	    			i++;
 	    		}
+	    		ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +53,6 @@ public class FoodSearch extends core.MyServlet {
     }
     
     public ArrayList<ArrayList<String>> foodShow(int iduser) {
-        super.init();
         PreparedStatement ps;
         PreparedStatement gs;
         ArrayList<ArrayList<String>> foodjes = new ArrayList<ArrayList<String>>();
@@ -76,7 +75,7 @@ public class FoodSearch extends core.MyServlet {
                 System.out.println("1:" + rs.getString(1));
                 foodjez.add(rs.getString(2) + ":");
                 System.out.println("2:" + rs.getString(2));
-                gs = super.getConnection().prepareStatement(
+                gs = getConnection().prepareStatement(
                         "SELECT name, calorie "
                         + "FROM uber.stdfood "
                         + "WHERE idfood = ?"
@@ -86,12 +85,14 @@ public class FoodSearch extends core.MyServlet {
                 while (hs.next()) {
                     foodjez.add(hs.getString(1) + ":");
                     System.out.println("2.1:" + hs.getString(1));
+                    
                     foodjez.add(hs.getString(2) + ":");
                     System.out.println("2.2:" + hs.getString(2));       
                 }
                 foodjes.add(foodjez);
+                gs.close();
             }
-            
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

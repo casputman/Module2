@@ -5,9 +5,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Formatter;
 
 import javax.servlet.ServletException;
@@ -22,7 +24,13 @@ public class Validation {
     private final static String COOKIE_NAME = "auth";
     
     private final static String REDIRECT_URL = "/login";
-    
+
+    private static final String DB_USERNAME = "di18";
+    private static final String DB_PASSWORD = "Q.Z4J2CPz";
+    private static final String DB_HOSTNAME = "farm14.ewi.utwente.nl";
+    private static final String DB_SCHEMA = "uber";
+    private static final int DB_PORT = 5432;
+    private static final String DATABASE = "di18";
     
     // --- Class variables -------------------------------------------------------------------
 
@@ -37,6 +45,9 @@ public class Validation {
     
     //TODO: make this thread safe.
     public static Connection getConnection() {
+        if (connection == null) {
+            connect();
+        }
         return connection;
     }
     
@@ -48,6 +59,27 @@ public class Validation {
     
     
     // --- Commands --------------------------------------------------------------------------
+    
+    private static void connect() {
+
+        // Via a main() method this works.
+        String url = "jdbc:postgresql://" + DB_HOSTNAME + ":" + DB_PORT + "/" + DATABASE;
+        try {
+            Class.forName("org.postgresql.Driver");
+            
+            connection = DriverManager.getConnection(url, DB_USERNAME, DB_PASSWORD);
+            //connection.setAutoCommit(false);
+            Statement st = getConnection().createStatement();
+            st.execute("SET search_path TO '" + DB_SCHEMA + "'");
+            st.close();
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Database connection could not be established: " + e);
+            e.printStackTrace();
+        }
+        
+        setConnection(connection);
+    }
     
     
     public static User validate(String username, String password) {

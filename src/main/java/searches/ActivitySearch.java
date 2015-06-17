@@ -11,7 +11,6 @@ public class ActivitySearch extends core.MyServlet{
     private static final long serialVersionUID = 1L;   
     
     public ArrayList<String> activitySearch(String activity) {
-        super.init();
         PreparedStatement ps;
         ArrayList<String> activities = new ArrayList<String>();
         try {
@@ -38,7 +37,6 @@ public class ActivitySearch extends core.MyServlet{
     }
     
     public ArrayList<ArrayList<String>> activityShow(int iduser) {
-        super.init();
         PreparedStatement ps;
         PreparedStatement gs;
         ArrayList<ArrayList<String>> activitjes = new ArrayList<ArrayList<String>>();
