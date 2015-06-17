@@ -63,6 +63,7 @@ public class IntakeServlet extends core.MyServlet{
         synchronized (request.getSession()) {
             super.doPost(request, response);
             FoodAdd foodAdd = new FoodAdd();
+            SleepAdd sleepAdd = new SleepAdd();
             switch (getUrlParts().get(0)) {
             case "intake": 
               // System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
@@ -82,6 +83,31 @@ public class IntakeServlet extends core.MyServlet{
                 //System.out.println("activity = " + getRequest().getParameter("activity") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
                 //);
                 activityAdd.addActivity(getRequest().getParameter("activity"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
+                forwardTo("/Intake");
+                break;
+            case "sleep": 
+                String sleepstart = request.getParameter("sleepstart");
+                String sleepend = request.getParameter("sleepend");
+                System.out.println();
+                int sleepstarthour = Integer.parseInt(sleepstart.split(":")[0]);
+                int sleepstartmin = Integer.parseInt(sleepstart.split(":")[1]);
+                int sleependhour = Integer.parseInt(sleepend.split(":")[0]);
+                int sleependmin = Integer.parseInt(sleepend.split(":")[1]);
+                double sleepstartper = ((double)sleepstartmin / 60.0);
+                double sleependper = ((double) sleependmin / 60.0);
+                double sleepStart = sleepstarthour + sleepstartper;
+                double sleepEnd = sleependhour + sleependper;
+                double sleepDuration;
+                if (sleepStart > sleepEnd) {
+                    double tmpStart = 24 - sleepStart;
+                    sleepDuration = tmpStart + sleepEnd;
+                } else if (sleepStart < sleepEnd) {
+                    sleepDuration = sleepEnd - sleepStart;
+                } else {
+                    sleepDuration = 0;
+                }
+                System.out.println("slaapjez: " + sleepDuration + " begin " + sleepstart + " eind " + sleepend + " sleepper " + sleepstartper + " + " + sleependper);
+                sleepAdd.addSleep(sleepDuration,((core.User) request.getSession().getAttribute("user")).getIdUser());
                 forwardTo("/Intake");
                 break;
             }

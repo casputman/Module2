@@ -11,7 +11,7 @@ public class SleepAdd extends core.MyServlet {
         PreparedStatement ps;
         try {
             ps = getConnection().prepareStatement(
-                    "INSERT INTO uber.intake (user_iduser, sleep)" + 
+                    "INSERT INTO uber.sleep (user_iduser, sleep)" + 
                         " VALUES (?, ?)");
             ps.setInt(1, userID);
             ps.setDouble(2, sleep);

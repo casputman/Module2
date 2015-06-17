@@ -77,6 +77,10 @@
 		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/intakeA</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>IntakeServlet</servlet-name>
+		<url-pattern>/sleep</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>GoalServlet</servlet-name>

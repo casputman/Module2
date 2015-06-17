@@ -233,10 +233,12 @@
 			<b>Enter your hours of sleep here:</b>
 		</p>
 		<div id="tfheader">
-			From <input type="text" class="tftextinput" name="q" size="16"
+		<form id="sleepform" method="POST" action="sleep">
+			From <input type="text" class="tftextinput" name="sleepstart" size="16"
 				maxlength="60"> till <input type="text" class="tftextinput"
-				name="q" size="16" maxlength="60" autocomplete="on"><input
+				name="sleepend" size="16" maxlength="60" autocomplete="on"><input
 				type="submit" value="Submit" class="tfbutton">
+				</form>
 		</div>
 		<div class="tfclear"></div>
 
