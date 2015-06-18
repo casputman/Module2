@@ -1,9 +1,9 @@
 package searches;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import core.User;
 
@@ -30,6 +30,7 @@ public class GoalShow extends core.MyServlet{
 			ps.setDate(2, goalDate);
 			ps.setInt(3, id); 
 			ps.execute();
+			printDate(goal.getGoaldate());
 			System.out.println("Goal is set");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,7 +62,7 @@ public class GoalShow extends core.MyServlet{
     	rs.next();
     	goal.setGoalweight(rs.getInt(1));
     	goal.setGoaldate(rs.getDate(2));
-    	System.out.println(goal.getGoaldate().toString());
+    	printDate(goal.getGoaldate());
     	goal.setCurrentWeight(rs.getInt(3));
     	System.out.println("goal is created");
     	user.setGoal(goal);
@@ -78,6 +79,11 @@ public class GoalShow extends core.MyServlet{
 	public void error(String arg) {
 		System.err.println("ERROR: " + arg);
 		
+	}
+	
+	public void printDate(Calendar dateArg) {
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(dateFormat.format(dateArg.getTime()));
 	}
 	
 	

@@ -64,7 +64,7 @@ private static final long serialVersionUID = 1L;
                         + "FROM uber.activities"
                         + "WHERE activities_name = ?"
                         );
-                gs.setInt(1, Integer.parseInt(rs.getString(1)));
+                gs.setInt(1, Integer.parseInt(rs.getString(2)));
                 ResultSet hs = gs.executeQuery();
                 while (hs.next()) {
                     activitjez.add(hs.getString(1));

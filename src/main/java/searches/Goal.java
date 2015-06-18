@@ -50,7 +50,7 @@ public class Goal {
 	}
 	
 	public void createCalendar(String arg) {
-		System.out.println(arg);
+		System.out.println(arg + 2);
 		String[] date = arg.split("-");
 		GoalDate goalDateArg = new GoalDate();
 		int year = Integer.parseInt(date[0]);
