@@ -234,16 +234,20 @@
 		</p>
 		<div id="tfheader">
 		<form id="sleepform" method="POST" action="sleep">
-			From <input type="text" class="tftextinput" name="sleepstart" size="16"
-				maxlength="60"> till <input type="text" class="tftextinput"
-				name="sleepend" size="16" maxlength="60" autocomplete="on"><input
+			From hour: <input type="text" class="tftextinput" name="sleepstarthour" size="2"
+				maxlength="2"> min: <input type="text" class="tftextinput" name="sleepstartmin" size="2"
+				maxlength="2"> till hour: <input type="text" class="tftextinput" name="sleependhour" size="2"
+				maxlength="2"> min: <input type="text" class="tftextinput" name="sleependmin" size="2"
+				maxlength="2"><input
 				type="submit" value="Submit" class="tfbutton">
 				</form>
 				<% Object e = request.getAttribute("sleepdur");
+					if (e != null) {
 					String sleepresponse = e.toString();
 					System.out.println("damn son" + sleepresponse);
 				%>
 				<%= sleepresponse %>
+				<% } %>
 		</div>
 		<div class="tfclear"></div>
 
