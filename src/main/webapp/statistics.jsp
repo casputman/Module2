@@ -73,12 +73,12 @@
 		<p>
 		<div class="backgroundstatistics">
 		<div class="siteContent container statistics">
-			Your current <b>BMI</b>:
-			<%=bmi%></p>
+  
+		<div id="chart_bmi" style="height:250px;">Loading...</div>
 
-			<meter class="meter" min="0" low="19" optimum="22" high="30" max="50"
-				value="<%=bmi%>"></meter>
-
+		<br /><br />
+	
+		<div id="chart_fat" style="height:250px;">Loading...</div>
 			<p>
 				Your calculated optimal <b>BMI</b>:
 				<%=""%></p>

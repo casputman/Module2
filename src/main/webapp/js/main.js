@@ -9,6 +9,17 @@ $(document).ajaxError(function(jqXHR, textStatus, errorThrown) {
 	alert("Something went wrong with the ajax request. See the console for details.");
 	console.log(jqXHR, testStatus, errorThrown);
 });
+$(document).ajaxSuccess(function(jsonData, textStatus, jqXHR) {
+	if (jsonData.code == undefined) {
+		return;
+	}
+	if (jsonData.code == 403) {
+		return ajaxAuthorizationError();
+	}
+	if (jsonData.code == 501) {
+		return ajaxInternalServerError();
+	}
+});
 
 	
 $(function(){
@@ -29,7 +40,7 @@ google.setOnLoadCallback(function(){
 	}
 	
 	var options = {
-        legend: {position: 'none'},
+        //legend: {position: 'none'},
         is3D: true,
         height: 250,
         theme: 'maximized',
@@ -42,20 +53,18 @@ google.setOnLoadCallback(function(){
             format: '###'
         },
         hAxis: { 
-            //format: "EEEE d MMMM yyyy",
+            format: "EEEE d MMMM yyyy",
             allowContainerBoundaryTextCufoff: true
         }
     };
 	
+	// Get BMI statistics.
 	$.ajax({
 		url: "rest/statistics/bmi"
 	})
 	.done(function(jsonData) {
-		if (jsonData.code == 403) {
-			return ajaxAuthorizationError();
-		}
-		if (jsonData.code == 501) {
-			return ajaxInternalServerError();
+		if (jsonData.code != 200) {
+			return;
 		}
 		
 		if (jsonData.data.length == 0) {
@@ -66,8 +75,9 @@ google.setOnLoadCallback(function(){
 		// Define columns.
 		var data = {
 			cols: [
-		       {label: "datum", type: "string"},
-		       {label: "BMI", type: "number"}
+		       {label: "Datum", type: "date"},
+		       {label: "Uw BMI", type: "number"},
+		       {label: "Gemiddeld BMI", type: "number"}
 	        ],
 	        rows: new Array()
 		};
@@ -75,7 +85,8 @@ google.setOnLoadCallback(function(){
 		for (var i = 0; i < jsonData.data.length; i++) {
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
 								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1]}]};
+			                   {v: jsonData.data[i][1]},
+			                   {v: jsonData.data[i][2]}]};
 		}
 		
 		// Create chart.
@@ -86,16 +97,13 @@ google.setOnLoadCallback(function(){
 	});
 	
 
-	
+	// Get fat percentage.
 	$.ajax({
 		url: "rest/statistics/fat"
 	})
 	.done(function(jsonData) {
-		if (jsonData.code == 403) {
-			return ajaxAuthorizationError();
-		}
-		if (jsonData.code == 501) {
-			return ajaxInternalServerError();
+		if (jsonData.code != 200) {
+			return;
 		}
 		
 		if (jsonData.data.length == 0) {
@@ -106,8 +114,9 @@ google.setOnLoadCallback(function(){
 		// Define columns.
 		var data = {
 			cols: [
-		       {label: "datum", type: "string"},
-		       {label: "vetpercentage", type: "number"}
+		       {label: "Datum", type: "date"},
+		       {label: "Uw vetpercentage", type: "number"},
+		       {label: "Gemiddeld vetpercentage", type: "number"}
 	        ],
 	        rows: new Array()
 		};
@@ -115,7 +124,8 @@ google.setOnLoadCallback(function(){
 		for (var i = 0; i < jsonData.data.length; i++) {
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
 								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1]}]};
+			                   {v: jsonData.data[i][1]},
+			                   {v: jsonData.data[i][2]}]};
 		}
 		
 		// Create chart.

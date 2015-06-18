@@ -1,5 +1,8 @@
 package statistics;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -57,6 +60,74 @@ public class Statistics {
         }
     }
     
+            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(
+                    "SELECT * FROM uber.bmi WHERE user_iduser = ? ORDER BY \"Date\";");
+            ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
+            final ResultSet rs = ps1.executeQuery();
+                final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(null);
+                data.add(rowData);
+            }
+            
+            // Get average BMI's.
+            final PreparedStatement ps2 = Validation.getConnection().prepareStatement(
+                    "SELECT \"Date\" FROM uber.bmi;");
+            final ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                final PreparedStatement ps3 = Validation.getConnection().prepareStatement(
+                        "SELECT avg(bmi) "
+                        + "FROM uber.bmi b, ( "
+                        + "    SELECT  user_iduser, max(\"Date\") as maxDate "
+                        + "    FROM    uber.bmi "
+                        + "    WHERE   \"Date\" <= ? "
+                        + "    GROUP BY user_iduser "
+                        + ") r "
+                        + "WHERE   b.user_iduser = r.user_iduser "
+                        + "  AND   b.\"Date\" = r.maxDate "
+                        + "");
+                ps3.setDate(1, rs2.getDate(1));
+                final ResultSet rs3 = ps3.executeQuery();
+                if (!rs3.next()) {
+                    continue;
+                }
+                final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(rs2.getString("Date"));
+                rowData.add(null);
+                rowData.add(rs3.getFloat(1));
+            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(""
+            ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
+            final ResultSet rs = ps1.executeQuery();
+                final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(null);
+                data.add(rowData);
+            }
+
+            
+            // Get average BMI's.
+            final PreparedStatement ps2 = Validation.getConnection().prepareStatement(
+                    "SELECT \"Date\" FROM uber.fat;");
+            final ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                final PreparedStatement ps3 = Validation.getConnection().prepareStatement(
+                        "SELECT avg(fatpercentage) "
+                        + "FROM uber.fat f, ( "
+                        + "    SELECT  user_iduser, max(\"Date\") as maxDate "
+                        + "    FROM    uber.fat "
+                        + "    WHERE   \"Date\" <= ? "
+                        + "    GROUP BY user_iduser "
+                        + ") r "
+                        + "WHERE   f.user_iduser = r.user_iduser "
+                        + "  AND   f.\"Date\" = r.maxDate "
+                        + "");
+                ps3.setDate(1, rs2.getDate(1));
+                final ResultSet rs3 = ps3.executeQuery();
+                if (!rs3.next()) {
+                    continue;
+                }
+                final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(rs2.getString("Date"));
+                rowData.add(null);
+                rowData.add(rs3.getFloat(1));
     
     private String checkValidation() {
         if (!Validation.validated(request)) {
