@@ -239,6 +239,11 @@
 				name="sleepend" size="16" maxlength="60" autocomplete="on"><input
 				type="submit" value="Submit" class="tfbutton">
 				</form>
+				<% Object e = request.getAttribute("sleepdur");
+					String sleepresponse = e.toString();
+					System.out.println("damn son" + sleepresponse);
+				%>
+				<%= sleepresponse %>
 		</div>
 		<div class="tfclear"></div>
 

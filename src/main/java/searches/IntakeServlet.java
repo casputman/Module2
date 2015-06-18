@@ -108,6 +108,10 @@ public class IntakeServlet extends core.MyServlet{
                 }
                 System.out.println("slaapjez: " + sleepDuration + " begin " + sleepstart + " eind " + sleepend + " sleepper " + sleepstartper + " + " + sleependper);
                 sleepAdd.addSleep(sleepDuration,((core.User) request.getSession().getAttribute("user")).getIdUser());
+                int sleepdurationhour = (int) sleepDuration;
+                double sleepdurationmin = sleepDuration - sleepdurationhour;
+                String times = ("je hebt: " + sleepdurationhour + " uur en " + sleepdurationmin + " minuten geslapen");
+                request.setAttribute("sleepdur", times);
                 forwardTo("/Intake");
                 break;
             }
