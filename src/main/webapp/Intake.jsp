@@ -182,14 +182,14 @@
 	                    String[] m = k[i].split("::");
 			    %>
 				<li><input type="text" name="amount" value="1" class="nfinput"
-					size="3">X<input type="submit" type="text" name="food"
+					size="3">X<input type="submit" type="text" name="activity"
 					value="<%=m[0] + " " + m[1]%> : <%=m[2]%>" class="tfbutton">
 				</li>
 				<%
 				    }
 				                else {
 				                    %> 
-				                    <p>food not found in the database, 
+				                    <p>activity not found in the database, 
 				                    please add it yourself or contact us at food@ubercoaching.com </p>
 				                    <%
 				                }

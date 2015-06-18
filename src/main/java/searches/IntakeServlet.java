@@ -46,7 +46,7 @@ public class IntakeServlet extends core.MyServlet{
                 ArrayList<String> probActivity = activitySearch.activitySearch(activity);
                 System.out.println("hier komen activities: " + probActivity + " dit was de zoekterm: " + activity);
                 if (activity != null) {
-                    request.setAttribute("ActivityList", probActivity);
+                    request.setAttribute("activityList", probActivity);
                 }
                 forwardTo("/Intake");
                 break;
