@@ -24,7 +24,7 @@ public class WebpageServlet extends MyServlet {
             throws ServletException, IOException {
         super.doGet(request, response);
         
-        if (!getUrlParts().get(0).equals("register") && !Validation.validateOrForward(request, response)) {
+        if (!getUrlParts().get(0).matches("register|start|contact|startAbout|calculator")  && !Validation.validateOrForward(request, response)) {
             return;
         }
         

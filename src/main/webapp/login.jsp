@@ -4,7 +4,7 @@
 </jsp:include>
   
 
-  <div class="masthead">
+  <div class="loginmast">
     <div class="container">
 	<div class = "fadein">
     <div class="login">

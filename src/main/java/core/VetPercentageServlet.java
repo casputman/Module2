@@ -52,7 +52,7 @@ public class VetPercentageServlet extends MyServlet {
 	public void VPTCalculateMan() {
 		double middelArg = middel;
 		double weightArg = weight;
-		double vptArg = (((-98.42+4.15*(middelArg/2.54)-0.082*(weightArg*2.2))/weightArg*2.2));
+		double vptArg = (((((-98.42 + (4.15 * (middelArg / 2.54))) - (0.082 * (weightArg * 2.2)))) / (weightArg * 2.2)) * 100);
 		vpt.setVPT(vptArg);
 		insertVPT(vptArg);
 	}
@@ -62,7 +62,7 @@ public class VetPercentageServlet extends MyServlet {
 	public void VPTCalculateVrouw() {
 		double middelArg = middel;
 		double weightArg = weight;
-		double vptArg = (((-76.76+4.15*(middelArg/2.54)-0.082*(weightArg*2.2))/weightArg*2.2));
+		double vptArg = (((((-76.76 + (4.15 * (middelArg / 2.54))) - (0.082 * (weightArg * 2.2)))) / (weightArg * 2.2)) * 100);
 		vpt.setVPT(vptArg);
 		insertVPT(vptArg);
 	}

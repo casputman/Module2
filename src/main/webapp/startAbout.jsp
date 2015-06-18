@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -21,10 +21,11 @@
 	</a>
     <nav class="nav">
       <ul>
-		<a href="login" class="buttonlink" ><li>Login</li></a>
-        <a href="start" class="buttonlink" ><li>Home</li></a>
-        <a href="startAbout" class="buttonlink" ><li>About</li></a>
-        <a href="contact" class="buttonlink" ><li>Contact</li></a>
+		<li><a href="login" class="buttonlink">Login</a></li>
+        <li><a href="start" class="buttonlink">Home</a></li>
+        <li><a href="calculator.jsp" class="buttonlink">Calculator</a></li>
+        <li><a href="startAbout" class="buttonlink">About</a></li>
+        <li><a href="contact" class="buttonlink">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -37,7 +38,7 @@
 			<img src="images/transparentabout.png" alt="About" align="right" width="25%" height="25%">
 &Uuml;ber-coaching bestaat uit een groep van meerdere diet-coaches die een brede groep klanten van advies op maat voorziet wat betreft voeding en sport. De doelgroep bestaat voornamelijk uit amateursporters, maar ook sporters op hoger niveau en zwaarlijvigen behoren tot het dagelijks klantenbestand. 
 
-&Uuml;ber-coaching, niet te verwarren met het uit &Uuml;ber-coaching ontsprongen taxiconcern Uber, werd opgericht te Enschede en opereerde sinds omstreeks 2007 enkel in deze regio. In het jaar 2009 expandeerde het bedrijf naar andere delen van Nederland en over de grens richting Münster, Duitsland. Anno 2015 opereert het bedrijf in vijf landen in noordwest-Europa. Het klantenbestand bestaat inmiddels uit ruim 42.000 klanten en het eind is nog lang niet in zicht.
+&Uuml;ber-coaching, niet te verwarren met het uit &Uuml;ber-coaching ontsprongen taxiconcern Uber, werd opgericht te Enschede en opereerde sinds omstreeks 2007 enkel in deze regio. In het jaar 2009 expandeerde het bedrijf naar andere delen van Nederland en over de grens richting M�nster, Duitsland. Anno 2015 opereert het bedrijf in vijf landen in noordwest-Europa. Het klantenbestand bestaat inmiddels uit ruim 42.000 klanten en het eind is nog lang niet in zicht.
 
 			
 		</div>

@@ -1,4 +1,4 @@
-﻿
+
 <!doctype html>
 <html>
 <head>
@@ -20,10 +20,10 @@
 	</a>
     <nav class="nav">
       <ul>
-		<a href="login" class="buttonlink" ><li>Login</li></a>
-        <a href="start" class="buttonlink" href=""><li>Home</li></a>
-        <a href="startAbout" class="buttonlink" href=""><li>About</li></a>
-        <a href="contact" class="buttonlink" href=""><li>Contact</li></a>
+				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
+				<a href="InAbout" class="buttonlink"><li>About</li></a>
+				<a href="InContact" class="buttonlink"><li>Contact</li></a>
+				<a href="#" class="buttonlink" onclick="logOut()"><li>LogOut</li></a>
       </ul>
     </nav>
   </header>

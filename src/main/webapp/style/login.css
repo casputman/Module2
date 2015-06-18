@@ -3,6 +3,19 @@
   transition: all .3s;
 }
 
+a {
+  color: #ecac91;
+  -webkit-transition: all .3s;
+          transition: all .3s;
+}
+a:hover {
+  color: #dd6a3a;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+}
+
 .siteHeader {
   border-bottom: 1px solid #eee;
 }
@@ -15,6 +28,18 @@
   .logo {
     float: left;
   }
+}
+.resbut {
+	margin-top: 50px;
+	margin-left: 30%;
+	
+	width: 40%;
+    background: url(buttonbackground.png);
+    background-position: left top;
+    background-repeat: repeat;
+    padding: 20px;
+	font-size: 170%;
+	border: 2px solid black;
 }
 .button {
 	font-style:none;
@@ -74,7 +99,7 @@
     border-top-right-radius: 10px; 
 	border-bottom-right-radius: 10px;
 }
-.masthead {
+.loginmast {
   background: url("../images/loginwallpaper.jpg") no-repeat center center;
 		
   height: 600px;
@@ -82,8 +107,13 @@
   background-size: fit;
   padding-bottom: 36px;
   padding-top: 36px;
-  
-
+}
+.masthead {
+  background: url("../images/Headerlogo.jpg") no-repeat center center;
+  height: 400px;
+  background-size: cover;
+  padding-bottom: 36px;
+  padding-top: 36px;
 }
 .login {
     border-radius: 25px;
@@ -171,3 +201,42 @@ a:active {
 .image {
 width: 100%;
 }
+
+.homeBanner-buttons {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+.homeBanner-buttons .btn--borderWhite {
+  border-width: 3px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  width: 100%;
+}
+@media (min-width: 30em) {
+  .homeBanner-buttons .btn--borderWhite {
+    margin-bottom: 0;
+    margin-left: 8px;
+    width: auto;
+  }
+  .homeBanner-buttons .btn--borderWhite:first-of-type {
+	display: block;
+	width: 40%;
+	margin-left: 30%;
+	background-color: #FFE13C;
+  }
+}
+
+.btn--borderWhite {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+.btn--borderWhite:hover {
+  background-color: #32B232 !important;
+  color: black !important; 
+}
+.btn--borderWhite:active, .btn--borderWhite:visited {
+  color: #black;
+}
+

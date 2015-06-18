@@ -34,10 +34,10 @@
 	</a>
     <nav class="nav">
       <ul>
-        <a href="webapp" class="buttonlink" href=""><li>Personal Home</li></a>
-        <a href="InAbout" class="buttonlink" href=""><li>About</li></a>
-        <a href="InContact" class="buttonlink" href=""><li>Contact</li></a>
-		<a href="#" class="buttonlink" onclick="logOut()"><li>Log Out</li></a>
+				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
+				<a href="InAbout" class="buttonlink"><li>About</li></a>
+				<a href="InContact" class="buttonlink"><li>Contact</li></a>
+				<a href="#" class="buttonlink" onclick="logOut()"><li>LogOut</li></a>
 		
       </ul>
     </nav>
