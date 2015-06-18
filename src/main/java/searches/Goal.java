@@ -23,6 +23,10 @@ public class Goal {
 		return currentWeight;
 	}
     
+    public int getCalculateGoal(){
+    	return 0;
+    }
+    
     // --- Setters ---------------------------------------------------------------------------
 	
 	public void setGoalweight(int goalweight) {
