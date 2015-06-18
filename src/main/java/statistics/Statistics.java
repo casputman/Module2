@@ -1,8 +1,9 @@
 package statistics;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,7 +20,10 @@ import javax.ws.rs.core.UriInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import core.User;
 import core.Validation;
+
+
 
 @Path("/statistics")
 public class Statistics {
@@ -36,7 +40,7 @@ public class Statistics {
         this.uriInfo = uriInfo;
         this.request = request;
         this.response = response;
-        System.out.println("[rest: Statistics]");
+        System.out.println("[rest: Statistics, uri: " + uriInfo.getRequestUri().toString() + "]");
     }
     
 
@@ -59,12 +63,31 @@ public class Statistics {
             return getInternalServerError();
         }
     }
-    
+
+    @GET
+    @Path("bmi")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String doJsonGetBmi() {
+        // Check validation.
+        final String validationErrorOutput;
+        if ((validationErrorOutput = checkValidation()) != null) {
+            return validationErrorOutput;
+        }
+        final Map<String, Object> map = new LinkedHashMap<>();
+        map.put("code", 200);
+        
+        final ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+        
+        
+        try {
             final PreparedStatement ps1 = Validation.getConnection().prepareStatement(
                     "SELECT * FROM uber.bmi WHERE user_iduser = ? ORDER BY \"Date\";");
             ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
-            final ResultSet rs = ps1.executeQuery();
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
                 final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(rs1.getString("Date"));
+                rowData.add(rs1.getDouble("bmi"));
                 rowData.add(null);
                 data.add(rowData);
             }
@@ -94,16 +117,54 @@ public class Statistics {
                 rowData.add(rs2.getString("Date"));
                 rowData.add(null);
                 rowData.add(rs3.getFloat(1));
-            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(""
-            ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
-            final ResultSet rs = ps1.executeQuery();
+                data.add(rowData);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return getInternalServerError();
+        }
+        
+        
+        map.put("data", data);
+        
+        // Send back to client.
+        try {
+            return new ObjectMapper().writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            return getInternalServerError();
+        }
+    }
+    
+    @GET
+    @Path("fat")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String doJsonGetFat() {
+        // Check validation.
+        final String validationErrorOutput;
+        if ((validationErrorOutput = checkValidation()) != null) {
+            return validationErrorOutput;
+        }
+        final Map<String, Object> map = new LinkedHashMap<>();
+        map.put("code", 200);
+        
+        final ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+        
+        try {
+            // Get current fat percentage entries.
+            final PreparedStatement ps = Validation.getConnection().prepareStatement(""
+                    + "SELECT * FROM uber.fat WHERE user_iduser = ? ORDER BY \"Date\";");
+            ps.setInt(1, ((User) request.getAttribute("user")).getIdUser());
+            final ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(rs.getString("Date"));
+                rowData.add(rs.getDouble("fatpercentage"));
                 rowData.add(null);
                 data.add(rowData);
             }
 
             
-            // Get average BMI's.
+            // Get average fatpercentages.
             final PreparedStatement ps2 = Validation.getConnection().prepareStatement(
                     "SELECT \"Date\" FROM uber.fat;");
             final ResultSet rs2 = ps2.executeQuery();
@@ -128,6 +189,23 @@ public class Statistics {
                 rowData.add(rs2.getString("Date"));
                 rowData.add(null);
                 rowData.add(rs3.getFloat(1));
+                data.add(rowData);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return getInternalServerError();
+        }
+        
+        
+        map.put("data", data);
+        
+        // Send back to client.
+        try {
+            return new ObjectMapper().writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            return getInternalServerError();
+        }
+    }
     
     private String checkValidation() {
         if (!Validation.validated(request)) {
