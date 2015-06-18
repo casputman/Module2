@@ -60,7 +60,11 @@
 	System.out.println("Goal made");
 	searches.Goal goal = user.getGoal();
 	goalWeight = goal.getGoalweight();
-	goalDate = goal.getGoaldate().toString();
+	java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	java.util.Calendar goalDateArg = goal.getGoaldate();
+	goalDate = dateFormat.format(goalDateArg.getTime());
+
+	
 	
 	%>
 	<center>

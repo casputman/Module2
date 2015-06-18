@@ -55,7 +55,7 @@ public class GoalServlet extends core.MyServlet {
     private void doSetGoal(GoalShow goalShow) {
     	int goalWeight = Integer.parseInt(getRequest().getParameter("goalWeight"));
     	String goalDate = getRequest().getParameter("goalDate");
-    	
+    	System.out.println(goalDate + 1);
     	if (user != null) {
     		int id = user.getIdUser();
     		goalShow.setGoal(goalWeight, goalDate, id);
