@@ -86,14 +86,16 @@ public class IntakeServlet extends core.MyServlet{
                 forwardTo("/Intake");
                 break;
             case "sleep": 
-                String sleepstart = request.getParameter("sleepstart");
-                String sleepend = request.getParameter("sleepend");
+                int sleepstarthour = Integer.parseInt(request.getParameter("sleepstarthour"));
+                System.out.println(sleepstarthour);
+                int sleepstartmin = Integer.parseInt(request.getParameter("sleepstartmin"));
+                System.out.println(sleepstartmin);
+                int sleependhour = Integer.parseInt(request.getParameter("sleependhour"));
+                System.out.println(sleependhour);
+                int sleependmin = Integer.parseInt(request.getParameter("sleependmin"));
+                System.out.println(sleependmin);
                 System.out.println();
-                int sleepstarthour = Integer.parseInt(sleepstart.split(":")[0]);
-                int sleepstartmin = Integer.parseInt(sleepstart.split(":")[1]);
-                int sleependhour = Integer.parseInt(sleepend.split(":")[0]);
-                int sleependmin = Integer.parseInt(sleepend.split(":")[1]);
-                double sleepstartper = ((double)sleepstartmin / 60.0);
+                double sleepstartper = ((double) sleepstartmin / 60.0);
                 double sleependper = ((double) sleependmin / 60.0);
                 double sleepStart = sleepstarthour + sleepstartper;
                 double sleepEnd = sleependhour + sleependper;
@@ -106,11 +108,12 @@ public class IntakeServlet extends core.MyServlet{
                 } else {
                     sleepDuration = 0;
                 }
-                System.out.println("slaapjez: " + sleepDuration + " begin " + sleepstart + " eind " + sleepend + " sleepper " + sleepstartper + " + " + sleependper);
+                System.out.println("slaapjez: " + sleepDuration + " begin " + sleepstarthour + " eind " + sleependhour + " sleepper " + sleepstartper + " + " + sleependper);
                 sleepAdd.addSleep(sleepDuration,((core.User) request.getSession().getAttribute("user")).getIdUser());
                 int sleepdurationhour = (int) sleepDuration;
-                double sleepdurationmin = sleepDuration - sleepdurationhour;
-                String times = ("je hebt: " + sleepdurationhour + " uur en " + sleepdurationmin + " minuten geslapen");
+                double sleepdurationmin = (int) Math.round((sleepDuration - sleepdurationhour) * 60);
+                System.out.println("hours : " + sleepdurationhour + " minuten: " + sleepdurationmin);
+                String times = ("you have slept: " + sleepdurationhour + " hours and " + sleepdurationmin + " minutes");
                 request.setAttribute("sleepdur", times);
                 forwardTo("/Intake");
                 break;

@@ -28,7 +28,7 @@ public class GoalShow extends core.MyServlet{
 			java.util.Date utilDate = goal.getGoaldate().getTime();
 		    java.sql.Date goalDate = new java.sql.Date(utilDate.getTime());
 			ps.setDate(2, goalDate);
-			ps.setInt(3, id);
+			ps.setInt(3, id); 
 			ps.execute();
 			System.out.println("Goal is set");
 		} catch (SQLException e) {
