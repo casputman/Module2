@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class ActivitySearch extends core.MyServlet{
     
-
-    private static final long serialVersionUID = 1L;   
+private static final long serialVersionUID = 1L;   
     
     public ArrayList<String> activitySearch(String activity) {
         PreparedStatement ps;
@@ -29,13 +28,14 @@ public class ActivitySearch extends core.MyServlet{
                     }
                     i++;
                 }
+                ps.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return activities;
     }
-    
+
     public ArrayList<ArrayList<String>> activityShow(int iduser) {
         PreparedStatement ps;
         PreparedStatement gs;
@@ -59,7 +59,7 @@ public class ActivitySearch extends core.MyServlet{
                 System.out.println("1:" + rs.getString(1));
                 activitjez.add(rs.getString(2));
                 System.out.println("2:" + rs.getString(2));
-                gs = super.getConnection().prepareStatement(
+                gs = getConnection().prepareStatement(
                         "SELECT name, calorie"
                         + "FROM uber.activities"
                         + "WHERE activities_name = ?"
@@ -73,7 +73,10 @@ public class ActivitySearch extends core.MyServlet{
                     System.out.println("2.2:" + rs.getString(2));       
                 }
                 activitjes.add(activitjez);
+                gs.close();
             }
+           
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

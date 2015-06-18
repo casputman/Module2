@@ -144,6 +144,8 @@ public abstract class MyServlet extends HttpServlet {
      */
     public void forwardTo(String url) throws ServletException, IOException {
     	System.out.println("Redirect to " + url);
+    	System.out.println(getRequest());
+    	System.out.println(getResponse());
         getRequest().getRequestDispatcher(url).forward(getRequest(), getResponse());
     }
 

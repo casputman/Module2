@@ -20,24 +20,109 @@ $(function(){
 	
 });
 
-// Statistics page.
-$(function(){
+google.load('visualization', '1.0', {'packages':['corechart']});
+google.setOnLoadCallback(function(){
+
+	// Statistics page.
 	if ($(".siteContent.statistics").length == 0) {
 		return;
 	}
 	
+	var options = {
+        legend: {position: 'none'},
+        is3D: true,
+        height: 250,
+        theme: 'maximized',
+        tooltip: {isHtml: true},
+        vAxis: {
+            viewWindowMode: 'explicit',
+            viewWindow: {
+                //min: 0
+            },
+            format: '###'
+        },
+        hAxis: { 
+            //format: "EEEE d MMMM yyyy",
+            allowContainerBoundaryTextCufoff: true
+        }
+    };
+	
 	$.ajax({
-		url: "rest/statistics/foo"
+		url: "rest/statistics/bmi"
 	})
-	.done(function(data) {
-		if (data.code == 403) {
+	.done(function(jsonData) {
+		if (jsonData.code == 403) {
 			return ajaxAuthorizationError();
 		}
-		if (data.code == 501) {
+		if (jsonData.code == 501) {
 			return ajaxInternalServerError();
 		}
-		console.log(data);
-		console.log("foo");
+		
+		if (jsonData.data.length == 0) {
+			$("#chart_bmi").html("U heeft uw BMI nog niet berekend.");
+			return;
+		}
+		
+		// Define columns.
+		var data = {
+			cols: [
+		       {label: "datum", type: "string"},
+		       {label: "BMI", type: "number"}
+	        ],
+	        rows: new Array()
+		};
+		// Put received data in the right format.
+		for (var i = 0; i < jsonData.data.length; i++) {
+			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
+								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1]}]};
+		}
+		
+		// Create chart.
+		var dataTable = new google.visualization.DataTable(data);
+		var chart = new google.visualization.LineChart($('#chart_bmi')[0]);
+		options.title = "BMI";
+        chart.draw(dataTable, options);
+	});
+	
+
+	
+	$.ajax({
+		url: "rest/statistics/fat"
+	})
+	.done(function(jsonData) {
+		if (jsonData.code == 403) {
+			return ajaxAuthorizationError();
+		}
+		if (jsonData.code == 501) {
+			return ajaxInternalServerError();
+		}
+		
+		if (jsonData.data.length == 0) {
+			$("#chart_fat").html("U heeft uw vetpercentage nog niet berekend.");
+			return;
+		}
+		
+		// Define columns.
+		var data = {
+			cols: [
+		       {label: "datum", type: "string"},
+		       {label: "vetpercentage", type: "number"}
+	        ],
+	        rows: new Array()
+		};
+		// Put received data in the right format.
+		for (var i = 0; i < jsonData.data.length; i++) {
+			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
+								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1]}]};
+		}
+		
+		// Create chart.
+		var dataTable = new google.visualization.DataTable(data);
+		var chart = new google.visualization.LineChart($('#chart_fat')[0]);
+		options.title = "Vetpercentage";
+        chart.draw(dataTable, options);
 	});
 });
 

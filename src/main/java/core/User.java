@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import searches.Goal;
+
 public class User {
     
     // --- Instance variables ----------------------------------------------------------------
@@ -17,6 +19,7 @@ public class User {
     private String email;
     private BMI bmi;
     private VetPercentage vet;
+    private Goal goal;
     
 
     // --- Constructors ----------------------------------------------------------------------
@@ -94,7 +97,20 @@ public class User {
 		return bmi;
 	}
     
+	/**
+	 * 
+	 * @return
+	 */
+	public Goal getGoal() {
+		return goal;
+	}
+	
     // --- Setters ---------------------------------------------------------------------------
+	
+	public void setGoal(Goal goalArg) {
+		goal = goalArg;
+		System.out.println("goal is set to user");
+	}
 	
 	/**
 	 * 

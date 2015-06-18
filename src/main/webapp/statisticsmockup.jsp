@@ -1,7 +1,4 @@
 <!doctype html>
-<%@page import="searches.Goal"%>
-<%@page import="searches.GoalDate"%>
-<%@page import="searches.GoalShow"%>
 <html>
 <head>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -37,45 +34,73 @@
 		</a>
 		<nav class="nav">
 			<ul>
-				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
-				<a href="InAbout" class="buttonlink"><li>About</li></a>
-				<a href="InContact" class="buttonlink"><li>Contact</li></a>
-				<a href="#" class="buttonlink" onclick="logOut()"><li>LogOut</li></a>
+				<a href="webapp" class="buttonlink" href=""><li>Personal
+						Home</li></a>
+				<a href="InAbout" class="buttonlink" href=""><li>About</li></a>
+				<a href="InContact" class="buttonlink" href=""><li>Contact</li></a>
+				<a href="#" class="buttonlink" onclick="logOut()"><li>Log
+						Out</li></a>
 			</ul>
 		</nav>
 	</header>
 
-	<main class="siteContent container">
+	<main class="siteContent container"> <%
 	
-	<%
-	int goalWeight = -1;
-	String goalDate = "-1";
-	core.User user = null;
-	if (request.getSession().getAttribute("user") != null) {
+ 	core.User user = null;
+ 	if (request.getSession().getAttribute("user") != null) {
  		user = core.User.fromIdUser(((core.User) request.getSession()
  				.getAttribute("user")).getIdUser());
  	}
-	searches.GoalShow goalShow = new GoalShow();
-	goalShow.makeGoal(user);
-	System.out.println("Goal made");
-	searches.Goal goal = user.getGoal();
-	goalWeight = goal.getGoalweight();
-	goalDate = goal.getGoaldate().toString();
-	
-	%>
+ 	//TODO user koppelen.
+ 	double bmi = 0;
+ 	double vet = 0;
+ 	if (user != null) {
+ 		System.out.println("user is not null");
+ 		if (user.getUserBMI() != null) {
+ 			bmi = user.getUserBMI().getBMI();
+ 			System.out.println("BMI is written" + bmi);
+ 		} else {
+ 			bmi = -1;
+ 			System.out.println("BMI is -1");
+ 		}
+ 		if (user.getUserVet() != null) {
+ 			vet = user.getUserVet().getVPT();
+ 		} else {
+ 			vet = -1;
+ 		}
+ 	}
+ %>
 	<center>
 		<p>
 		<div class="backgroundstatistics">
 		<div class="siteContent container statistics">
-			<p>
-			Your current Goal is:
-			<%=goalWeight%>
-			</p>
+			Your current <b>BMI</b>:
+			<%=bmi%></p>
+
+			<meter class="meter" min="0" low="19" optimum="22" high="30" max="50"
+				value="<%=bmi%>"></meter>
 
 			<p>
-				You have until:	<%=goalDate%>
-				To complete your goal
+				Your calculated optimal <b>BMI</b>:
+				<%=""%></p>
+			<meter class="meter" min="0" low="19" optimum="22" high="30" max="50"
+				value="25"></meter>
+			<br> <br>
+
+			<p>
+				Your current <b>fat-percentage</b>:
+				<%=vet%>
 			</p>
+
+			<meter class="meter" min="0" low="5" optimum="17" high="30"
+				max="60" value="<%=vet%>"></meter>
+
+			<p>
+				Your calculated optimal <b>fat-percentage</b>:
+				<%=""%>
+			</p>
+			<meter class="meter" min="0" low="5" optimum="17" high="30"
+				max="60" value="18"></meter>
 
 		</div>
 		</div>

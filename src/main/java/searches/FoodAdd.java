@@ -15,7 +15,7 @@ public class FoodAdd extends core.MyServlet{
 		try {
 		    System.out.println("fuck1:" + food.trim());
 		    food = food.split(":")[1].trim();
-			ps = super.getConnection().prepareStatement(
+			ps = getConnection().prepareStatement(
 					" SELECT  idfood "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name = ? ");

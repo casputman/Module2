@@ -19,7 +19,7 @@ public class FoodSearch extends core.MyServlet {
     	PreparedStatement ps;
     	ArrayList<String> foods = new ArrayList<String>();
 		try {
-			ps = super.getConnection().prepareStatement(
+			ps = getConnection().prepareStatement(
 					" SELECT  name, unit, amount "
 							+ " FROM    uber.stdfood "
 							+ " WHERE   name LIKE ? "
@@ -58,7 +58,7 @@ public class FoodSearch extends core.MyServlet {
         ArrayList<ArrayList<String>> foodjes = new ArrayList<ArrayList<String>>();
         try {
             System.out.println("dit werkt " + iduser);
-            ps = super.getConnection().prepareStatement (
+            ps = getConnection().prepareStatement (
                     "SELECT idfood, amount "
                     + "FROM uber.intake " 
                     + "WHERE user_iduser = ? "
@@ -75,7 +75,7 @@ public class FoodSearch extends core.MyServlet {
                 System.out.println("1:" + rs.getString(1));
                 foodjez.add(rs.getString(2) + ":");
                 System.out.println("2:" + rs.getString(2));
-                gs = super.getConnection().prepareStatement(
+                gs = getConnection().prepareStatement(
                         "SELECT name, calorie "
                         + "FROM uber.stdfood "
                         + "WHERE idfood = ?"

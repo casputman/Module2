@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import core.User;
+import core.Validation;
 
 public class GoalServlet extends core.MyServlet {
 	private User user;
@@ -29,17 +30,21 @@ public class GoalServlet extends core.MyServlet {
             super.doGet(request, response);
             GoalShow goalShow = new GoalShow();
             System.out.println("text:" + getUrlParts().get(0));
+            
+            if (!getUrlParts().get(0).equals("register") && !Validation.validateOrForward(request, response)) {
+                return;
+            }
+            
+            if (request.getSession().getAttribute("user") != null) {
+         		user = core.User.fromIdUser(((core.User) request.getSession()
+         				.getAttribute("user")).getIdUser());
+         	}
+            
             switch (getUrlParts().get(0)) {
             case "SetGoal":
                 forwardTo("/SetGoal.jsp");
                 break;
             case "GoalDetails":
-             	if (request.getSession().getAttribute("user") != null) {
-             		user = core.User.fromIdUser(((core.User) request.getSession()
-             				.getAttribute("user")).getIdUser());
-             	} else {
-             		error("User not read from session");
-             	}
             	doSetGoal(goalShow);
                 forwardTo("/GoalDetails.jsp");
                 break;
@@ -50,6 +55,7 @@ public class GoalServlet extends core.MyServlet {
     private void doSetGoal(GoalShow goalShow) {
     	int goalWeight = Integer.parseInt(getRequest().getParameter("goalWeight"));
     	String goalDate = getRequest().getParameter("goalDate");
+    	
     	if (user != null) {
     		int id = user.getIdUser();
     		goalShow.setGoal(goalWeight, goalDate, id);
@@ -73,8 +79,6 @@ public class GoalServlet extends core.MyServlet {
             FoodAdd foodAdd = new FoodAdd();
             switch (getUrlParts().get(0)) {
             case "intake": 
-              // System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
-                //);
                 foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
                 forwardTo("/Intake");
                 break;
