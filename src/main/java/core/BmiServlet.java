@@ -21,9 +21,9 @@ public class BmiServlet extends MyServlet {
 		try {
 			ps = getConnection().prepareStatement(
 					" SELECT  w.weight, u.height, ?, w.user_IDuser "
-							+ " FROM    user u, weight w "
+							+ " FROM    uber.user u, uber.weight w "
 							+ " WHERE w.user_IDuser = ? "
-							+ " AND w.date = ( SELECT MAX(w.weightdate) FROM weight w, user u WHERE w.user_IDuser = ?");
+							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?");
 			String input = String.valueOf(user.getIdUser());
 			ps.setString(1, input );
 			ps.setString(2, input );

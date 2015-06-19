@@ -70,7 +70,7 @@ public class GoalShow extends core.MyServlet{
 	    }
 	}
 	
-	public int calculateGoal(Goal goal){
+	public int calculateGoal(int userid){
 		return 0;
 	}
 	
