@@ -3,6 +3,8 @@ package searches;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import core.User;
@@ -25,8 +27,7 @@ public class GoalShow extends core.MyServlet{
 			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
 				+ " VALUES(?, ?, ?)");
 			ps.setInt(1, goalweight);
-			java.util.Date utilDate = goal.getGoaldate().getTime();
-		    java.sql.Date goalDate = new java.sql.Date(utilDate.getTime());
+		    java.sql.Date goalDate = convertUtilToSql(goal.getGoaldate().getTime());
 			ps.setDate(2, goalDate);
 			ps.setInt(3, id); 
 			ps.execute();
@@ -85,6 +86,13 @@ public class GoalShow extends core.MyServlet{
 		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(dateFormat.format(dateArg.getTime()));
 	}
+		 
+	private java.sql.Date convertUtilToSql(java.util.Date uDate) {
+	    java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+	    return sDate;
+	}
+	
+	
 	
 	
 }

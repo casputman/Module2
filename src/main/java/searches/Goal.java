@@ -42,6 +42,7 @@ public class Goal {
 	public void setGoaldate(java.util.Date goaldate) {
 		GoalDate goalDateArg = new GoalDate();
 		goalDateArg.setTime(goaldate);
+		printDate(goalDateArg);
 		goalDate = goalDateArg;
 	}
 	
@@ -52,12 +53,26 @@ public class Goal {
 	public void createCalendar(String arg) {
 		System.out.println(arg + 2);
 		String[] date = arg.split("-");
-		GoalDate goalDateArg = new GoalDate();
+		java.util.Date dateArg = new java.util.Date();
 		int year = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]);
 		int day = Integer.parseInt(date[2]);
-		goalDateArg.set(year, month, day);
+		dateArg.setDate(day);
+		dateArg.setMonth(month);
+		dateArg.setYear(year);
+		
+		
+		
+		GoalDate goalDateArg = new GoalDate();
+		goalDateArg.setTime(dateArg);
+		printDate(goalDateArg);
+		System.out.println("string create error");
 		goalDate = goalDateArg;
+	}
+	
+	public void printDate(Calendar dateArg) {
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(dateFormat.format(dateArg.getTime()));
 	}
 	
 }
