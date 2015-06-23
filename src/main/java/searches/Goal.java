@@ -60,9 +60,6 @@ public class Goal {
 		dateArg.setDate(day);
 		dateArg.setMonth(month);
 		dateArg.setYear(year);
-		
-		
-		
 		GoalDate goalDateArg = new GoalDate();
 		goalDateArg.setTime(dateArg);
 		printDate(goalDateArg);
