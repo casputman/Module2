@@ -28,6 +28,10 @@
 		<servlet-class>searches.GoalServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>StatusServlet</servlet-name>
+		<servlet-class>statistics.StatusServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>REST Service</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
@@ -80,6 +84,11 @@
 	<servlet-mapping>
 		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/sleep</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StatusServlet</servlet-name>
+		<url-pattern>/Balance</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

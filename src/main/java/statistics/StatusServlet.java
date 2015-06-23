@@ -6,10 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import searches.ActivitySearch;
 import searches.CalorieGoal;
 import searches.FoodAdd;
-import searches.FoodSearch;
 import searches.SleepAdd;
 
 public class StatusServlet extends core.MyServlet {
