@@ -86,8 +86,8 @@ public class FoodSearch extends core.MyServlet {
                     foodjez.add(hs.getString(1) + ":");
                     System.out.println("2.1:" + hs.getString(1));
                     
-                    foodjez.add(hs.getString(2) + ":");
-                    System.out.println("2.2:" + hs.getString(2));       
+                    foodjez.add((Integer.parseInt(hs.getString(2)) * Integer.parseInt(rs.getString(2))) + ":");
+                    System.out.println("2.2:" + Integer.parseInt(hs.getString(2)) * Integer.parseInt(rs.getString(2)));       
                 }
                 foodjes.add(foodjez);
                 gs.close();

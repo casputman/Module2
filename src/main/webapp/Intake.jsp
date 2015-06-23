@@ -81,8 +81,6 @@
 		            System.out.println("vage shit 1 " + probFood);
 		            String[] x = probFood.split(":,");
 		%>
-		<form id="tfnewFood" method="POST" action="intake">
-			<input type="hidden" name="action" value="intake" />
 			<ul class="foodSearchOptions">
 				<%
 				    System.out.println("vage shit 2 " + x.length);
@@ -94,9 +92,13 @@
 				                    System.out.println("vage shit 3 " + x[i].length());
 				                    String[] y = x[i].split("::");
 				%>
-				<li><input type="text" name="amount" value="1" class="nfinput"
+				<li>		
+				<form id="tfnewFood" method="POST" action="intake">
+			<input type="hidden" name="action" value="intake" />
+			<input type="text" name="amount" value="1" class="nfinput"
 					size="3">X<input type="submit" type="text" name="food"
 					value="<%=y[0] + " " + y[1]%> : <%=y[2]%>" class="tfbutton">
+					</form>
 				</li>
 				<%
 				    }
@@ -112,7 +114,6 @@
 				    }
 				%>
 			</ul>
-		</form>
 	</div>
 
 	<div>
@@ -260,7 +261,7 @@
 		<form id="tfFoodjes" method="POST" action="moreFood">
 			<input type="hidden" name="action" value="intake" /> 
 			name of the food:<input type="text" class="tftextinput" name="name" value="bier" required> <br>
-			Calorie per amount:<input type="text" class="tftextinput" name="calorie" value="100" required> <br>
+			KiloCalorie per amount:<input type="text" class="tftextinput" name="calorie" value="100" required> <br>
 			amount:<input type="text" class="tftextinput" name="amount" value="100" required> <br>
 			unit of amount:<input type="text" class="tftextinput" name="unit" value="gr." required> <br>
 			<input type="submit" name="commit" value="addFood" class="tfbutton">

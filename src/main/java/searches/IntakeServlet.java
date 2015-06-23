@@ -11,7 +11,7 @@ public class IntakeServlet extends core.MyServlet{
     private static final long serialVersionUID = 1L;
 
     /**
-     * Any GET requests concerning the food.
+     * Any GET requests concerning the intake.
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,7 +55,7 @@ public class IntakeServlet extends core.MyServlet{
     }
     
     /**
-     * Any POST request concerning the user.
+     * Any POST request concerning the intake.
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
