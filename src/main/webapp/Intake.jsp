@@ -17,7 +17,7 @@
   function logOut() {
 	var logOut = confirm("Are you sure you want to log out ?");
 	if( logOut == true ){
-		location.href = "start";
+		location.href = "logout";
 	}else{
 		location.href = "#";
 	  }

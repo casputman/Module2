@@ -25,7 +25,7 @@ public class FoodSearch extends core.MyServlet {
 							+ " WHERE   name LIKE ? "
 							+ " AND ( iduser IS NULL "
 							+ " OR iduser = ? )");
-	    	ps.setString(1, food + "%"); 
+	    	ps.setString(1, food.toLowerCase() + "%"); 
 	    	ps.setInt(2, userID);
 	    	ResultSet rs = ps.executeQuery();
 	    	int i = 0;
