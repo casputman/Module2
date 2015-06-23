@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import searches.ActivitySearch;
+import searches.CalorieGoal;
 import searches.FoodAdd;
 import searches.FoodSearch;
 import searches.SleepAdd;
@@ -22,11 +23,14 @@ public class StatusServlet extends core.MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
-            FoodSearch foodSearch = new FoodSearch();
-            ActivitySearch activitySearch = new ActivitySearch();
             System.out.println("text:" + getUrlParts().get(0));
             switch (getUrlParts().get(0)) {
-            
+            case "Balance": 
+            CalorieGoal CGoal = new CalorieGoal();
+            double balance = CGoal.balance(((core.User) request.getSession().getAttribute("user")).getIdUser());
+            request.setAttribute("mybalance", balance);
+            forwardTo("/inStatus.jsp");
+            break;
             }
             }
         }
