@@ -59,6 +59,7 @@
 	searches.Goal goal = user.getGoal();
 	goalWeight = goal.getGoalweight();
 	goalDate = goal.getGoaldate();
+	
 	%>
 	<center>
 		<p>

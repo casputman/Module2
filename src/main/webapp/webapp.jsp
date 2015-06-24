@@ -93,8 +93,8 @@
       </div>
     </div>
     <div>
-    	<a href="SetGoal" class="btn bg-small">
-    	Set Goal
+    	<a href="GoalDetails" class="btn bg-small">
+    	GoalDetails
     	</a> 
     </div>
     
