@@ -2,10 +2,16 @@ package searches;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import core.FoodDao;
+import core.Intake;
+import core.User;
+import core.Validation;
 
 public class IntakeServlet extends core.MyServlet{
     private static final long serialVersionUID = 1L;
@@ -18,26 +24,29 @@ public class IntakeServlet extends core.MyServlet{
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
+            
+            // Check authorization.
+            if (!Validation.validateOrForward(request, response)) {
+                return;
+            }
+            final int iduser = ((User) request.getSession().getAttribute("user")).getIdUser();
+            
             FoodSearch foodSearch = new FoodSearch();
             ActivitySearch activitySearch = new ActivitySearch();
-            System.out.println("text:" + getUrlParts().get(0));
             switch (getUrlParts().get(0)) {
             case "Intake": 
-                ArrayList<ArrayList<String>> Foodlist = foodSearch.foodShow(((core.User) request.getSession().getAttribute("user")).getIdUser());
-                request.setAttribute("myFood", Foodlist);
-                System.out.println(Foodlist);
+                List<Intake> foodIntake = FoodDao.getFoodIntakeToday(iduser);
+                request.setAttribute("foodIntake", foodIntake);
+                
                 ArrayList<ArrayList<String>> Activitylist = activitySearch.activityShow(((core.User) request.getSession().getAttribute("user")).getIdUser());
                 request.setAttribute("myAct", Activitylist);
                 System.out.println(Activitylist);
                 forwardTo("/Intake.jsp");
                 break;
             case "search":  
-                String food = getRequest().getParameter("q");
-                int userID = ((core.User) request.getSession().getAttribute("user")).getIdUser();
-                ArrayList<String> probFood = foodSearch.foodsearch(food, userID);
-                System.out.println("hier komt eten: " + probFood + " dit was de zoekterm: " + food);
+                final String food = getRequest().getParameter("q");
                 if (food != null) {
-                    request.setAttribute("foodList", probFood);
+                    request.setAttribute("foodSearchResults", FoodDao.search(food, iduser));
                 }
                 forwardTo("/Intake");
                 break;

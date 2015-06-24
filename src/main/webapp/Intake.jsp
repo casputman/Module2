@@ -1,152 +1,74 @@
-<!doctype html>
-<html>
-<head>
-<link rel="shortcut icon" type="image/ico" href="favicon.ico">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="HandheldFriendly" content="True">
+<%@include file="_header.jsp" %>
 
-<%@ page import="java.util.ArrayList"%>
-<title>&Uuml;ber-coaching</title>
-
-<link rel="stylesheet" type="text/css" media="screen"
-	href="style/concise.min.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="style/contactstyle.css" />
-
-<script type="text/javascript">
-	function logOut() {
-		var logOut = confirm("Are you sure you want to log out ?");
-		if (logOut == true) {
-			location.href = "logout";
-		} else {
-			location.href = "#";
-		}
-		return false;
-	}
-	function textShizzle() {
-		var text = document.getElementById("textinput").value; //|| document.getElementById("textinput").innerText;
-		//document.getElementById("textDing").innerHTML = text;
-
-		$ajax({
-			url : 'localhost:8080/ubercoaching/Intake',
-			method : 'GET',
-			dataType : 'html'
-		});
-	}
-</script>
-
-
-</head>
-
-<body>
-	<header class="siteHeader container clearfix">
-		<a href="webapp"> <img class="logo" src="images/Ubercoaching.png"
-			alt="Ubercoaching">
-		</a>
-		<nav class="nav">
-			<ul>
-				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
-				<a href="InAbout" class="buttonlink"><li>About</li></a>
-				<a href="InContact" class="buttonlink"><li>Contact</li></a>
-				<a href="#" class="buttonlink" onclick="logOut()"><li>Log
-						Out</li></a>
-			</ul>
-		</nav>
-	</header>
-
-
-	<main class="siteContent container">
+	<div class="siteContent container">
 	<div class="container vertical-divider">
 		<div class="column two-thirds">
 			<p>
 				<b>Enter your food over here:</b>
 			</p>
 			<div id="tfheader">
-
-				<form id="tfnewsearch" method="GET" action="search"
-					autocomplete="on">
-					<input type="hidden" name="action" value="search" /> <input
-						type="text" id="textinput" class="tftextinput" name="q" size="21"
-						maxlength="120" oninput="textShizzle()"><input
-						type="submit" name="commit" value="Search food!" class="tfbutton">
+				<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
+					<input type="hidden" name="action" value="search" />
+					<input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120">
+					<input type="submit" name="commit" value="Search food!" class="tfbutton">
 				</form>
 				<div class="tfclear"></div>
 			</div>
 
 			<div id="textDing">
 				<%
-					Object f = request.getAttribute("foodList");
-					if (f != null) {
-						String probFood = f.toString();
-						probFood = probFood.substring(1, probFood.length() - 1);
-						System.out.println("checkem:" + probFood + ":");
-						if (probFood.trim() != null) {
-							System.out.println("vage shit 1 " + probFood);
-							String[] x = probFood.split(":,");
+				// Food search results.
+				final java.util.List<?> fsr = (java.util.List<?>) request.getAttribute("foodSearchResults");
+				if (fsr != null) {
+				    if (fsr.size() == 0) {
 				%>
+				<p>Requested food not found in the database, please add it yourself or 
+				   contact us at food@ubercoaching.com</p>
+				<%  } %>
 				<ul class="foodSearchOptions">
 					<%
-						System.out.println("vage shit 2 " + x.length);
-								for (int i = 0; i < x.length; i++) {
-									System.out.println("CHeck deza shizlle: " + x[i]);
-									x[i].trim();
-									if (x[i].length() != 0) {
-
-										System.out.println("vage shit 3 " + x[i].length());
-										String[] y = x[i].split("::");
+					for (Object obj : fsr) {
+					    final core.Food food = (core.Food) obj;
 					%>
 					<li>
 						<form id="tfnewFood" method="POST" action="intake">
 							<input type="hidden" name="action" value="intake" /> <input
 								type="text" name="amount" value="1" class="nfinput" size="3">X<input
 								type="submit" type="text" name="food"
-								value="<%=y[0] + " " + y[1]%> : <%=y[2]%>" class="tfbutton">
+								value="<%=food.getAmount()%> <%=food.getUnit()%>: <%=food.getName()%>" class="tfbutton">
 						</form>
 					</li>
 					<%
-						} else {
+					}
 					%>
-					<p>Requested food not found in the database, please add it
-						yourself or contact us at food@ubercoaching.com</p>
-					<%
-						}
-								}
-
-							}
-						}
-					%>
+				<%
+				}
+				%>
 				</ul>
 			</div>
 
 			<div>
-				<ul>
+				<table>
 					<%
-						Object z = request.getAttribute("myFood");
-						String myFoodList = z.toString();
-						myFoodList = myFoodList.substring(1, myFoodList.length() - 1)
-								.trim();
-						System.out.println("fuckerdefuck: " + myFoodList);
-						if (myFoodList.length() != 0) {
-							String[] c = myFoodList.split(":]");
-							int totaal = 0;
-							for (int i = 0; i < c.length; i++) {
-								c[i] = c[i].substring(1);
-								String foodjes = c[i].split(":,")[1];
-								String caltjes = c[i].split(":,")[2];
-								totaal += Integer.parseInt(caltjes.trim());
+					// The user's calorie intake for today.
+					
+					final java.util.List<?> fi = (java.util.List<?>) request.getAttribute("foodIntake");
+					double totalCalories = 0;
+					if (fi != null && fi.size() > 0) {
+						for (Object obj : fi) {
+						    final core.Intake intake = (core.Intake) obj;
+						    final double calories = intake.getAmount() * intake.getFood().getCalorie();
+						    totalCalories += calories;
 					%>
-					<li><%=foodjes%> : <%=caltjes%></li>
-					<%
+					<tr><td><%=intake.getFood().getName()%></td><td><%=calories%></td></tr>
+						<%
 						}
-					%>
-					<li>Total amount of Kcal today: <%=totaal%>
-					</li>
+						%>
+					<tr><td>Totaal aantal caloriën vandaag:</td><td><%=totalCalories%></td></tr>
 					<%
-						}
+					}
 					%>
-				</ul>
+				</table>
 
 			</div>
 
@@ -211,7 +133,7 @@
 					</ul>
 				</form>
 			</div>
-		<%-- 	<div>
+			<div>
 				<ul>
 					<%
 						Object d = request.getAttribute("myAct");
@@ -232,14 +154,14 @@
 					<%
 						}
 					%>
-					<li>Total amount of Kcal today: <%=totaal%>
+					<li>Totaal aantal Kcal vandaag: <%=totaal%>
 					</li>
 					<%
 						}
 					%>
 				</ul>
 
-			</div> --%>
+			</div>
 			<div>
 				<p>
 					<b>Enter your hours of sleep here:</b>
@@ -303,14 +225,6 @@
 			</div>
 		</div>
 	</div>
-	</main>
+	</div>
 
-	<footer class="siteFooter container">
-		<p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
-	</footer>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="js/concise.min.js"></script>
-</body>
-</html>
+<%@include file="_footer.jsp" %>
