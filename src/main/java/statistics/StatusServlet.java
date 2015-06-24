@@ -27,7 +27,7 @@ public class StatusServlet extends core.MyServlet {
             case "Balance": 
             CalorieGoal CGoal = new CalorieGoal();
             User user = ((core.User) request.getSession().getAttribute("user"));
-            double balance = CGoal.balance(user.getIdUser());
+            double balance = Math.round(CGoal.balance(user.getIdUser()));
             request.setAttribute("mybalance", balance);
             double BMI = user.getUserBMI().getBMI();
             request.setAttribute("myBMI", BMI);

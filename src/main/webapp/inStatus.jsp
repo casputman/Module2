@@ -62,11 +62,15 @@
 	<%
 	    Object f = request.getAttribute("mybalance");
 	    String myBalance = f.toString();
+	    if (myBalance.equals("-1.0")) {
+	      %> <p>not all of the required information is known to us, please make sure your age, gender, length and weight is filled in </p> <%
+	    } else {
 	%>
 	<p>
 		Your Kcal balance is:
 		<%=myBalance%>
 	</p>
+	<%} %>
 	</main>
 
 	<footer class="siteFooter container">
