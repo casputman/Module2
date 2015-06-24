@@ -211,7 +211,7 @@
 					</ul>
 				</form>
 			</div>
-			<div>
+		<%-- 	<div>
 				<ul>
 					<%
 						Object d = request.getAttribute("myAct");
@@ -239,7 +239,7 @@
 					%>
 				</ul>
 
-			</div>
+			</div> --%>
 			<div>
 				<p>
 					<b>Enter your hours of sleep here:</b>
