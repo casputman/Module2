@@ -9,8 +9,8 @@
 			<div id="tfheader">
 				<form id="tfnewsearch" method="GET" action="search" autocomplete="on">
 					<input type="hidden" name="action" value="search" />
-					<input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120">
-					<input type="submit" name="commit" value="Search food!" class="tfbutton">
+					<input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" />
+					<input type="submit" name="commit" value="Search food!" class="tfbutton" />
 				</form>
 				<div class="tfclear"></div>
 			</div>
@@ -32,10 +32,11 @@
 					%>
 					<li>
 						<form id="tfnewFood" method="POST" action="intake">
-							<input type="hidden" name="action" value="intake" /> <input
-								type="text" name="amount" value="1" class="nfinput" size="3">X<input
-								type="submit" type="text" name="food"
-								value="<%=food.getAmount()%> <%=food.getUnit()%>: <%=food.getName()%>" class="tfbutton">
+							<input type="hidden" name="action" value="intake" />
+							<input type="text" name="amount" value="1" class="nfinput" size="3">
+							X
+							<input type="submit" name="food" 
+								value="<%=food.getAmount()%> <%=food.getUnit()%>: <%=food.getName()%>" class="tfbutton" />
 						</form>
 					</li>
 					<%

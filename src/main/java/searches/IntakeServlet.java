@@ -31,7 +31,6 @@ public class IntakeServlet extends core.MyServlet{
             }
             final int iduser = ((User) request.getSession().getAttribute("user")).getIdUser();
             
-            FoodSearch foodSearch = new FoodSearch();
             ActivitySearch activitySearch = new ActivitySearch();
             switch (getUrlParts().get(0)) {
             case "Intake": 
