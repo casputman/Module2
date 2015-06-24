@@ -47,14 +47,27 @@
 	</header>
 
 	<main class="siteContent container">
+	 <%
+     Object q = request.getAttribute("myBMI");
+     String myBmi = q.toString();
+ %>
+	<p>
+		Your BMI is:
+		<%=myBmi%></p>
 
-
-					<%
-				Object f = request.getAttribute("mybalance");
-				String myBalance = f.toString();
-				%>
-				<p>Your Kcal balance is: 
-				<%= myBalance %> <p> </main>
+	<%Object g = request.getAttribute("myVET");
+	String myVet = g.toString();%>
+	<p>Your fat percentage is:
+	<%=myVet %></p>
+	<%
+	    Object f = request.getAttribute("mybalance");
+	    String myBalance = f.toString();
+	%>
+	<p>
+		Your Kcal balance is:
+		<%=myBalance%>
+	</p>
+	</main>
 
 	<footer class="siteFooter container">
 		<p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>

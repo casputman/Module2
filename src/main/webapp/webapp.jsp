@@ -45,7 +45,7 @@
  
   <main class="siteContent container">
   <div class="row gutters">
-      <div class="column-5">
+      <div class="column-4">
 		<a href="Intake">
 			<img class="columnLogo" src="images/CalorieIntake.jpg" alt="CalorieIntake">
 		</a>
@@ -59,7 +59,7 @@
         <a href="Intake" class="btn bg-small">PROCEED &raquo;</a>
       </div>
 
-      <div class="column-5">
+      <div class="column-4">
 		<a href="Statistics">
 			<img class="columnLogo" src="images/statistics.jpg" alt="statistics">
 		</a>
@@ -70,7 +70,7 @@
         <a href="statistics" class="btn bg-small">PROCEED &raquo;</a>
       </div>
 
-      <div class="column-5">
+      <div class="column-4">
 		<a href="Forum">
 			<img class="columnLogo" src="images/Forum.jpg" alt="Forum">
 		</a>
@@ -79,6 +79,17 @@
         <p>We keep track of your average calorie intake and inform you of the best course of action.</p>
 		</br>
         <a href="forum" class="btn bg-small">PROCEED &raquo;</a>
+      </div>
+      
+      <div class="column-4">
+		<a href="Balance">
+			<img class="columnLogo" src="images/target.jpg" alt="Goal">
+		</a>
+        <h3><b>Goal</b></h3>
+
+        <p>Directly see your goal and your Kcal balance.</p>
+		</br>
+        <a href="Balance" class="btn bg-small">PROCEED &raquo;</a>
       </div>
     </div>
     <div>

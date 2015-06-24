@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import searches.CalorieGoal;
 import searches.FoodAdd;
 import searches.SleepAdd;
+import core.User;
 
 public class StatusServlet extends core.MyServlet {
     private static final long serialVersionUID = 1L;
@@ -25,8 +26,13 @@ public class StatusServlet extends core.MyServlet {
             switch (getUrlParts().get(0)) {
             case "Balance": 
             CalorieGoal CGoal = new CalorieGoal();
-            double balance = CGoal.balance(((core.User) request.getSession().getAttribute("user")).getIdUser());
+            User user = ((core.User) request.getSession().getAttribute("user"));
+            double balance = CGoal.balance(user.getIdUser());
             request.setAttribute("mybalance", balance);
+            double BMI = user.getUserBMI().getBMI();
+            request.setAttribute("myBMI", BMI);
+            double vet = user.getUserVet().getVPT();
+            request.setAttribute("myVET", vet);
             forwardTo("/inStatus.jsp");
             break;
             }
