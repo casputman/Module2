@@ -130,12 +130,9 @@ public class CalorieGoal extends core.MyServlet {
 		double remaining = togoal - goaldouble;
 		System.out.println("balance: " + balance);
 		System.out.println("BMR: " + BMR);
+		System.out.println("togoal: " + togoal);
 		System.out.println("remaining: " + remaining);
 		return remaining;
 	}
 
-	public static void main(String[] args) {
-		CalorieGoal kaas = new CalorieGoal();
-		kaas.balance(4);
-	}
 }
