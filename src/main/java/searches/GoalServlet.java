@@ -30,22 +30,22 @@ public class GoalServlet extends core.MyServlet {
             super.doGet(request, response);
             GoalShow goalShow = new GoalShow();
             System.out.println("text:" + getUrlParts().get(0));
-            
             if (!getUrlParts().get(0).equals("register") && !Validation.validateOrForward(request, response)) {
                 return;
             }
-            
-            if (request.getSession().getAttribute("user") != null) {
-         		user = core.User.fromIdUser(((core.User) request.getSession()
-         				.getAttribute("user")).getIdUser());
-         	}
-            
             switch (getUrlParts().get(0)) {
             case "SetGoal":
                 forwardTo("/SetGoal.jsp");
+                int goalWeight = Integer.parseInt(request.getParameter("goalWeight"));
+                String goalDate = request.getParameter("goalDate");
+                if (user != null) {
+            		int id = user.getIdUser();
+            		goalShow.setGoal(goalWeight, goalDate, id);
+            	} else {
+            		error("User is null");
+            	}
                 break;
             case "GoalDetails":
-            	doSetGoal(goalShow);
                 forwardTo("/GoalDetails.jsp");
                 break;
             } 
