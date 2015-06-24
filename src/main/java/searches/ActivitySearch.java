@@ -40,6 +40,7 @@ private static final long serialVersionUID = 1L;
         PreparedStatement ps;
         PreparedStatement gs;
         ArrayList<ArrayList<String>> activitjes = new ArrayList<ArrayList<String>>();
+        DetermineActivityColumn activitykg = new DetermineActivityColumn();
         try {
             System.out.println("dit werkt " + iduser);
             ps = getConnection().prepareStatement (
@@ -54,23 +55,29 @@ private static final long serialVersionUID = 1L;
             ResultSet rs = ps.executeQuery();
             System.out.println("haha komen");
             System.out.println("fuck");
+            int activityColumn = activitykg.determineActivityColumn(iduser);
+            String column = "kg" + Integer.toString(activityColumn);
+            System.out.println("column: " + column);
             while (rs.next()) {
                 ArrayList<String> activitjez = new ArrayList<String>();
                 System.out.println("1:" + rs.getString(1));
                 activitjez.add(rs.getString(2));
                 System.out.println("2:" + rs.getString(2));
                 gs = getConnection().prepareStatement(
-                        "SELECT name, calorie"
-                        + "FROM uber.activities"
-                        + "WHERE activities_name = ?"
+                        "SELECT name, ? "
+                        + "FROM uber.activities "
+                        + "WHERE name = ?"
                         );
-                gs.setInt(1, Integer.parseInt(rs.getString(2)));
+                gs.setString(1, rs.getString(1));
+                gs.setString(2, column);
                 ResultSet hs = gs.executeQuery();
                 while (hs.next()) {
-                    activitjez.add(hs.getString(1));
-                    System.out.println("2.1:" + rs.getString(1));
-                    activitjez.add(rs.getString(2));
-                    System.out.println("2.2:" + rs.getString(2));       
+                    activitjez.add(hs.getString(1) + ":");
+                    System.out.println("2.1:" + hs.getString(1));
+                    
+                    System.out.println(hs.getString(2));
+                    activitjez.add((Integer.parseInt(hs.getString(2)) * Integer.parseInt(rs.getString(2))) + ":");
+                    System.out.println("2.2:" + Integer.parseInt(hs.getString(2)) * Integer.parseInt(rs.getString(2)));     
                 }
                 activitjes.add(activitjez);
                 gs.close();

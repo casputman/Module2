@@ -195,7 +195,7 @@
 						<li><input type="text" name="amount" value="1"
 							class="nfinput" size="3">X<input type="submit"
 							type="text" name="activity"
-							value="<%=m[0] + " " + m[1]%> : <%=m[2]%>" class="tfbutton">
+							value="<%=m[0]%>" class="tfbutton">
 						</li>
 						<%
 							} else {
