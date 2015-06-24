@@ -71,6 +71,39 @@
 		<%=myBalance%>
 	</p>
 	<%} %>
+	<div>
+		<form method="POST" action="GoalDetails">
+		<p><b>Goal information:</b></p>
+		<p>
+			<p>What weight do want to achieve?</p>
+			<input type="text" name="goalWeight" value="" placeholder=" Weight in KG" class="mytext" required/>
+		</p>
+		<p>
+			<p>For when do you want to set this goal?</p>
+			<input type="date" name="goalDate" value="" placeholder=" DD/MM/YYYY" class="mytext" required />
+		</P>
+		    <p><input type="submit" value="Set Goal"></p>
+		</form>
+		
+	</div>
+		<div class="backgroundstatistics">
+		<div class="siteContent container statistics">
+		<%Object j = request.getAttribute("myGoal");
+		if (j != null) {
+		 double goalWeight = ((searches.Goal) j).getGoalweight();
+		 String goalDate = ((searches.Goal) j).getGoaldate();%>
+			<p>
+			Your current Goal is:
+			<%=goalWeight%>
+			</p>
+
+			<p>
+				You have until:	<%=goalDate%>
+				To complete your goal
+			</p>
+<%} %>
+		</div>
+		</div>
 	</main>
 
 	<footer class="siteFooter container">

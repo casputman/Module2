@@ -90,15 +90,11 @@
 		<servlet-name>StatusServlet</servlet-name>
 		<url-pattern>/Balance</url-pattern>
 	</servlet-mapping>
-	
 	<servlet-mapping>
-		<servlet-name>GoalServlet</servlet-name>
-		<url-pattern>/SetGoal</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>GoalServlet</servlet-name>
+		<servlet-name>StatusServlet</servlet-name>
 		<url-pattern>/GoalDetails</url-pattern>
 	</servlet-mapping>
+
 	
 	<servlet-mapping>
 		<servlet-name>WebpageServlet</servlet-name>

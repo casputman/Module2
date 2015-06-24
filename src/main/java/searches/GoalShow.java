@@ -39,7 +39,7 @@ public class GoalShow extends core.MyServlet {
 		}
 	}
 
-	public void getGoalBean(User user) {
+	public Goal getGoalBean(User user) {
 		Goal goal = null;
 		PreparedStatement ps;
 		try {
@@ -68,10 +68,12 @@ public class GoalShow extends core.MyServlet {
 			System.out.println(goal.getGoaldate());
 			System.out.println("goal is created");
 			user.setGoal(goal);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			error("problem in get goal");
 		}
+		return goal;
 	}
 
 	public double calculateGoal(int iduser){
