@@ -36,11 +36,8 @@
 		<div class="column-16">
 			<h3><b>About</b></h3>
 			<img src="images/transparentabout.png" alt="About" align="right" width="25%" height="25%">
-&Uuml;ber-coaching bestaat uit een groep van meerdere diet-coaches die een brede groep klanten van advies op maat voorziet wat betreft voeding en sport. De doelgroep bestaat voornamelijk uit amateursporters, maar ook sporters op hoger niveau en zwaarlijvigen behoren tot het dagelijks klantenbestand. 
-
-&Uuml;ber-coaching, niet te verwarren met het uit &Uuml;ber-coaching ontsprongen taxiconcern Uber, werd opgericht te Enschede en opereerde sinds omstreeks 2007 enkel in deze regio. In het jaar 2009 expandeerde het bedrijf naar andere delen van Nederland en over de grens richting Münster, Duitsland. Anno 2015 opereert het bedrijf in vijf landen in noordwest-Europa. Het klantenbestand bestaat inmiddels uit ruim 42.000 klanten en het eind is nog lang niet in zicht.
-
-			
+Übercoaching, founded in the year 2007 in the small town of Gronau, has quickly grown to the size it is at this very moment. With over 70.000 clients, located all over the world Ubercoaching is one of the largest health-coaching support groups the world has ever know in it's existence.
+After numerous of successes with meeting our clients face to face we have decided to give back to the community by launching the Ubercoaching web environment you are looking at right now. Please feel free to contact us using the contact page if someone is not up to your standards.
 		</div>
 		</div>
 		</div>

@@ -54,6 +54,7 @@
 			<p>E-mail: <a href="mailto:uber-coaching@gmail.com">uber-coaching@gmail.com</a></p>
 			<p>Phone number: 031 0685475451</p>
 			<p>Fax: +1-212-9876543</p>
+			<p>Or by using our  <a href="/ubercoaching/contactForm.jsp">contact form</a>.</p>
 			
 		</div>
 		</div>

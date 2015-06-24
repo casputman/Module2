@@ -141,7 +141,7 @@
 					<%
 						}
 					%>
-					<li>Totaal aantal Kcal vandaag: <%=totaal%>
+					<li>Total amount of Kcal today: <%=totaal%>
 					</li>
 					<%
 						}
@@ -232,7 +232,7 @@
 					<%
 						}
 					%>
-					<li>Totaal aantal Kcal vandaag: <%=totaal%>
+					<li>Total amount of Kcal today: <%=totaal%>
 					</li>
 					<%
 						}

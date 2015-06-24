@@ -42,10 +42,10 @@
 		</a>
 		<nav class="nav">
 			<ul>
-				<a href="webapp" class="buttonlink"><li>Personal Home</li></a>
-				<a href="InAbout" class="buttonlink"><li>About</li></a>
-				<a href="InContact" class="buttonlink"><li>Contact</li></a>
-				<a href="#" class="buttonlink" onclick="logOut()"><li>LogOut</li></a>
+				<li><a href="login" class="buttonlink">Login/Personal</a></li>
+				<li><a href="start" class="buttonlink">Home</a></li>
+				<li><a href="startAbout" class="buttonlink">About</a></li>
+				<li><a href="contact" class="buttonlink">Contact</a></li>
 		</nav>
 	</header>
 
@@ -56,46 +56,43 @@
 			<b>Contactform</b>
 		</h3>
 
-	<form name="htmlform" method="post" action="html_form_send.php">
-		<table width="450px">
-			</tr>
-			<tr>
-				<td valign="top"><label for="first_name">First Name *</label></td>
-				<td valign="top"><input type="text" name="first_name"
-					maxlength="50" size="30"></td>
-			</tr>
+		<script language="javascript">
+				var sa_email_id = '55055-f1b58';
+				var sa_sent_text = 'Thank you for contacting us. We will get back to you soon.';
+			</script>
+		<script language="javascript"
+			src="http://s1.smartaddon.com/sa_htmlform.js"></script>
+		<div id="sa_contactdiv">
 
-			<tr>
-				<td valign="top""><label for="last_name">Last Name *</label></td>
-				<td valign="top"><input type="text" name="last_name"
-					maxlength="50" size="30"></td>
-			</tr>
-			<tr>
-				<td valign="top"><label for="email">Email Address *</label></td>
-				<td valign="top"><input type="text" name="email" maxlength="80"
-					size="30"></td>
+				<form name=sa_htmlform style="margin: 0px"
+					onsubmit="return sa_contactform()">
+					<table>
+						<tr>
+							<td>Name:<br> <input type="text" name="name" /></td>
+						</tr>
+						<tr>
+							<td>E-mail Address: <span style="color: #D70000">*</span><br>
+								<input type="text" name="email" required="true" /></td>
+						</tr>
+						<tr>
+							<td>Phone Number:<br> <input type="text" name="number" /></td>
+						</tr>
+						<tr>
+							<td>Subject: <span style="color: #D70000">*</span><br>
+								<input type="text" name="subject" required="true" /></td>
+						</tr>
+						<tr>
+							<td>Message: <span style="color: #D70000">*</span><br>
+								<textarea name="message" cols="42" rows="9" required="true"></textarea></td>
+						</tr>
+						<tr>
+							<td><input type="submit" value="Send Message"
+								style="font-weight: bold"></td>
+						</tr>
+					</table>
+				</form>
 
-			</tr>
-			<tr>
-				<td valign="top"><label for="telephone">Telephone
-						Number</label></td>
-				<td valign="top"><input type="text" name="telephone"
-					maxlength="30" size="30"></td>
-			</tr>
-			<tr>
-				<td valign="top"><label for="comments">Comments *</label></td>
-				<td valign="top"><textarea name="comments" maxlength="1000"
-						cols="25" rows="6"></textarea></td>
-
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center"><input type="submit"
-					value="Submit">
-				</td>
-			</tr>
-		</table>
-			</center>
-	</form>
+		</div>
 	</main>
 
 	<footer class="siteFooter container">
