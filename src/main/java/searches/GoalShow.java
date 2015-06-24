@@ -1,5 +1,6 @@
 package searches;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,17 +22,15 @@ public class GoalShow extends core.MyServlet{
 	//Retrieves the goalweight, goaldate and last entered weight of a user
 	public void setGoal(int goalweight, String goaldate, int id){
 		Goal goal = new Goal();
-		goal.createCalendar(goaldate);
+		java.sql.Date goalDate = Date.valueOf(goaldate); 
 		PreparedStatement ps;
 		try {
 			ps = super.getConnection().prepareStatement("INSERT INTO uber.goal (goalweight, goaldate, user_iduser)"
 				+ " VALUES(?, ?, ?)");
 			ps.setInt(1, goalweight);
-		    java.sql.Date goalDate = convertUtilToSql(goal.getGoaldate().getTime());
 			ps.setDate(2, goalDate);
 			ps.setInt(3, id); 
 			ps.execute();
-			printDate(goal.getGoaldate());
 			System.out.println("Goal is set");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,7 +38,7 @@ public class GoalShow extends core.MyServlet{
 		}
 	}
 	
-	public void makeGoal(User user){
+	public void getGoalBean(User user){
 		Goal goal = null;
 		PreparedStatement ps;
 	    try {
@@ -63,8 +62,8 @@ public class GoalShow extends core.MyServlet{
     	rs.next();
     	goal.setGoalweight(rs.getInt(1));
     	goal.setGoaldate(rs.getDate(2));
-    	printDate(goal.getGoaldate());
     	goal.setCurrentWeight(rs.getInt(3));
+    	System.out.println(goal.getGoaldate());
     	System.out.println("goal is created");
     	user.setGoal(goal);
 	    } catch (SQLException e) {
@@ -87,12 +86,4 @@ public class GoalShow extends core.MyServlet{
 		System.out.println(dateFormat.format(dateArg.getTime()));
 	}
 		 
-	private java.sql.Date convertUtilToSql(java.util.Date uDate) {
-	    java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-	    return sDate;
-	}
-	
-	
-	
-	
 }

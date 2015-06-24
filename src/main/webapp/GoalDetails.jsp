@@ -1,6 +1,5 @@
 <!doctype html>
 <%@page import="searches.Goal"%>
-<%@page import="searches.GoalDate"%>
 <%@page import="searches.GoalShow"%>
 <html>
 <head>
@@ -56,16 +55,10 @@
  				.getAttribute("user")).getIdUser());
  	}
 	searches.GoalShow goalShow = new GoalShow();
-	goalShow.makeGoal(user);
-	System.out.println("Goal made");
+	goalShow.getGoalBean(user);
 	searches.Goal goal = user.getGoal();
 	goalWeight = goal.getGoalweight();
-	java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	java.util.Calendar goalDateArg = goal.getGoaldate();
-	goalDate = dateFormat.format(goalDateArg.getTime());
-
-	
-	
+	goalDate = goal.getGoaldate();
 	%>
 	<center>
 		<p>
