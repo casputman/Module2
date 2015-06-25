@@ -7,7 +7,7 @@
   border-bottom: 1px solid #eee;
 }
 .ex1 {
-margin-left: 70px;
+margin-left: 60px;
 }
 .logo {
   margin-bottom: 0;
@@ -23,6 +23,20 @@ margin-left: 70px;
 	outline:0px;
 	width:120px;
 	height:80px;
+}
+
+.buttonlink:link,
+.buttonlink:visited,
+.buttonlink:hover,
+.buttonlink:active {
+color:#000000; 
+background-color:transparent; 
+text-decoration:none
+}
+
+.nav .buttonlink ul:first-of-type {
+    border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px;
 }
 
 .vertical-divider{
@@ -149,7 +163,7 @@ text-decoration:none
 }
 
 .siteContent {
-  padding: 50px;
+  padding: 50px 0;
   
 }
 .siteContent .btn {
