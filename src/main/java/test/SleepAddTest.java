@@ -12,6 +12,6 @@ public class SleepAddTest {
 		int initialsize = counter.countRow("sleep");
 		test.addSleep(5.0, 4);
 		int newsize = counter.countRow("sleep");
-        assertEquals(initialsize + 1, newsize);
+        assertEquals("Number of rows must increase by 1", initialsize + 1, newsize);
 	}
 }
