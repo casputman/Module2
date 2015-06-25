@@ -79,12 +79,10 @@ public class StatusServlet extends core.MyServlet {
             case "updateWeight":
                 Weight weightClass = new Weight();
                 double weight = Double.parseDouble(request.getParameter("weight"));
-                System.out.println("weight is: " + weight);
                 int userid = user.getIdUser();
                 if (request.getParameter("width") != null) {
                     double width = Double.parseDouble(request.getParameter("width"));
                     weightClass.setWidth(userid, width, weight);
-                    System.out.println("width is: " + width);
                 } else {
                     weightClass.setWeight(userid, weight);
                 }
