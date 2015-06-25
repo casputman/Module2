@@ -59,7 +59,7 @@ public class Statistics {
         // Send back to client.
         try {
             return new ObjectMapper().writeValueAsString(map);
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException e) {               
             return getInternalServerError();
         }
     }

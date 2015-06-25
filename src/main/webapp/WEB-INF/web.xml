@@ -94,6 +94,10 @@
 		<servlet-name>StatusServlet</servlet-name>
 		<url-pattern>/GoalDetails</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StatusServlet</servlet-name>
+		<url-pattern>/updateWeight</url-pattern>
+	</servlet-mapping>
 
 	
 	<servlet-mapping>

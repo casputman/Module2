@@ -48,8 +48,10 @@ public class GoalShow extends core.MyServlet {
 					.prepareStatement(
 							" SELECT  goal.goalweight, goal.goaldate, weight.weight "
 									+ " FROM uber.goal, uber.weight "
-									+ " WHERE weight.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?)"
-									+ " AND goal.user_iduser = ? ");
+									+ " WHERE goal.currentdate = (SELECT MAX(g.currentdate) FROM uber.goal g WHERE g.user_iduser = ?)"
+									+ " AND weight.weightdate = (SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?) "
+									+ " AND goal.user_iduser = ? "
+									+ " AND weight.user_iduser = ? ");
 			int input = 0;
 			if (user != null) {
 				input = user.getIdUser();
@@ -59,6 +61,8 @@ public class GoalShow extends core.MyServlet {
 			}
 			ps.setInt(1, input);
 			ps.setInt(2, input);
+			ps.setInt(3, input);
+			ps.setInt(4, input);
 			ResultSet rs = ps.executeQuery();
 			goal = new Goal();
 			rs.next();

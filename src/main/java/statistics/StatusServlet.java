@@ -25,6 +25,7 @@ public class StatusServlet extends core.MyServlet {
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doGet(request, response);
+            GoalShow goalShow = new GoalShow();
             System.out.println("text:" + getUrlParts().get(0));
             if (!getUrlParts().get(0).equals("register") && !Validation.validateOrForward(request, response)) {
                 return;
@@ -39,6 +40,7 @@ public class StatusServlet extends core.MyServlet {
                 request.setAttribute("myBMI", BMI);
                 double vet = user.getUserVet().getVPT();
                 request.setAttribute("myVET", vet);
+                request.setAttribute("myGoal", goalShow.getGoalBean(user));
                 forwardTo("/inStatus.jsp");
                 break;
             case "SetGoal":
@@ -72,6 +74,20 @@ public class StatusServlet extends core.MyServlet {
                     error("User is null");
                 }
                 request.setAttribute("myGoal", goalShow.getGoalBean(user));
+                forwardTo("/Balance");
+                break;
+            case "updateWeight":
+                Weight weightClass = new Weight();
+                double weight = Double.parseDouble(request.getParameter("weight"));
+                System.out.println("weight is: " + weight);
+                int userid = user.getIdUser();
+                if (request.getParameter("width") != null) {
+                    double width = Double.parseDouble(request.getParameter("width"));
+                    weightClass.setWidth(userid, width, weight);
+                    System.out.println("width is: " + width);
+                } else {
+                    weightClass.setWeight(userid, weight);
+                }
                 forwardTo("/Balance");
                 break;
 

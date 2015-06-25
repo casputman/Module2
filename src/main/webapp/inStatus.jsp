@@ -47,6 +47,7 @@
 	</header>
 
 	<main class="siteContent container">
+	<div>
 	 <%
      Object q = request.getAttribute("myBMI");
      String myBmi = q.toString();
@@ -71,6 +72,14 @@
 		<%=myBalance%>
 	</p>
 	<%} %>
+	<form method="POST" action="updateWeight">
+	What is your current weight? <br>
+	<input type="text" name="weight" placeholder="Weight in KG" class="mytext" required/> <br>
+	For more information and a better calculation please also fill in your waistline span <br>
+	<input type="text" name="width" placeholder="Waistline in cm" class="mytext"> <br>
+	<input type="submit" value="Enter weight">
+	</form>
+	</div>
 	<div>
 		<form method="POST" action="GoalDetails">
 		<p><b>Goal information:</b></p>
@@ -81,7 +90,7 @@
 		<p>
 			<p>For when do you want to set this goal?</p>
 			<input type="date" name="goalDate" value="" placeholder=" DD/MM/YYYY" class="mytext" required />
-		</P>
+		</p>
 		    <p><input type="submit" value="Set Goal"></p>
 		</form>
 		
