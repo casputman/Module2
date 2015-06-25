@@ -138,15 +138,26 @@ public abstract class MyServlet extends HttpServlet {
     }
     
     /**
-     * @param url               The url to forward to.
+     * Applies an internal forward. Use this after a GET request. 
+     * 
+     * @param url               the url to forward to
      * @throws ServletException
      * @throws IOException
      */
     public void forwardTo(String url) throws ServletException, IOException {
-    	System.out.println("Redirect to " + url);
-    	System.out.println(getRequest());
-    	System.out.println(getResponse());
+    	System.out.println("Forward to " + url);
         getRequest().getRequestDispatcher(url).forward(getRequest(), getResponse());
+    }
+    
+    /**
+     * Applies a redirect. Use this after a POST request.
+     * 
+     * @param url               the url to redirect to
+     * @throws IOException
+     */
+    public void redirectTo(String url) throws IOException {
+        System.out.println("Redirect to " + url);
+        getResponse().sendRedirect(getResponse().encodeRedirectURL(url));
     }
 
 }

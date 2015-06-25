@@ -59,27 +59,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>IntakeServlet</servlet-name>
-		<url-pattern>/search</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IntakeServlet</servlet-name>
 		<url-pattern>/intake</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IntakeServlet</servlet-name>
-		<url-pattern>/moreFood</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IntakeServlet</servlet-name>
-		<url-pattern>/IntakeA</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IntakeServlet</servlet-name>
-		<url-pattern>/actsearch</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IntakeServlet</servlet-name>
-		<url-pattern>/intakeA</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>IntakeServlet</servlet-name>

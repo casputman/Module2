@@ -1,15 +1,18 @@
 package searches;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.Activity;
+import core.ActivityDao;
+import core.Food;
 import core.FoodDao;
 import core.Intake;
+import core.Usage;
 import core.User;
 import core.Validation;
 
@@ -31,33 +34,32 @@ public class IntakeServlet extends core.MyServlet{
             }
             final int iduser = ((User) request.getSession().getAttribute("user")).getIdUser();
             
-            ActivitySearch activitySearch = new ActivitySearch();
-            switch (getUrlParts().get(0)) {
-            case "Intake": 
-                List<Intake> foodIntake = FoodDao.getFoodIntakeToday(iduser);
-                request.setAttribute("foodIntake", foodIntake);
-                
-                ArrayList<ArrayList<String>> Activitylist = activitySearch.activityShow(((core.User) request.getSession().getAttribute("user")).getIdUser());
-                request.setAttribute("myAct", Activitylist);
-                System.out.println(Activitylist);
-                forwardTo("/Intake.jsp");
-                break;
-            case "search":  
+
+            // Always get the current food intakes.
+            final List<Intake> foodIntake = FoodDao.getFoodIntakeToday(iduser);
+            request.setAttribute("foodIntake", foodIntake);
+            
+            // Always get the current activity usages.
+            final List<Usage> activityUsage = ActivityDao.getActivityUsageToday(iduser);
+            request.setAttribute("activityUsage", activityUsage);
+            
+            switch (getAction()) {
+            case "foodsearch":
                 final String food = getRequest().getParameter("q");
                 if (food != null) {
                     request.setAttribute("foodSearchResults", FoodDao.search(food, iduser));
                 }
-                forwardTo("/Intake");
+                forwardTo("/Intake.jsp");
                 break;
-            case "actsearch":
-                String activity = getRequest().getParameter("q");
-                ArrayList<String> probActivity = activitySearch.activitySearch(activity);
-                System.out.println("hier komen activities: " + probActivity + " dit was de zoekterm: " + activity);
+            case "activitysearch":
+                final String activity = getRequest().getParameter("q");
                 if (activity != null) {
-                    request.setAttribute("activityList", probActivity);
+                    request.setAttribute("activitySearchResults", ActivityDao.search(activity));
                 }
-                forwardTo("/Intake");
+                forwardTo("/Intake.jsp");
                 break;
+            default:
+                forwardTo("/Intake.jsp");
             } 
         }
     }
@@ -70,28 +72,67 @@ public class IntakeServlet extends core.MyServlet{
             throws ServletException, IOException {
         synchronized (request.getSession()) {
             super.doPost(request, response);
-            FoodAdd foodAdd = new FoodAdd();
+            
+            // Check authorization.
+            if (!Validation.validateOrForward(request, response)) {
+                return;
+            }
+            final int iduser = ((User) request.getSession().getAttribute("user")).getIdUser();
+            
             SleepAdd sleepAdd = new SleepAdd();
-            switch (getUrlParts().get(0)) {
-            case "intake": 
-              // System.out.println("food = " + getRequest().getParameter("food") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
-                //);
-                foodAdd.addFood(getRequest().getParameter("food"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
-                forwardTo("/Intake");
+            switch (getAction()) {
+            case "intake":
+                try {
+                    final double amount = Double.parseDouble(getRequest().getParameter("amount"));
+                    final int    idfood = Integer.parseInt(getRequest().getParameter("idfood"));
+                    FoodDao.addFoodIntake(iduser, new Intake(amount, new Food(idfood)));
+                } catch (NullPointerException | NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                redirectTo("intake");
                 break;
-            case "moreFood":
-                System.out.println("holooaos: " + getRequest().getParameter("calorie") );
-                System.out.println("holooaos1: " + getRequest().getParameter("amount") );
-                System.out.println("holooaos2: " + getRequest().getParameter("unit") );
-                foodAdd.addFoodToDB(Double.parseDouble(getRequest().getParameter("calorie")),Double.parseDouble(getRequest().getParameter("amount")), getRequest().getParameter("unit"), 0, 0, 0, ((core.User) request.getSession().getAttribute("user")).getIdUser(), getRequest().getParameter("name"));
-                forwardTo("/Intake");
+            case "food":
+                try {
+                    final String name = getRequest().getParameter("name");
+                    final double calorie = Double.parseDouble(getRequest().getParameter("calorie"));
+                    final double amount  = Double.parseDouble(getRequest().getParameter("amount"));
+                    final String unit = getRequest().getParameter("unit");
+                    
+                    final Food food = new Food();
+                    food.setIduser(iduser);
+                    food.setName(name);
+                    food.setCalorie(calorie);
+                    food.setAmount(amount);
+                    food.setUnit(unit);
+                    
+                    FoodDao.addFood(food);
+                } catch (NullPointerException | NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
+                redirectTo("intake");
                 break;
-            case "intakeA": 
-                ActivityAdd activityAdd = new ActivityAdd();
-                //System.out.println("activity = " + getRequest().getParameter("activity") + " maybe user: " + ((core.User) request.getSession().getAttribute("user")).getIdUser() + " shizzle: " //getRequest().getParameterNames().toString()
-                //);
-                activityAdd.addActivity(getRequest().getParameter("activity"), ((core.User) request.getSession().getAttribute("user")).getIdUser(), Double.parseDouble(getRequest().getParameter("amount")));
-                forwardTo("/Intake");
+            case "usage": 
+                try {
+                    final double amount = Double.parseDouble(getRequest().getParameter("amount"));
+                    final String activityName = getRequest().getParameter("activity");
+                    if (activityName != null) {
+                        
+                        final Activity activity = new Activity();
+                        activity.setName(activityName);
+                        
+                        final Usage usage = new Usage();
+                        usage.setActivity(activity);
+                        usage.setAmount(amount);
+                        usage.setIduser(iduser);
+                        
+                        ActivityDao.addActivityUsage(usage);
+                    }
+                } catch (NullPointerException | NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                
+                redirectTo("intake");
                 break;
             case "sleep": 
                 int sleepstarthour = Integer.parseInt(request.getParameter("sleepstarthour"));
@@ -126,8 +167,6 @@ public class IntakeServlet extends core.MyServlet{
                 forwardTo("/Intake");
                 break;
             }
-            // No page selected.
-            doGet(getRequest(), getResponse());
         } 
     }
 }

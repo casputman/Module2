@@ -9,11 +9,15 @@ public class Food {
     private Double protein;
     private Double carbon;
     private Double fat;
-    private Double iduser;
+    private Integer iduser;
     private String name;
     private int idfood;
     
     public Food(){}
+    
+    public Food(int idfood) {
+        setIdfood(idfood);
+    }
     
     public Food(String name, Double calorie) {
         setName(name);
@@ -66,7 +70,7 @@ public class Food {
     /**
      * @return the iduser
      */
-    public Double getIduser() {
+    public Integer getIduser() {
         return iduser;
     }
     
@@ -129,7 +133,7 @@ public class Food {
     /**
      * @param iduser the iduser to set
      */
-    public void setIduser(Double iduser) {
+    public void setIduser(Integer iduser) {
         this.iduser = iduser;
     }
 
