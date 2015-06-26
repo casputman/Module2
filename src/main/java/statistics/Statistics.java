@@ -243,6 +243,48 @@ public class Statistics {
         }
     }
     
+/*
+    @GET
+    @Path("calories")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String doJsonGetCalories() {
+        // Check validation.
+        final String validationErrorOutput;
+        if ((validationErrorOutput = checkValidation()) != null) {
+            return validationErrorOutput;
+        }
+        final Map<String, Object> map = new LinkedHashMap<>();
+        map.put("code", 200);
+        
+        final TreeMap<Integer, ArrayList<Object>> data = new TreeMap<Integer, ArrayList<Object>>(); 
+        
+        try {
+            // Get calorie intake entries.
+            
+            // ...
+            //
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return getInternalServerError();
+        }
+        
+        // Now cast the data map to a simple list.
+        final ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+        for (Map.Entry<Integer, ArrayList<Object>> entry : data.entrySet()) {
+            dataList.add(entry.getValue());
+        }
+        
+        map.put("data", dataList);
+        
+        // Send back to client.
+        try {
+            return new ObjectMapper().writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            return getInternalServerError();
+        }
+    }
+*/
+    
     private String checkValidation() {
         if (!Validation.validated(request)) {
             return "{\"code\":403}";

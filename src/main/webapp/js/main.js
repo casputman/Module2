@@ -45,6 +45,7 @@ google.setOnLoadCallback(function(){
         height: 250,
         theme: 'maximized',
         tooltip: {isHtml: true},
+        interpolateNulls: true,
         vAxis: {
             viewWindowMode: 'explicit',
             viewWindow: {
@@ -126,8 +127,8 @@ google.setOnLoadCallback(function(){
 
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
 								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-								{v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
-								{v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
+							   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
+							   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
 		}
 		
 		// Create chart.
