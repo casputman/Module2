@@ -61,7 +61,7 @@ final String genderV = gender.equals("v") ? " checked=\"checked\"" : "";
 	  	<% } %>
 		<p><b>Account information:</b></p>
 		<p>
-			<input type="text" name="username" value="<%=username%>" placeholder=" Username" class="mytext" />
+			<input type="text" name="username" value="<%=username%>" placeholder=" Username" class="mytext" required/>
 		</p>
 		<p>
 			<input type="password" name="password1" placeholder=" Password" class="mytext" required />
@@ -71,25 +71,29 @@ final String genderV = gender.equals("v") ? " checked=\"checked\"" : "";
 		</p>
 		<p><b>To help you with your health we first need to know a little bit about you:</b>
 		<p>
-			<input type="number" name="length" value="<%=length%>" placeholder=" Length" class="mytext" />
+			<input type="number" name="length" value="<%=length%>" placeholder=" Length" class="mytext" required/>
 		</p>
 		<p>
-			<input type="number" name="age" value="<%=age%>" placeholder=" Age" class="mytext" />
+			<input type="number" name="age" value="<%=age%>" placeholder=" Age" class="mytext" required/>
 		</p>
 		<p>
-			<input type="text" name="surname" value="<%=surname%>" placeholder=" Surname" class="mytext" />
+			<input type="text" name="surname" value="<%=surname%>" placeholder=" Surname" class="mytext" required/>
 		</p>
 		<p>
-			<input type="text" name="firstname" value="<%=firstname%>" placeholder=" First Name" class="mytext" />
+			<input type="text" name="firstname" value="<%=firstname%>" placeholder=" First Name" class="mytext" required/>
 		</p>
 		<p>
-			<input type="email" name="email" value="<%=email%>" placeholder=" E-mail address" class="mytext" />
+			<input type="email" name="email" value="<%=email%>" placeholder=" E-mail address" class="mytext" required/>
 		</p>
 		<p>
 			<input type="radio" name="gender" value="m" placeholder="" class="mytext"<%=genderM%> /> Male<br />
 			<input type="radio" name="gender" value="f" placeholder="" class="mytext"<%=genderV%> /> Female
 		</p>
 		
+		What is your current <b>weight</b>? <br><br>
+		<input type="text" name="weight" placeholder="Weight in Kg" class="mytext" required/> <br><br>
+		For more information and a better calculation, please also fill in your <b>waistline span</b>. <br><br>
+		<input type="text" name="width" placeholder="Waistline in cm" class="mytext" required> <br><br>
 	
 		<p><b>Goal information:</b></p>
 		<p>

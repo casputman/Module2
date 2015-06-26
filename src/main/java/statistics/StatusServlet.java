@@ -41,7 +41,7 @@ public class StatusServlet extends core.MyServlet {
                 request.setAttribute("mybalance", balance);
                 double BMI = user.getUserBMI().getBMI();
                 request.setAttribute("myBMI", BMI);
-                double vet = user.getUserVet().getVPT();
+                double vet = Math.round(user.getUserVet().getVPT());
                 request.setAttribute("myVET", vet);
                 request.setAttribute("myGoal", goalShow.getGoalBean(user));
                 double weight = weightClass.getWeight(user.getIdUser());
