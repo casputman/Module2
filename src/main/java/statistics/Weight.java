@@ -31,7 +31,7 @@ public class Weight {
             ps.setDouble(1, weight);
             ps.setDouble(2, width);
             ps.setInt(3, userid);
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

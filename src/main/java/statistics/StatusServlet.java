@@ -10,6 +10,7 @@ import searches.CalorieGoal;
 import searches.FoodAdd;
 import searches.GoalShow;
 import searches.SleepAdd;
+import core.BmiServlet;
 import core.User;
 import core.Validation;
 
@@ -35,6 +36,7 @@ public class StatusServlet extends core.MyServlet {
             case "Balance": 
                 CalorieGoal CGoal = new CalorieGoal();
                 double balance = Math.round(CGoal.balance(user.getIdUser()));
+                user.setBMIVPT(user.getIdUser());
                 request.setAttribute("mybalance", balance);
                 double BMI = user.getUserBMI().getBMI();
                 request.setAttribute("myBMI", BMI);
@@ -86,6 +88,8 @@ public class StatusServlet extends core.MyServlet {
                 } else {
                     weightClass.setWeight(userid, weight);
                 }
+                BmiServlet bmiServlet = new BmiServlet();
+                bmiServlet.determineBMI(user);
                 forwardTo("/Balance");
                 break;
 

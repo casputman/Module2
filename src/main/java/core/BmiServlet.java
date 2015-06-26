@@ -16,22 +16,21 @@ public class BmiServlet extends MyServlet {
     /**
      * 
      */
-	public void determineBMI() {
+	public void determineBMI(User user) {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					" SELECT  w.weight, u.height, ?, w.user_IDuser "
+					" SELECT  w.weight, u.length, w.user_IDuser "
 							+ " FROM    uber.user u, uber.weight w "
 							+ " WHERE w.user_IDuser = ? "
-							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?");
-			String input = String.valueOf(user.getIdUser());
-			ps.setString(1, input );
-			ps.setString(2, input );
-			ps.setString(3, input );
+							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w WHERE w.user_IDuser = ? )");
+			this.user = user;
+			ps.setInt(1, user.getIdUser() );
+			ps.setInt(2, user.getIdUser() );
 	    	ResultSet rs = ps.executeQuery();
 	    	while (rs.next()) {
-	    		height = rs.getDouble(1);
-	    		weight = rs.getDouble(2);
+	    		height = rs.getDouble(2);
+	    		weight = rs.getDouble(1);
 	    	}
 		} catch (SQLException e) {
 			error("determineBMI()");
@@ -46,8 +45,9 @@ public class BmiServlet extends MyServlet {
 	public void BMICalculate() {
 		double heightArg = height;
 		double weightArg = weight;
-		double bmiArg = (weightArg/Math.pow((heightArg/100),2));
-		bmi.setBMI(bmiArg);
+		double bmiArg = Math.round((weightArg/Math.pow((heightArg/100), 2)));
+		System.out.println("bmi: " + bmiArg + " height: " + height);
+		bmi = new BMI(bmiArg);
 		insertBMI(bmiArg);
 	}
 	
@@ -58,12 +58,10 @@ public class BmiServlet extends MyServlet {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"INSERT INTO bmi" + 
+					"INSERT INTO uber.bmi (bmi, user_iduser) " + 
 						" VALUES (?, ?)");
-			String input = String.valueOf(bmiArg);
-			ps.setString(1, input);
-			String input2 = String.valueOf(user.getIdUser());
-			ps.setString(2, input2);
+			ps.setDouble(1, bmiArg);
+			ps.setInt(2, user.getIdUser());
 			ps.execute();
 		} catch (SQLException e) {
 			error("insertBMI()");
