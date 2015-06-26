@@ -90,6 +90,15 @@ final String genderV = gender.equals("v") ? " checked=\"checked\"" : "";
 			<input type="radio" name="gender" value="f" placeholder="" class="mytext"<%=genderV%> /> Female
 		</p>
 		
+	
+		<p><b>Goal information:</b></p>
+		<p>
+			<p>What weight do want to achieve?</p>
+			<input type="text" name="goalWeight" value="" placeholder=" Weight in KG" class="mytext" required/>
+		</p>
+		<p>
+			<p>For when do you want to set this goal?</p>
+			<input type="date" name="goalDate" value="" placeholder=" DD/MM/YYYY" class="mytext" required />
 		    <p><input type="submit" value="Register"></p>
 		</form>
 		

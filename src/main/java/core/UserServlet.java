@@ -2,6 +2,7 @@ package core;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import searches.GoalShow;
 
 public class UserServlet extends MyServlet {
     private static final long serialVersionUID = 1L;
@@ -165,10 +168,22 @@ public class UserServlet extends MyServlet {
     		ps.setInt(8, age);
     		ps.execute();
     		ps.close();
+    		PreparedStatement gs = getConnection().prepareStatement(
+    		        " SELECT iduser "
+    		        + " FROM uber.user "
+    		        + " WHERE username = ? ");
+    		gs.setString(1, username);
+    		ResultSet ts = gs.executeQuery();
+    		while(ts.next()) {
+    		int id = ts.getInt(1);
+            int goalWeight = Integer.parseInt(getRequest().getParameter("goalWeight"));
+            String goalDate = getRequest().getParameter("goalDate");
+            GoalShow goalShow = new GoalShow();
+            goalShow.setGoal(goalWeight, goalDate, id);
+    		}
     	}catch (SQLException e) { 
 			e.printStackTrace();
 		}
-    	
         forwardTo("/login");
     }
 }
