@@ -99,15 +99,15 @@
 			else { if (male < 14) {
 				alert("Your fat percentage = " + male + "%" + ". This is considered below average. Register now and let us help!")
 			} else {
-				alert("Your fat percentage = " + male + "%" + ". This is considered average. Keep up te good work!")
-		} else if (GetUrlValue('sex') == "female") {
+				alert("Your fat percentage = " + male + "%" + ". This is considered average. Keep up te good work!");
+			}}} else if (GetUrlValue('sex') == "female") {
 			if (male > 31){
 				alert("Your fat percentage = " + female + "%" + ". This is considered above average. Register now and let us help!")
 			} else { if (male < 21) {
 				alert("Your fat percentage = " + female + "%" + ". This is considered below average. Register now and let us help!")
 			} else {
-				alert("Your fat percentage = " + female + "%" + ". This is considered average. Keep up te good work!")
-		} else {
+				alert("Your fat percentage = " + female + "%" + ". This is considered average. Keep up te good work!");
+		}}} else {
 			alert("Input invalid, check input!")}
 	</script>
 
