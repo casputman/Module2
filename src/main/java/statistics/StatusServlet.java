@@ -1,22 +1,23 @@
 package statistics;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import searches.CalorieGoal;
-import searches.FoodAdd;
 import searches.GoalShow;
-import searches.SleepAdd;
 import core.BmiServlet;
 import core.User;
 import core.Validation;
+import core.VetPercentageServlet;
 
 public class StatusServlet extends core.MyServlet {
     private static final long serialVersionUID = 1L;
     private User user;
+    Weight weightClass = new Weight();
 
     /**
      * Any GET requests concerning the status.
@@ -43,6 +44,16 @@ public class StatusServlet extends core.MyServlet {
                 double vet = user.getUserVet().getVPT();
                 request.setAttribute("myVET", vet);
                 request.setAttribute("myGoal", goalShow.getGoalBean(user));
+                double weight = weightClass.getWeight(user.getIdUser());
+                request.setAttribute("myWeight", weight);
+                Date weightDate = weightClass.getWeigtDate(user.getIdUser());
+                long weightDateTime = weightDate.getTime();
+                Date date = new Date();
+                long dateTime = date.getTime();
+                long differance = dateTime - weightDateTime;
+                long differanceDay = Math.round(differance / ((long)(24*60*60*1000))); 
+                System.out.println("differanceDay: " + differanceDay + " dateTime: " + dateTime + " weightDateTime: " + weightDateTime);
+                request.setAttribute("myTimeAgo", differanceDay);
                 forwardTo("/inStatus.jsp");
                 break;
             case "SetGoal":
@@ -79,12 +90,24 @@ public class StatusServlet extends core.MyServlet {
                 forwardTo("/Balance");
                 break;
             case "updateWeight":
-                Weight weightClass = new Weight();
                 double weight = Double.parseDouble(request.getParameter("weight"));
                 int userid = user.getIdUser();
-                if (request.getParameter("width") != null) {
-                    double width = Double.parseDouble(request.getParameter("width"));
+                String x = request.getParameter("width");
+                boolean check = true;
+                try
+                {
+                  Double.parseDouble(x);
+                }
+                catch(NumberFormatException e)
+                {
+                  check = false;
+                }
+                System.out.println("widht :" + request.getParameter("width") + ":");
+                if (check) {
+                    double width = Double.parseDouble(x);
                     weightClass.setWidth(userid, width, weight);
+                    VetPercentageServlet vet = new VetPercentageServlet();
+                    vet.determineVPT(user);
                 } else {
                     weightClass.setWeight(userid, weight);
                 }

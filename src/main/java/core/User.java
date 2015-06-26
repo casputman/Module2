@@ -117,7 +117,7 @@ public class User {
 	 * @param vet
 	 */
 	public void setUserVet(double vet) {
-		this.vet.setVPT(vet);;
+		this.vet.setVPT(vet);
 	}
 	
 	/**
@@ -235,14 +235,14 @@ public class User {
        		    	double vet = 0;
        		    	try {
        		            PreparedStatement ps = Validation.getConnection().prepareStatement(
-       		                      " SELECT  bmi "
-       		                    + " FROM    uber.bmi "
+       		                      " SELECT  fatpercentage "
+       		                    + " FROM    uber.fat "
        		                    + " WHERE   user_iduser = ? ; ");  
        		            
        		            ps.setInt(1, iduser);
        		            rs = ps.executeQuery();
        		            while(rs.next()) {
-       		            	vet = rs.getDouble("bmi");
+       		            	vet = rs.getDouble(1);
        		            }
        		        } catch (SQLException e) {
        		            e.printStackTrace();

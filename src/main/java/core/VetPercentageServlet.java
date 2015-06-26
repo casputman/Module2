@@ -17,23 +17,22 @@ public class VetPercentageServlet extends MyServlet {
     /**
      * 
      */
-	public void determineVPT() {
+	public void determineVPT(User user) {
 		PreparedStatement ps;
+		this.user = user;
 		try {
 			ps = getConnection().prepareStatement(
-					" SELECT  w.weight, u.middel, ?, w.user_IDuser, u.gender "
-							+ " FROM    user u, weight w "
+					" SELECT  w.weight, w.width, w.user_IDuser, u.gender "
+							+ " FROM    uber.user u, uber.weight w "
 							+ " WHERE w.user_IDuser = ? "
-							+ " AND w.date = ( SELECT MAX(w.date) FROM weight w, user u WHERE w.user_IDuser = ?");
-			String input = String.valueOf(user.getIdUser());
-			ps.setString(1, input );
-			ps.setString(2, input );
-			ps.setString(3, input );
+							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ? ) ");
+			ps.setInt(1, user.getIdUser() );
+			ps.setInt(2, user.getIdUser() );
 	    	ResultSet rs = ps.executeQuery();
 	    	while (rs.next()) {
-	    		middel = rs.getDouble(1);
-	    		weight = rs.getDouble(2);
-	    		gender = rs.getString(5);
+	    		middel = rs.getDouble(2);
+	    		weight = rs.getDouble(1);
+	    		gender = rs.getString(4);
 	    	}
 		} catch (SQLException e) {
 			error("determineVPT");
@@ -53,7 +52,7 @@ public class VetPercentageServlet extends MyServlet {
 		double middelArg = middel;
 		double weightArg = weight;
 		double vptArg = (((((-98.42 + (4.15 * (middelArg / 2.54))) - (0.082 * (weightArg * 2.2)))) / (weightArg * 2.2)) * 100);
-		vpt.setVPT(vptArg);
+		vpt = new VetPercentage(vptArg);
 		insertVPT(vptArg);
 	}
 	/**
@@ -63,7 +62,7 @@ public class VetPercentageServlet extends MyServlet {
 		double middelArg = middel;
 		double weightArg = weight;
 		double vptArg = (((((-76.76 + (4.15 * (middelArg / 2.54))) - (0.082 * (weightArg * 2.2)))) / (weightArg * 2.2)) * 100);
-		vpt.setVPT(vptArg);
+		vpt = new VetPercentage(vptArg);
 		insertVPT(vptArg);
 	}
 	/**
@@ -73,12 +72,10 @@ public class VetPercentageServlet extends MyServlet {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"INSERT INTO vpt" + 
+					"INSERT INTO fat (fatpercentage, user_iduser) " + 
 						" VALUES (?, ?)");
-			String input = String.valueOf(vptArg);
-			ps.setString(1, input);
-			String input2 = String.valueOf(user.getIdUser());
-			ps.setString(2, input2);
+			ps.setDouble(1, vptArg);
+			ps.setInt(2, user.getIdUser());
 			ps.execute();
 		} catch (SQLException e) {
 			error("insertVPT");

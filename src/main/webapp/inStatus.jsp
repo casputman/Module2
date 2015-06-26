@@ -72,6 +72,11 @@
 		<%=myBalance%>
 	</p>
 	<%} %>
+	<% Object m = request.getAttribute("myWeight"); 
+	String weight = m.toString();%>
+	<% Object n = request.getAttribute("myTimeAgo");
+	String timeAgo = n.toString();%>
+	<p> Your weight was <%= weight %>, <%= timeAgo %> days ago</p>
 	<form method="POST" action="updateWeight">
 	What is your current weight? <br>
 	<input type="text" name="weight" placeholder="Weight in KG" class="mytext" required/> <br>
