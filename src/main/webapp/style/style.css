@@ -1,255 +1,3 @@
-.btn {
-  border-radius: 4px;
-  transition: all .3s;
-}
-
-.siteHeader {
-  border-bottom: 1px solid #eee;
-}
-.ex1 {
-margin-left: 60px;
-}
-.logo {
-  margin-bottom: 0;
-  height: 80px;
-}
-@media (min-width: 48em) {
-  .logo {
-    float: left;
-  }
-}
-.button {
-	font-style:none;
-	outline:0px;
-	width:120px;
-	height:80px;
-}
-
-.buttonlink:link,
-.buttonlink:visited,
-.buttonlink:hover,
-.buttonlink:active {
-color:#000000; 
-background-color:transparent; 
-text-decoration:none
-}
-
-.nav .buttonlink ul:first-of-type {
-    border-top-left-radius: 10px; 
-	border-bottom-left-radius: 10px;
-}
-
-.vertical-divider{
-    clear: both;
-    position: relative;
-}
-
-.vertical-divider:after {
-    clear: both;
-    content: " ";
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
-
-.vertical-divider .column:not(:first-child):after, .vertical-divider .columns:not(:first-child):after{
-    background: #DDDDDD;
-    bottom: 0;
-    content: " ";
-    margin-left: -10px;
-    position: absolute;
-    top: 0;
-    width: 1px;
-}
-
-/* Very simple grid for example */
-.container { position: relative; width: 960px; margin: 20px auto; padding: 0; }
-
-.container .column, .container .columns { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
-
-.container .one-third.column { width: 300px; }
-
-.container .two-thirds.column { width: 620px; }
-
-.rightfloat {
-	float: left;
-	width: 50%;
-	
-	}
-
-.float {
-	float: left;
-	width: 50%;
-	}
-
-.buttonlink:link,
-.buttonlink:visited,
-.buttonlink:hover,
-.buttonlink:active {
-color:#000000; 
-background-color:transparent; 
-text-decoration:none
-}
-
-@media (min-width: 48em) {
-  .nav {
-	background-color: #ADADAD;
-	margin-top: 20px;
-    float: right;
-	border-top-left-radius: 10px; 
-	border-bottom-left-radius: 10px;
-	border-top-right-radius: 10px; 
-	border-bottom-right-radius: 10px
-  }
-}
-.nav .buttonlink ul:first-of-type {
-    border-top-left-radius: 10px; 
-	border-bottom-left-radius: 10px;
-}
-
-@media (min-width: 48em) {
-  .nav {
-	background-color: #ADADAD;
-	margin-top: 20px;
-    float: right;
-	border-top-left-radius: 10px; 
-	border-bottom-left-radius: 10px;
-	border-top-right-radius: 10px; 
-	border-bottom-right-radius: 10px
-  }
-}
-.nav li {
-  font-style: none;
-  font-weight: bold;
-  font-size: 16px;
-  display: inline-block;
-  line-height: 2.5;
-  text-align: center;
-  margin: 0px;
-  width: 150px;
-  height: 40px;
-}
-.nav li:hover{
-  background-color: #BDBDBD;
-}
-.nav li:hover:first-child {
-}
-.nav li:first-of-type {
-  margin-left: 0;
-}
-.nav li:first-child, .nav li:first-child:hover {
-    border-top-left-radius: 10px; 
-	border-bottom-left-radius: 10px;
-}
-.nav li:last-child, .nav li:last-child:hover {
-    border-top-right-radius: 10px; 
-	border-bottom-right-radius: 10px;
-}
-.masthead {
-  background: url("../images/Headerlogo.jpg") no-repeat center center;
-  height: 400px;
-  background-size: cover;
-  padding-bottom: 36px;
-  padding-top: 36px;
-}
-@media (min-width: 48em) {
-  .masthead {
-    padding: 75px 0;
-  }
-}
-
-.masthead-title {
-  margin-top: 0;
-}
-
-.siteContent {
-  padding: 50px 0;
-  
-}
-.siteContent .btn {
-  background-color: transparent;
-  border: 1px solid #ccc;
-  color: #666;
-}
-.siteContent .btn:hover {
-  background-color: #eee;
-}
-
-.siteFooter {
-  border-top: 1px solid #eee;
-  padding-top: 15px;
-}
-
-.image {
-width: 100%;
-}
-
-.forumImg {
- width: 80%;
- display: inline-block;
- float: left;
-}
-
-.forumTips {
- list-style: none;
- font-style: bold;
- display: inline-block;
- float: right;
- top: 0px;
- margin: 0px;
- width: 20%;
- margin-top: 50px;
-} 
-
-.forumTips li{
- font-weight: bold;
- padding: 0px;
- border: 1px solid black;
-}
-
-.forumHolder {
-display: inline-block;
-}
-
-.but {
-padding: 8px;
-width: 100%;
-height:100%;
-}
-
-#but1 {
-	display: none;
-	float: right;
-	width: 20%;
-	border: 1px solid black;
-	margin-top: 30px;
-	
-}
-
-#but1 p {
-	margin-left: 10px;
-}
-
-#but2 {
-	display: none;
-	float: right;
-	width: 20%;
-	border: 1px solid black;
-	margin-top: 30px;
-}
-
-#but2 p {
-	margin-left: 10px;
-}
-
-.foodSearchOptions {
-	list-style-type: none;
-}
-
-.nfinput {
-	width: 20px;
-	size: 5;
-}
 /* -------------------------------- 
 
 Primary style
@@ -285,7 +33,7 @@ Form
 .cd-form {
   width: 90%;
   max-width: 600px;
-
+  margin: 4em auto;
 }
 .cd-form::after {
   clear: both;
@@ -308,7 +56,7 @@ Form
 }
 .cd-form h4, .cd-form .cd-label {
   font-size: 1.3rem;
-  color: black;
+  color: #94aab0;
   margin-bottom: 10px;
 }
 .cd-form .cd-label {
@@ -366,7 +114,7 @@ Form
   display: block;
   width: 16px;
   height: 16px;
-  background: url("../images/cd-icon-arrow.svg") no-repeat center center;
+  background: url("../img/cd-icon-arrow.svg") no-repeat center center;
   pointer-events: none;
 }
 .cd-form select {
@@ -453,11 +201,11 @@ Form
 }
 .cd-form input[type="radio"] + label::after {
   /* custom image for radio button */
-  background-image: url("../images/cd-icon-radio.svg");
+  background-image: url("../img/cd-icon-radio.svg");
 }
 .cd-form input[type="checkbox"] + label::after {
   /* custom image for checkbox */
-  background-image: url("../images/cd-icon-check.svg");
+  background-image: url("../img/cd-icon-check.svg");
 }
 .cd-form input[type="radio"]:focus + label::before,
 .cd-form input[type="checkbox"]:focus + label::before {
@@ -514,7 +262,7 @@ Form
   transform: scale(0.9);
 }
 .cd-form [required] {
-  background: url("../images/cd-required.svg") no-repeat top right;
+  background: url("../img/cd-required.svg") no-repeat top right;
 }
 .cd-form .error-message p {
   background: #e94b35;
@@ -591,31 +339,31 @@ Custom icons
   padding-left: 54px !important;
 }
 .cd-form .user {
-  background: url("../images/cd-icon-user.svg") no-repeat 16px center;
+  background: url("../img/cd-icon-user.svg") no-repeat 16px center;
 }
 .cd-form [required].user {
-  background: url("../images/cd-icon-user.svg") no-repeat 16px center, url("../images/cd-required.svg") no-repeat top right;
+  background: url("../img/cd-icon-user.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
 }
 .cd-form .company {
-  background: url("../images/cd-icon-company.svg") no-repeat 16px center;
+  background: url("../img/cd-icon-company.svg") no-repeat 16px center;
 }
 .cd-form [required].company {
-  background: url("../images/cd-icon-company.svg") no-repeat 16px center, url("../images/cd-required.svg") no-repeat top right;
+  background: url("../img/cd-icon-company.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
 }
 .cd-form .email {
-  background: url("../images/cd-icon-email.svg") no-repeat 16px center;
+  background: url("../img/cd-icon-email.svg") no-repeat 16px center;
 }
 .cd-form [required].email {
-  background: url("../images/cd-icon-email.svg") no-repeat 16px center, url("../images/cd-required.svg") no-repeat top right;
+  background: url("../img/cd-icon-email.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
 }
 .cd-form .budget {
-  background: url("../images/cd-icon-budget.svg") no-repeat 16px center;
+  background: url("../img/cd-icon-budget.svg") no-repeat 16px center;
 }
 .cd-form .message {
-  background: url("../images/cd-icon-message.svg") no-repeat 16px 16px;
+  background: url("../img/cd-icon-message.svg") no-repeat 16px 16px;
 }
 .cd-form [required].message {
-  background: url("../images/cd-icon-message.svg") no-repeat 16px 16px, url("../images/cd-required.svg") no-repeat top right;
+  background: url("../img/cd-icon-message.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
 }
 
 /* -------------------------------- 
@@ -654,4 +402,3 @@ FLoating labels
     top: 20px;
   }
 }
-

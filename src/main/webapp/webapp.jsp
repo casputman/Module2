@@ -88,7 +88,7 @@
         <h3><b>Goal</b></h3>
 
         <p>Directly see your goal and your Kcal balance.</p>
-		</br>
+		<br>
         <a href="Balance" class="btn bg-small">PROCEED &raquo;</a>
       </div>
     </div>

@@ -53,46 +53,43 @@
 	<main class="siteContent container">
 	<center>
 		<h3>
-			<b>Contactform</b>
+			<b>Contact form</b>
 		</h3>
 
-		<script language="javascript">
-				var sa_email_id = '55055-f1b58';
-				var sa_sent_text = 'Thank you for contacting us. We will get back to you soon.';
-			</script>
-		<script language="javascript"
-			src="http://s1.smartaddon.com/sa_htmlform.js"></script>
-		<div id="sa_contactdiv">
+		</head>
+		<body>
+			<form form method="post" id="ContactForm" action="/ubercoaching/contactForm.jsp" onSubmit="alert('Thank you for your feedback.');"  class="cd-form floating-labels">
+				<fieldset>
+					</div>
 
-				<form name=sa_htmlform style="margin: 0px"
-					onsubmit="return sa_contactform()">
-					<table>
-						<tr>
-							<td>Name:<br> <input type="text" name="name" /></td>
-						</tr>
-						<tr>
-							<td>E-mail Address: <span style="color: #D70000">*</span><br>
-								<input type="text" name="email" required="true" /></td>
-						</tr>
-						<tr>
-							<td>Phone Number:<br> <input type="text" name="number" /></td>
-						</tr>
-						<tr>
-							<td>Subject: <span style="color: #D70000">*</span><br>
-								<input type="text" name="subject" required="true" /></td>
-						</tr>
-						<tr>
-							<td>Message: <span style="color: #D70000">*</span><br>
-								<textarea name="message" cols="42" rows="9" required="true"></textarea></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="Send Message"
-								style="font-weight: bold"></td>
-						</tr>
-					</table>
-				</form>
+					<div class="icon">
+						<label class="cd-label" for="cd-name"><b>Name</b></label> <input
+							class="user" type="text" name="cd-name" id="cd-name" required>
+					</div>
 
-		</div>
+					<div class="icon">
+						<label class="cd-label" for="cd-company"><b>Subject</b></label> <input
+							class="company" type="text" name="cd-company" id="cd-company">
+					</div>
+
+					<div class="icon">
+						<label class="cd-label" for="cd-email"><b>Email</b></label> <input
+							class="email error" type="email" name="cd-email" id="cd-email"
+							required>
+					</div>
+					<div class="icon">
+						<label class="cd-label" for="cd-textarea"><b>Message</b></label>
+						<textarea class="message" name="cd-textarea" id="cd-textarea"
+							required></textarea>
+					</div>
+
+					<div>
+						<input type="submit" value="Send Message">
+					</div>
+				</fieldset>
+			</form>
+
+			</div>
 	</main>
 
 	<footer class="siteFooter container">
