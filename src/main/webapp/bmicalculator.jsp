@@ -88,11 +88,11 @@
 		var bmi = Math.round(GetUrlValue('weight')
 				/ Math.pow((GetUrlValue('length') / 100), 2));
 		if (bmi > 25){
-			alert "Your BMI = " + bmi + ". You are considered overweight. Register, and let us help!" }
+			alert ("Your BMI = " + bmi + ". You are considered overweight. Register, and let us help!") }
 			else { if (bmi < 19){
-				alert "Your BMI = " + bmi + ". You are considered underweight. Register, and let us help!"
+				alert ("Your BMI = " + bmi + ". You are considered underweight. Register, and let us help!")
 			}
-			else { alert "Your BMI = " + bmi + ". You are on a healthy weight, keep up te good work!"
+			else { alert ("Your BMI = " + bmi + ". You are on a healthy weight, keep up te good work!")
 		}}
 	</script>
 </body>
