@@ -23,19 +23,20 @@ public class ContactForm {
   }
 
   @Test
-  public void testContactForm() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/contactForm.jsp");
-    driver.findElement(By.name("name")).clear();
-    driver.findElement(By.name("name")).sendKeys("Bas");
-    driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("jow@jow.jow");
-    driver.findElement(By.name("number")).clear();
-    driver.findElement(By.name("number")).sendKeys("061111111111");
-    driver.findElement(By.name("subject")).clear();
-    driver.findElement(By.name("subject")).sendKeys("jow");
-    driver.findElement(By.name("message")).clear();
-    driver.findElement(By.name("message")).sendKeys("jow");
+  public void testContact() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/webapp");
+    driver.findElement(By.xpath("//a[3]/li")).click();
+    driver.findElement(By.linkText("contact form")).click();
+    driver.findElement(By.id("cd-name")).clear();
+    driver.findElement(By.id("cd-name")).sendKeys("Cas");
+    driver.findElement(By.id("cd-company")).clear();
+    driver.findElement(By.id("cd-company")).sendKeys("Information regarding registration");
+    driver.findElement(By.id("cd-email")).clear();
+    driver.findElement(By.id("cd-email")).sendKeys("c.g.j.putman@student.utwente.nl");
+    driver.findElement(By.id("cd-textarea")).clear();
+    driver.findElement(By.id("cd-textarea")).sendKeys("Hello, I would like some information.");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+    assertEquals("Thank you for your feedback.", closeAlertAndGetItsText());
   }
 
   @After
