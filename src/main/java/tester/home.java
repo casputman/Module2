@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class loginscreen {
+public class home {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,11 +23,14 @@ public class loginscreen {
   }
 
   @Test
-  public void testLogin() throws Exception {
-    driver.findElement(By.name("username")).sendKeys("test");
-    driver.findElement(By.name("password")).sendKeys("test");
-    driver.findElement(By.id("remember_me")).click();
-    driver.findElement(By.name("commit")).click();
+  public void testHome() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/start");
+    driver.findElement(By.linkText("Learn More »")).click();
+    driver.findElement(By.linkText("Home")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'Learn More »')])[2]")).click();
+    driver.findElement(By.linkText("Home")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'Learn More »')])[3]")).click();
+    driver.findElement(By.linkText("Home")).click();
   }
 
   @After
