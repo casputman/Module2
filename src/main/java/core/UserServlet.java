@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import searches.GoalShow;
+import statistics.Weight;
 
 public class UserServlet extends MyServlet {
     private static final long serialVersionUID = 1L;
@@ -179,8 +180,19 @@ public class UserServlet extends MyServlet {
             int goalWeight = Integer.parseInt(getRequest().getParameter("goalWeight"));
             String goalDate = getRequest().getParameter("goalDate");
             GoalShow goalShow = new GoalShow();
+            Weight weightClass = new Weight();
             goalShow.setGoal(goalWeight, goalDate, id);
+            double weight = Double.parseDouble(getRequest().getParameter("weight"));
+            String x = getRequest().getParameter("width");
+            double width = Double.parseDouble(x);
+            weightClass.setWidth(id, width, weight);
+            VetPercentageServlet vet = new VetPercentageServlet();
+            User user = User.fromIdUser(id);
+            vet.determineVPT(user);
+            BmiServlet bmiServlet = new BmiServlet();
+            bmiServlet.determineBMI(user);
     		}
+    		gs.close();
     	}catch (SQLException e) { 
 			e.printStackTrace();
 		}

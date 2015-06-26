@@ -4,9 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import searches.DetermineActivityColumn;
 
 public class ActivityDao {
     
@@ -55,7 +54,6 @@ public class ActivityDao {
     public static List<Usage> getActivityUsageToday(int iduser) {
         
         final List<Usage> usages = new ArrayList<Usage>();
-        final DetermineActivityColumn activitykg = new DetermineActivityColumn();
         
         try {
             final PreparedStatement ps = Validation.getConnection().prepareStatement (
@@ -67,8 +65,7 @@ public class ActivityDao {
             ps.setInt(1, iduser);
             final ResultSet rs = ps.executeQuery();
             
-            final int activityColumn = activitykg.determineActivityColumn(iduser);
-            final String column = "kg" + Integer.toString(activityColumn);
+            final String column = new User(iduser).getWeightColumn(new Date());
             
             // Loop through each usage of the current user and current date.
             while (rs.next()) {

@@ -50,7 +50,22 @@ public class DetermineActivityColumn extends core.MyServlet {
 		}
 	}
 	public static void main(String[] args){
-		DetermineActivityColumn kaas = new DetermineActivityColumn();
-		kaas.determineActivityColumn(4);
+	    double activityweight = 75;
+        double activityweight59 = Math.abs(activityweight - 59);
+        double activityweight70 = Math.abs(activityweight - 70);
+        double activityweight81 = Math.abs(activityweight - 81);
+        double activityweight92 = Math.abs(activityweight - 92);
+        int res;
+        if(activityweight59 <= activityweight70 ){
+            res = 59;
+        } else if (activityweight70 <=  activityweight81){
+            res = 70;
+        } else if (activityweight81 <= activityweight92){
+            res = 81;
+        } else {
+            res = 92;
+        }
+        
+        System.out.println(res);
 	}
 }

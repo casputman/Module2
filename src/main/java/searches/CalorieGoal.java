@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import core.User;
 
 public class CalorieGoal extends core.MyServlet {
-	private User user;
 	private static final long serialVersionUID = 1L;
 	private double totalCalorieIntake;
 	private double totalCalorieBurned;

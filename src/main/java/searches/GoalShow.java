@@ -65,14 +65,14 @@ public class GoalShow extends core.MyServlet {
 			ps.setInt(4, input);
 			ResultSet rs = ps.executeQuery();
 			goal = new Goal();
-			rs.next();
+			while(rs.next()) {
 			goal.setGoalweight(rs.getInt(1));
 			goal.setGoaldate(rs.getDate(2));
 			goal.setCurrentWeight(rs.getInt(3));
 			System.out.println(goal.getGoaldate());
 			System.out.println("goal is created");
 			user.setGoal(goal);
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			error("problem in get goal");
