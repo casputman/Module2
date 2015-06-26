@@ -85,8 +85,8 @@ google.setOnLoadCallback(function(){
 		for (var i = 0; i < jsonData.data.length; i++) {
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
 								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1]},
-			                   {v: jsonData.data[i][2]}]};
+			                   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
+			                   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
 		}
 		
 		// Create chart.
@@ -120,12 +120,14 @@ google.setOnLoadCallback(function(){
 	        ],
 	        rows: new Array()
 		};
+
 		// Put received data in the right format.
 		for (var i = 0; i < jsonData.data.length; i++) {
+
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
 								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1]},
-			                   {v: jsonData.data[i][2]}]};
+								{v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
+								{v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
 		}
 		
 		// Create chart.

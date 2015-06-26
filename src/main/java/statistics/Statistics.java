@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,8 +76,8 @@ public class Statistics {
         }
         final Map<String, Object> map = new LinkedHashMap<>();
         map.put("code", 200);
-        
-        final ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+
+        final TreeMap<Integer, ArrayList<Object>> data = new TreeMap<Integer, ArrayList<Object>>(); 
         
         
         try {
@@ -85,11 +86,19 @@ public class Statistics {
             ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
             ResultSet rs1 = ps1.executeQuery();
             while (rs1.next()) {
-                final ArrayList<Object> rowData = new ArrayList<Object>();
-                rowData.add(rs1.getString("Date"));
-                rowData.add(rs1.getDouble("bmi"));
-                rowData.add(null);
-                data.add(rowData);
+                final int key = Integer.parseInt(rs1.getString("Date").replaceAll("[^\\d]", ""));
+                // If the data point already exists.
+                if (data.containsKey(key)) {
+                    data.get(key).set(1, rs1.getDouble("bmi"));
+                }
+                // If this is a new entry.
+                else {
+                    final ArrayList<Object> row = new ArrayList<Object>();
+                    row.add(rs1.getString("Date"));
+                    row.add(rs1.getDouble("bmi"));
+                    row.add(null);
+                    data.put(key, row);
+                }
             }
             
             // Get average BMI's.
@@ -106,26 +115,36 @@ public class Statistics {
                         + "    GROUP BY user_iduser "
                         + ") r "
                         + "WHERE   b.user_iduser = r.user_iduser "
-                        + "  AND   b.\"Date\" = r.maxDate "
-                        + "");
+                        + "  AND   b.\"Date\" = r.maxDate ");
                 ps3.setDate(1, rs2.getDate(1));
                 final ResultSet rs3 = ps3.executeQuery();
                 if (!rs3.next()) {
                     continue;
                 }
-                final ArrayList<Object> rowData = new ArrayList<Object>();
-                rowData.add(rs2.getString("Date"));
-                rowData.add(null);
-                rowData.add(rs3.getFloat(1));
-                data.add(rowData);
+                final int key = Integer.parseInt(rs2.getString("Date").replaceAll("[^\\d]", ""));
+                if (data.containsKey(key)) {
+                    data.get(key).set(2, rs3.getFloat(1));
+                } else {
+                    final ArrayList<Object> rowData = new ArrayList<Object>();
+                    rowData.add(rs2.getString("Date"));
+                    rowData.add(null);
+                    rowData.add(rs3.getFloat(1));
+                    data.put(key, rowData);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return getInternalServerError();
         }
+
         
+        // Now cast the data map to a simple list.
+        final ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+        for (Map.Entry<Integer, ArrayList<Object>> entry : data.entrySet()) {
+            dataList.add(entry.getValue());
+        }
         
-        map.put("data", data);
+        map.put("data", dataList);
         
         // Send back to client.
         try {
@@ -147,20 +166,28 @@ public class Statistics {
         final Map<String, Object> map = new LinkedHashMap<>();
         map.put("code", 200);
         
-        final ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+        final TreeMap<Integer, ArrayList<Object>> data = new TreeMap<Integer, ArrayList<Object>>(); 
         
         try {
             // Get current fat percentage entries.
-            final PreparedStatement ps = Validation.getConnection().prepareStatement(""
+            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(""
                     + "SELECT * FROM uber.fat WHERE user_iduser = ? ORDER BY \"Date\";");
-            ps.setInt(1, ((User) request.getAttribute("user")).getIdUser());
-            final ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                final ArrayList<Object> rowData = new ArrayList<Object>();
-                rowData.add(rs.getString("Date"));
-                rowData.add(rs.getDouble("fatpercentage"));
-                rowData.add(null);
-                data.add(rowData);
+            ps1.setInt(1, ((User) request.getAttribute("user")).getIdUser());
+            final ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                final int key = Integer.parseInt(rs1.getString("Date").replaceAll("[^\\d]", ""));
+                // If the data point already exists.
+                if (data.containsKey(key)) {
+                    data.get(key).set(1, rs1.getDouble("fatpercentage"));
+                }
+                // If this is a new entry.
+                else {
+                    final ArrayList<Object> row = new ArrayList<Object>();
+                    row.add(rs1.getString("Date"));
+                    row.add(rs1.getDouble("fatpercentage"));
+                    row.add(null);
+                    data.put(key, row);
+                }
             }
 
             
@@ -178,26 +205,35 @@ public class Statistics {
                         + "    GROUP BY user_iduser "
                         + ") r "
                         + "WHERE   f.user_iduser = r.user_iduser "
-                        + "  AND   f.\"Date\" = r.maxDate "
-                        + "");
+                        + "  AND   f.\"Date\" = r.maxDate ");
                 ps3.setDate(1, rs2.getDate(1));
                 final ResultSet rs3 = ps3.executeQuery();
                 if (!rs3.next()) {
                     continue;
                 }
-                final ArrayList<Object> rowData = new ArrayList<Object>();
-                rowData.add(rs2.getString("Date"));
-                rowData.add(null);
-                rowData.add(rs3.getFloat(1));
-                data.add(rowData);
+                final int key = Integer.parseInt(rs2.getString("Date").replaceAll("[^\\d]", ""));
+                if (data.containsKey(key)) {
+                    data.get(key).set(2, rs3.getFloat(1));
+                } else {
+                    final ArrayList<Object> rowData = new ArrayList<Object>();
+                    rowData.add(rs2.getString("Date"));
+                    rowData.add(null);
+                    rowData.add(rs3.getFloat(1));
+                    data.put(key, rowData);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return getInternalServerError();
         }
         
+        // Now cast the data map to a simple list.
+        final ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+        for (Map.Entry<Integer, ArrayList<Object>> entry : data.entrySet()) {
+            dataList.add(entry.getValue());
+        }
         
-        map.put("data", data);
+        map.put("data", dataList);
         
         // Send back to client.
         try {

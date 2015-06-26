@@ -3,6 +3,8 @@ package core;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import searches.Goal;
 
@@ -23,6 +25,12 @@ public class User {
     
 
     // --- Constructors ----------------------------------------------------------------------
+    
+    public User() {}
+    
+    public User(int idUser) { 
+        setIdUser(idUser);
+    }
     
     // --- Getters ---------------------------------------------------------------------------
     
@@ -105,7 +113,66 @@ public class User {
 		return goal;
 	}
 	
+	/**
+	 * Returns the weight column, used for determining the calorie usage of activities. If 
+	 * no weight was found, kg81 is selected. The user id should be set.
+	 * 
+	 * @param date the date after the weight entry
+	 * @return     either kg59, kg70, kg81 or kg92
+	 */
+	public String getWeightColumn(Date date) throws IllegalArgumentException {
+	    
+	    try {
+    	    final double weight = getWeight(date);
+    	    if (weight >= 92) {
+    	        return "kg92";
+    	    } else if (weight >= 81) {
+    	        return "kg81";
+    	    } else if (weight >= 70) {
+    	        return "kg70";
+    	    } else {
+    	        return "kg59";
+    	    }
+	    } catch (IllegalArgumentException e) {
+	        return "kg81";
+	    }
+	}
+    
+    /**
+     * Returns the weight.
+     * The user id should be set.
+     * 
+     * @param date the date after the weight entry
+     * @return     the weight; -1 if an SQLException occurred
+     * @throws IllegalArgumentException if there was no weight entry found for this date 
+     */
+    public double getWeight(Date date) throws IllegalArgumentException {
+        try {
+            final PreparedStatement ps = Validation.getConnection().prepareStatement(
+                      " SELECT  weight "
+                    + " FROM    uber.weight "
+                    + " WHERE   user_iduser = ? "
+                    + "   AND   weightdate <= ? "
+                    + " ORDER BY weightdate DESC ");
+            ps.setInt(1, getIdUser());
+            ps.setDate(2, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(date)));
+            final ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                throw new IllegalArgumentException("no weight entry found before or on this date");
+            }
+            return rs.getDouble("weight");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+	
+	
     // --- Setters ---------------------------------------------------------------------------
+    
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 	
 	public void setGoal(Goal goalArg) {
 		goal = goalArg;
