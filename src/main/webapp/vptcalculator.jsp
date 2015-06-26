@@ -92,12 +92,23 @@
 				.round((((-98.42 + (4.15 * ((GetUrlValue('waistline') / 2.54))) - (0.082 * ((GetUrlValue('weight') * 2.2)))) / (GetUrlValue('weight') * 2.2))) * 100);
 		var female = Math
 				.round((((-76.76 + (4.15 * ((GetUrlValue('waistline') / 2.54))) - (0.082 * ((GetUrlValue('weight') * 2.2)))) / (GetUrlValue('weight') * 2.2))) * 100);
-		if (GetUrlValue('sex') == "male") {
-			alert("Your fat percentage = " + male + "%")
+		if (GetUrlValue('sex') == "male") { 
+			if (male > 24){
+				alert("Your fat percentage = " + male + "%" + ". This is considered above average. Register now and let us help!")
+			}
+			else { if (male < 14) {
+				alert("Your fat percentage = " + male + "%" + ". This is considered below average. Register now and let us help!")
+			} else {
+				alert("Your fat percentage = " + male + "%" + ". This is considered average. Keep up te good work!")
 		} else if (GetUrlValue('sex') == "female") {
-			alert("Your fat percentage = " + female + "%")
-		} else
-			alert("Input invalid, check input!")
+			if (male > 31){
+				alert("Your fat percentage = " + female + "%" + ". This is considered above average. Register now and let us help!")
+			} else { if (male < 21) {
+				alert("Your fat percentage = " + female + "%" + ". This is considered below average. Register now and let us help!")
+			} else {
+				alert("Your fat percentage = " + female + "%" + ". This is considered average. Keep up te good work!")
+		} else {
+			alert("Input invalid, check input!")}
 	</script>
 
 </body>
