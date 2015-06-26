@@ -25,9 +25,11 @@ public class VetPercentageServlet extends MyServlet {
 					" SELECT  w.weight, w.width, w.user_IDuser, u.gender "
 							+ " FROM    uber.user u, uber.weight w "
 							+ " WHERE w.user_IDuser = ? "
-							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ? ) ");
+							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ? ) "
+							+ " AND u.iduser = ? ");
 			ps.setInt(1, user.getIdUser() );
 			ps.setInt(2, user.getIdUser() );
+			ps.setInt(3, user.getIdUser() );
 	    	ResultSet rs = ps.executeQuery();
 	    	while (rs.next()) {
 	    		middel = rs.getDouble(2);
@@ -88,11 +90,8 @@ public class VetPercentageServlet extends MyServlet {
 		System.err.println("ERROR: " + arg);
 		
 	}
-	
-	
-	
-	
-	
-	
+	public VetPercentage getVPT(){
+		return vpt; 
+	}
 	
 }
