@@ -24,8 +24,7 @@ public class Contact {
 
   @Test
   public void testContact() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/logout");
-    driver.findElement(By.linkText("Contact")).click();
+    driver.get(baseUrl + "/ubercoaching/contact");
     driver.findElement(By.linkText("contact form")).click();
     driver.findElement(By.linkText("Contact")).click();
     driver.findElement(By.linkText("uber-coaching@gmail.com")).click();

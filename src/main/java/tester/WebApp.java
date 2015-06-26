@@ -24,7 +24,13 @@ public class WebApp {
 
   @Test
   public void testWebApp() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/webapp");
+    driver.get(baseUrl + "/ubercoaching/logout");
+    driver.findElement(By.linkText("Login")).click();
+    driver.findElement(By.name("username")).clear();
+    driver.findElement(By.name("username")).sendKeys("test");
+    driver.findElement(By.name("password")).clear();
+    driver.findElement(By.name("password")).sendKeys("test");
+    driver.findElement(By.name("commit")).click();
     driver.findElement(By.linkText("PROCEED »")).click();
     driver.findElement(By.linkText("Personal Home")).click();
     driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[2]")).click();
@@ -32,8 +38,6 @@ public class WebApp {
     driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[4]")).click();
     driver.findElement(By.cssSelector("li")).click();
     driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[3]")).click();
-    driver.findElement(By.cssSelector("li")).click();
-    driver.findElement(By.linkText("GoalDetails")).click();
   }
 
   @After
