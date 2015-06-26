@@ -66,7 +66,7 @@
 						<%
 						}
 						%>
-					<tr><td>Totaal aantal caloriën vandaag:</td><td><%=totalCalorieIntake%></td></tr>
+					<tr><td>Totaal aantal caloriÃ«n vandaag:</td><td><%=totalCalorieIntake%></td></tr>
 					<%
 					}
 					%>
@@ -137,7 +137,7 @@
 			        		<%
 					    }
 					    %>
-				    <tr><td>Totaal aantal verbruikte caloriën vandaag:</td><td><%=totalCalorieUsage%></td></tr>
+				    <tr><td>Totaal aantal verbruikte caloriÃ«n vandaag:</td><td><%=totalCalorieUsage%></td></tr>
 				    <%
 					}
 					%>
