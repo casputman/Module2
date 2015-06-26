@@ -92,11 +92,7 @@
         <a href="Balance" class="btn bg-small">PROCEED &raquo;</a>
       </div>
     </div>
-    <div>
-    	<a href="GoalDetails" class="btn bg-small">
-    	GoalDetails
-    	</a> 
-    </div>
+
     
   </main>
   

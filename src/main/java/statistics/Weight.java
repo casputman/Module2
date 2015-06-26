@@ -37,4 +37,19 @@ public class Weight {
             e.printStackTrace();
         }
     }
+    
+    public double getWeight(int userid) {
+        PreparedStatement ps;
+        try {
+            ps = core.Validation.getConnection().prepareStatement( 
+                    " SELECT weight "
+                    + " FROM uber.user "
+                    + " WHERE weightdate = ( SELECT MAX(weightdate) FROM uber.user WHERE user_iduser = ? "
+                    );
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
 }
