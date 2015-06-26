@@ -75,4 +75,15 @@ public class BmiServlet extends MyServlet {
 		
 	}
 	
+	public double getHeight(){
+		return height;
+	}
+	
+	public double getWeight(){
+		return weight;
+	}
+	
+	public BMI getBmi(){
+		return bmi;
+	}
 }
