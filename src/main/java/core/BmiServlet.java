@@ -23,10 +23,12 @@ public class BmiServlet extends MyServlet {
 					" SELECT  w.weight, u.length, w.user_IDuser "
 							+ " FROM    uber.user u, uber.weight w "
 							+ " WHERE w.user_IDuser = ? "
-							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w WHERE w.user_IDuser = ? )");
+							+ " AND w.weightdate = ( SELECT MAX(w.weightdate) FROM uber.weight w WHERE w.user_IDuser = ? )"
+							+ " AND u.iduser = ? ");
 			this.user = user;
 			ps.setInt(1, user.getIdUser() );
 			ps.setInt(2, user.getIdUser() );
+			ps.setInt(3, user.getIdUser());
 	    	ResultSet rs = ps.executeQuery();
 	    	while (rs.next()) {
 	    		height = rs.getDouble(2);
