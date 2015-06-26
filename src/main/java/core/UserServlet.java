@@ -192,6 +192,7 @@ public class UserServlet extends MyServlet {
             BmiServlet bmiServlet = new BmiServlet();
             bmiServlet.determineBMI(user);
     		}
+    		gs.close();
     	}catch (SQLException e) { 
 			e.printStackTrace();
 		}
