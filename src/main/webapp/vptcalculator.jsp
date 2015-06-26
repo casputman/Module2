@@ -44,7 +44,7 @@
 			<ul>
 				<li><a href="login" class="buttonlink">Login</a></li>
 				<li><a href="start" class="buttonlink">Home</a></li>
-				<li><a href="calclator.jsp" class="buttonlink">Calculator</a></li>
+				<li><a href="calculator.jsp" class="buttonlink">Calculator</a></li>
 				<li><a href="startAbout" class="buttonlink">About</a></li>
 				<li><a href="contact" class="buttonlink">Contact</a></li>
 		</nav>
