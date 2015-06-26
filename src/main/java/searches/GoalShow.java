@@ -48,7 +48,7 @@ public class GoalShow extends core.MyServlet {
 					.prepareStatement(
 							" SELECT  goal.goalweight, goal.goaldate, weight.weight "
 									+ " FROM uber.goal, uber.weight "
-									+ " WHERE goal.currentdate = (SELECT MAX(g.currentdate) FROM uber.goal g WHERE g.user_iduser = ?)"
+									+ " WHERE goal.currentdate = (SELECT MAX(g.currentdate) FROM uber.goal g WHERE g.user_iduser = ?) "
 									+ " AND weight.weightdate = (SELECT MAX(w.weightdate) FROM uber.weight w, uber.user u WHERE w.user_IDuser = ?) "
 									+ " AND goal.user_iduser = ? "
 									+ " AND weight.user_iduser = ? ");
