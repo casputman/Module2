@@ -1,5 +1,6 @@
 <%@include file="_header.jsp" %>
-
+    <link rel="stylesheet" type="text/css" media="screen" href="style/webapp.css" />
+    
 <div class="siteContent container">
 	<div class="container vertical-divider">
 		<div class="column two-thirds">

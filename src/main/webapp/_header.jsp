@@ -20,7 +20,7 @@ final boolean authorized = user != null;
 
   <link rel="stylesheet" type="text/css" media="screen" href="style/concise.min.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="style/login.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style/webapp.css" />
+
   
   
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
