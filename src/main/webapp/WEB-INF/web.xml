@@ -6,9 +6,9 @@
 	id="WebApp_ID" version="3.0">
 
 	<description>
-       Servlets for an online fitness coach web application.
+       Servlets for an online health coach web application.
     </description>
-	<display-name>Online fitness coach</display-name>
+	<display-name>Online health coach by di18: Cas Putman, Bas Nottrot, Julik Keijer, Luc Jansen, Max Riesewijk, Karim El Assal</display-name>
 
 	
 	<servlet>	

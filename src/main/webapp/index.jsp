@@ -1,3 +1,6 @@
+<%
+    response.sendRedirect("start");
+%>
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,6 +14,7 @@
 
 <a href="login">login</a>
 <br /><a href="welcome.jsp">welcome</a>
+<br /><a href="start">start</a>
 <br /><a href="logout">logout</a>
 <br />
 <br />Session user data:

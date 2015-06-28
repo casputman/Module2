@@ -5,7 +5,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Über-coaching</name>
-	<description>A servlet-based online fitness coach</description>
+	<description>A servlet-based online health coach</description>
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
