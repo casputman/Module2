@@ -243,7 +243,7 @@ public class Statistics {
         }
     }
     
-/*
+
     @GET
     @Path("calories")
     @Produces(MediaType.APPLICATION_JSON)
@@ -257,12 +257,31 @@ public class Statistics {
         map.put("code", 200);
         
         final TreeMap<Integer, ArrayList<Object>> data = new TreeMap<Integer, ArrayList<Object>>(); 
+        final int iduser = ((User) request.getAttribute("user")).getIdUser();
         
         try {
             // Get calorie intake entries.
+            final PreparedStatement ps = Validation.getConnection().prepareStatement(
+                      " SELECT  i.intaketime::date as \"date\", "
+                    + "         sum(i.amount * f.calorie) as intake "
+                    + " FROM    uber.intake i "
+                    + " JOIN    uber.stdfood f  ON i.idfood = f.idfood "
+                    + " WHERE   i.user_iduser = ? "
+                    + " GROUP BY i.intaketime::date ");
+            ps.setInt(1, iduser);
+            final ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                final int key = Integer.parseInt(rs.getString("date").replaceAll("[^\\d]", ""));
+                
+                final ArrayList<Object> rowData = new ArrayList<Object>();
+                rowData.add(rs.getString("date"));
+                rowData.add(rs.getDouble("intake"));
+                data.put(key, rowData);
+            }
             
-            // ...
-            //
+            // Next: calorie usage
+            // Next: calorie netto usage
+                
         } catch (SQLException e) {
             e.printStackTrace();
             return getInternalServerError();
@@ -283,7 +302,7 @@ public class Statistics {
             return getInternalServerError();
         }
     }
-*/
+
     
     private String checkValidation() {
         if (!Validation.validated(request)) {
