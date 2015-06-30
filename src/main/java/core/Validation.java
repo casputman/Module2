@@ -85,6 +85,7 @@ public class Validation {
     public static User validate(String username, String password) {
         User user = null;
         try {
+        	connect();
             PreparedStatement ps = getConnection().prepareStatement(
                       " SELECT  * "
                     + " FROM    uber.user "
@@ -98,6 +99,7 @@ public class Validation {
                 user = new User();
                 user.setFrom(rs);
             }
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
