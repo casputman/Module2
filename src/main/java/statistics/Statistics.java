@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -42,27 +41,6 @@ public class Statistics {
         this.request = request;
         this.response = response;
         System.out.println("[rest: Statistics, uri: " + uriInfo.getRequestUri().toString() + "]");
-    }
-    
-
-    @GET
-    @Path("{type}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String doJsonGetType(@PathParam("type") String type) {
-        // Check validation.
-        final String validationErrorOutput;
-        if ((validationErrorOutput = checkValidation()) != null) {
-            return validationErrorOutput;
-        }
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("code", 200);
-        
-        // Send back to client.
-        try {
-            return new ObjectMapper().writeValueAsString(map);
-        } catch (JsonProcessingException e) {               
-            return getInternalServerError();
-        }
     }
 
     @GET
@@ -245,7 +223,7 @@ public class Statistics {
     
 
     @GET
-    @Path("calories")
+    @Path("calorie")
     @Produces(MediaType.APPLICATION_JSON)
     public String doJsonGetCalories() {
         // Check validation.
@@ -261,25 +239,66 @@ public class Statistics {
         
         try {
             // Get calorie intake entries.
-            final PreparedStatement ps = Validation.getConnection().prepareStatement(
+            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(
                       " SELECT  i.intaketime::date as \"date\", "
                     + "         sum(i.amount * f.calorie) as intake "
                     + " FROM    uber.intake i "
                     + " JOIN    uber.stdfood f  ON i.idfood = f.idfood "
                     + " WHERE   i.user_iduser = ? "
                     + " GROUP BY i.intaketime::date ");
-            ps.setInt(1, iduser);
-            final ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                final int key = Integer.parseInt(rs.getString("date").replaceAll("[^\\d]", ""));
+            ps1.setInt(1, iduser);
+            final ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                final int key = Integer.parseInt(rs1.getString("date").replaceAll("[^\\d]", ""));
                 
                 final ArrayList<Object> rowData = new ArrayList<Object>();
-                rowData.add(rs.getString("date"));
-                rowData.add(rs.getDouble("intake"));
+                rowData.add(rs1.getString("date"));
+                rowData.add(rs1.getDouble("intake"));
+                rowData.add(null);
                 data.put(key, rowData);
             }
             
-            // Next: calorie usage
+            // Get calorie usage.
+            // First get weights.
+            final TreeMap<Integer, String> weights = new TreeMap<>();
+            final PreparedStatement ps2 = Validation.getConnection().prepareStatement(
+                      " SELECT   weightdate as \"date\", avg(weight) as weight "
+                    + " FROM    uber.weight "
+                    + " WHERE   user_iduser = ? "
+                    + " GROUP BY weightdate ORDER BY weightdate; ");
+            ps2.setInt(1, iduser);
+            final ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                final int key = Integer.parseInt(rs2.getString("date").replaceAll("[^\\d]", ""));
+                weights.put(key, User.getWeightColumn(rs2.getDouble("weight")));
+            }
+            
+            // Get usage entries.
+            final PreparedStatement ps3 = Validation.getConnection().prepareStatement(
+                      " SELECT  u.amount, a.kg59, a.kg70, a.kg81, a.kg92, u.usagedate as \"date\" "
+                    + " FROM    uber.usage u "
+                    + " JOIN    uber.activities a  ON u.activities_name = a.name "
+                    + " WHERE   u.user_iduser = ? "
+                    + " ORDER BY u.usagedate ");
+            ps3.setInt(1, iduser);
+            final ResultSet rs3 = ps3.executeQuery();
+            while (rs3.next()) {
+                final int key = Integer.parseInt(rs3.getString("date").replaceAll("[^\\d]", ""));
+                final double delta = rs3.getDouble("amount") * rs3.getDouble(getWeightColumn(weights, key));
+                
+                if (data.containsKey(key)) {
+                    final Double dayUsageValue = (Double) data.get(key).get(2);
+                    final double dayUsage = dayUsageValue == null ? 0 : dayUsageValue;
+                    data.get(key).set(2, dayUsage + delta);
+                } else {
+                    final ArrayList<Object> rowData = new ArrayList<Object>();
+                    rowData.add(rs3.getString("date"));
+                    rowData.add(null);
+                    rowData.add(delta);
+                    data.put(key, rowData);
+                }
+            }
+            
             // Next: calorie netto usage
                 
         } catch (SQLException e) {
@@ -301,6 +320,25 @@ public class Statistics {
         } catch (JsonProcessingException e) {
             return getInternalServerError();
         }
+    }
+    
+    /**
+     * Gets the weight column according to a <Integer date, String weightColumn> map
+     * where date is in the format of YYYYMMdd.
+     * 
+     * @param map  the weight column map
+     * @param date the request date
+     * @return     the weight column; "kg81" if a valid value could not be found
+     */
+    private String getWeightColumn(TreeMap<Integer, String> map, int date) {
+        if (map != null && map.size() > 0) {
+            for (Map.Entry<Integer, String> entry : map.entrySet()) {
+                if (entry.getKey() < date) {
+                    return entry.getValue();
+                }
+            }
+        }
+        return "kg81";
     }
 
     

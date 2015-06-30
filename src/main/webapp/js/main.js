@@ -7,7 +7,7 @@ $.ajaxSetup({
 });
 $(document).ajaxError(function(jqXHR, textStatus, errorThrown) {
 	alert("Something went wrong with the ajax request. See the console for details.");
-	console.log(jqXHR, testStatus, errorThrown);
+	console.log(jqXHR, textStatus, errorThrown);
 });
 $(document).ajaxSuccess(function(jsonData, textStatus, jqXHR) {
 	if (jsonData.code == undefined) {
@@ -135,6 +135,47 @@ google.setOnLoadCallback(function(){
 		var dataTable = new google.visualization.DataTable(data);
 		var chart = new google.visualization.LineChart($('#chart_fat')[0]);
 		options.title = "Vetpercentage";
+        chart.draw(dataTable, options);
+	});
+	
+
+	
+	// Get calorie statistics.
+	$.ajax({
+		url: "rest/statistics/calorie"
+	})
+	.done(function(jsonData) {
+		
+		if (jsonData.code != 200) {
+			return;
+		}
+		
+		if (jsonData.data.length == 0) {
+			$("#chart_bmi").html("Er is nog geen calorie data beschkbaar.");
+			return;
+		}
+		
+		// Define columns.
+		var data = {
+			cols: [
+		       {label: "Datum", type: "date"},
+		       {label: "Calorie-inname", type: "number"},
+		       {label: "Caloriegebruik", type: "number"}
+	        ],
+	        rows: new Array()
+		};
+		// Put received data in the right format.
+		for (var i = 0; i < jsonData.data.length; i++) {
+			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
+								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
+			                   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
+		}
+		
+		// Create chart.
+		var dataTable = new google.visualization.DataTable(data);
+		var chart = new google.visualization.LineChart($('#chart_calorie')[0]);
+		options.title = "Uw calorie-inname en -gebruik";
         chart.draw(dataTable, options);
 	});
 });

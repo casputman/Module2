@@ -123,19 +123,28 @@ public class User {
 	public String getWeightColumn(Date date) throws IllegalArgumentException {
 	    
 	    try {
-    	    final double weight = getWeight(date);
-    	    if (weight >= 92) {
-    	        return "kg92";
-    	    } else if (weight >= 81) {
-    	        return "kg81";
-    	    } else if (weight >= 70) {
-    	        return "kg70";
-    	    } else {
-    	        return "kg59";
-    	    }
+    	    return getWeightColumn(getWeight(date));
 	    } catch (IllegalArgumentException e) {
 	        return "kg81";
 	    }
+	}
+	
+	/**
+	 * Returns the weight column according to a weight value.
+	 * 
+	 * @param weight the weight value in kg
+	 * @return       the weight column
+	 */
+	public static String getWeightColumn(double weight) {
+        if (weight >= 92) {
+            return "kg92";
+        } else if (weight >= 81) {
+            return "kg81";
+        } else if (weight >= 70) {
+            return "kg70";
+        } else {
+            return "kg59";
+        }
 	}
     
     /**
