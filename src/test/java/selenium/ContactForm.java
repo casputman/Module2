@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Calculator {
+public class ContactForm {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,20 +23,20 @@ public class Calculator {
   }
 
   @Test
-  public void testCalculator() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/logout");
-    driver.findElement(By.linkText("Calculator")).click();
-    driver.findElement(By.name("weight")).clear();
-    driver.findElement(By.name("weight")).sendKeys("80");
-    driver.findElement(By.name("length")).clear();
-    driver.findElement(By.name("length")).sendKeys("185");
+  public void testContact() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/webapp");
+    driver.findElement(By.xpath("//a[3]/li")).click();
+    driver.findElement(By.linkText("contact form")).click();
+    driver.findElement(By.id("cd-name")).clear();
+    driver.findElement(By.id("cd-name")).sendKeys("Cas");
+    driver.findElement(By.id("cd-company")).clear();
+    driver.findElement(By.id("cd-company")).sendKeys("Information regarding registration");
+    driver.findElement(By.id("cd-email")).clear();
+    driver.findElement(By.id("cd-email")).sendKeys("c.g.j.putman@student.utwente.nl");
+    driver.findElement(By.id("cd-textarea")).clear();
+    driver.findElement(By.id("cd-textarea")).sendKeys("Hello, I would like some information.");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.xpath("(//input[@name='weight'])[2]")).clear();
-    driver.findElement(By.xpath("(//input[@name='weight'])[2]")).sendKeys("80");
-    driver.findElement(By.name("waistline")).clear();
-    driver.findElement(By.name("waistline")).sendKeys("60");
-    driver.findElement(By.name("sex")).click();
-    driver.findElement(By.xpath("//input[@value='Calculate your fat percentage!']")).click();
+    assertEquals("Thank you for your feedback.", closeAlertAndGetItsText());
   }
 
   @After

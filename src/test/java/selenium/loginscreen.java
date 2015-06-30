@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Contact {
+public class loginscreen {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,12 +23,11 @@ public class Contact {
   }
 
   @Test
-  public void testContact() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/contact");
-    driver.findElement(By.linkText("contact form")).click();
-    driver.findElement(By.linkText("Contact")).click();
-    driver.findElement(By.linkText("uber-coaching@gmail.com")).click();
-    driver.findElement(By.linkText("Grotere kaart weergeven")).click();
+  public void testLogin() throws Exception {
+    driver.findElement(By.name("username")).sendKeys("test");
+    driver.findElement(By.name("password")).sendKeys("test");
+    driver.findElement(By.id("remember_me")).click();
+    driver.findElement(By.name("commit")).click();
   }
 
   @After

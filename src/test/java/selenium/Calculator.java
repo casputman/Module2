@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class register {
+public class Calculator {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,28 +23,20 @@ public class register {
   }
 
   @Test
-  public void testRegister() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/start");
-    driver.findElement(By.linkText("Login")).click();
-    driver.findElement(By.linkText("Click here to register")).click();
-    driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys("Jan");
-    driver.findElement(By.name("password1")).clear();
-    driver.findElement(By.name("password1")).sendKeys("janssen");
-    driver.findElement(By.name("password2")).clear();
-    driver.findElement(By.name("password2")).sendKeys("janssen");
+  public void testCalculator() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/logout");
+    driver.findElement(By.linkText("Calculator")).click();
+    driver.findElement(By.name("weight")).clear();
+    driver.findElement(By.name("weight")).sendKeys("80");
     driver.findElement(By.name("length")).clear();
-    driver.findElement(By.name("length")).sendKeys("180");
-    driver.findElement(By.name("age")).clear();
-    driver.findElement(By.name("age")).sendKeys("18");
-    driver.findElement(By.name("surname")).clear();
-    driver.findElement(By.name("surname")).sendKeys("Janssen");
-    driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("Jan");
-    driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("janjansen@hotmail.nl");
-    driver.findElement(By.name("gender")).click();
+    driver.findElement(By.name("length")).sendKeys("185");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+    driver.findElement(By.xpath("(//input[@name='weight'])[2]")).clear();
+    driver.findElement(By.xpath("(//input[@name='weight'])[2]")).sendKeys("80");
+    driver.findElement(By.name("waistline")).clear();
+    driver.findElement(By.name("waistline")).sendKeys("60");
+    driver.findElement(By.name("sex")).click();
+    driver.findElement(By.xpath("//input[@value='Calculate your fat percentage!']")).click();
   }
 
   @After

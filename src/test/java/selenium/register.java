@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class home {
+public class register {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,14 +23,28 @@ public class home {
   }
 
   @Test
-  public void testHome() throws Exception {
+  public void testRegister() throws Exception {
     driver.get(baseUrl + "/ubercoaching/start");
-    driver.findElement(By.linkText("Learn More »")).click();
-    driver.findElement(By.linkText("Home")).click();
-    driver.findElement(By.xpath("(//a[contains(text(),'Learn More »')])[2]")).click();
-    driver.findElement(By.linkText("Home")).click();
-    driver.findElement(By.xpath("(//a[contains(text(),'Learn More »')])[3]")).click();
-    driver.findElement(By.linkText("Home")).click();
+    driver.findElement(By.linkText("Login")).click();
+    driver.findElement(By.linkText("Click here to register")).click();
+    driver.findElement(By.name("username")).clear();
+    driver.findElement(By.name("username")).sendKeys("Jan");
+    driver.findElement(By.name("password1")).clear();
+    driver.findElement(By.name("password1")).sendKeys("janssen");
+    driver.findElement(By.name("password2")).clear();
+    driver.findElement(By.name("password2")).sendKeys("janssen");
+    driver.findElement(By.name("length")).clear();
+    driver.findElement(By.name("length")).sendKeys("180");
+    driver.findElement(By.name("age")).clear();
+    driver.findElement(By.name("age")).sendKeys("18");
+    driver.findElement(By.name("surname")).clear();
+    driver.findElement(By.name("surname")).sendKeys("Janssen");
+    driver.findElement(By.name("firstname")).clear();
+    driver.findElement(By.name("firstname")).sendKeys("Jan");
+    driver.findElement(By.name("email")).clear();
+    driver.findElement(By.name("email")).sendKeys("janjansen@hotmail.nl");
+    driver.findElement(By.name("gender")).click();
+    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
   }
 
   @After

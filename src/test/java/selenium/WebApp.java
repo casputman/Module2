@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ContactForm {
+public class WebApp {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,20 +23,21 @@ public class ContactForm {
   }
 
   @Test
-  public void testContact() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/webapp");
-    driver.findElement(By.xpath("//a[3]/li")).click();
-    driver.findElement(By.linkText("contact form")).click();
-    driver.findElement(By.id("cd-name")).clear();
-    driver.findElement(By.id("cd-name")).sendKeys("Cas");
-    driver.findElement(By.id("cd-company")).clear();
-    driver.findElement(By.id("cd-company")).sendKeys("Information regarding registration");
-    driver.findElement(By.id("cd-email")).clear();
-    driver.findElement(By.id("cd-email")).sendKeys("c.g.j.putman@student.utwente.nl");
-    driver.findElement(By.id("cd-textarea")).clear();
-    driver.findElement(By.id("cd-textarea")).sendKeys("Hello, I would like some information.");
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    assertEquals("Thank you for your feedback.", closeAlertAndGetItsText());
+  public void testWebApp() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/logout");
+    driver.findElement(By.linkText("Login")).click();
+    driver.findElement(By.name("username")).clear();
+    driver.findElement(By.name("username")).sendKeys("test");
+    driver.findElement(By.name("password")).clear();
+    driver.findElement(By.name("password")).sendKeys("test");
+    driver.findElement(By.name("commit")).click();
+    driver.findElement(By.linkText("PROCEED »")).click();
+    driver.findElement(By.linkText("Personal Home")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[2]")).click();
+    driver.findElement(By.linkText("Personal Home")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[4]")).click();
+    driver.findElement(By.cssSelector("li")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[3]")).click();
   }
 
   @After

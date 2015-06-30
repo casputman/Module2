@@ -1,15 +1,18 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class About {
+public class Goal {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,9 +26,25 @@ public class About {
   }
 
   @Test
-  public void testAbout() throws Exception {
+  public void testGoal() throws Exception {
     driver.get(baseUrl + "/ubercoaching/logout");
-    driver.findElement(By.linkText("About")).click();
+    driver.findElement(By.linkText("Login")).click();
+    driver.findElement(By.name("username")).clear();
+    driver.findElement(By.name("username")).sendKeys("test");
+    driver.findElement(By.name("password")).clear();
+    driver.findElement(By.name("password")).sendKeys("test");
+    driver.findElement(By.name("commit")).click();
+    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[4]")).click();
+    driver.findElement(By.name("weight")).clear();
+    driver.findElement(By.name("weight")).sendKeys("75");
+    driver.findElement(By.name("width")).clear();
+    driver.findElement(By.name("width")).sendKeys("60");
+    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+    driver.findElement(By.name("goalWeight")).clear();
+    driver.findElement(By.name("goalWeight")).sendKeys("70");
+    driver.findElement(By.name("goalDate")).clear();
+    driver.findElement(By.name("goalDate")).sendKeys("20/05/2016");
+    driver.findElement(By.xpath("//input[@value='Set Goal']")).click();
   }
 
   @After

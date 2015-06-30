@@ -1,4 +1,4 @@
-package tester;
+package selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class WebApp {
+public class Contact {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,21 +23,12 @@ public class WebApp {
   }
 
   @Test
-  public void testWebApp() throws Exception {
-    driver.get(baseUrl + "/ubercoaching/logout");
-    driver.findElement(By.linkText("Login")).click();
-    driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys("test");
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("test");
-    driver.findElement(By.name("commit")).click();
-    driver.findElement(By.linkText("PROCEED »")).click();
-    driver.findElement(By.linkText("Personal Home")).click();
-    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[2]")).click();
-    driver.findElement(By.linkText("Personal Home")).click();
-    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[4]")).click();
-    driver.findElement(By.cssSelector("li")).click();
-    driver.findElement(By.xpath("(//a[contains(text(),'PROCEED »')])[3]")).click();
+  public void testContact() throws Exception {
+    driver.get(baseUrl + "/ubercoaching/contact");
+    driver.findElement(By.linkText("contact form")).click();
+    driver.findElement(By.linkText("Contact")).click();
+    driver.findElement(By.linkText("uber-coaching@gmail.com")).click();
+    driver.findElement(By.linkText("Grotere kaart weergeven")).click();
   }
 
   @After

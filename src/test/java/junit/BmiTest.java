@@ -1,5 +1,4 @@
-package test;
-
+package junit;
 import static org.junit.Assert.*;
 import core.User;
 import core.BmiServlet;
