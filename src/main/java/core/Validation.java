@@ -48,6 +48,15 @@ public class Validation {
         if (connection == null) {
             connect();
         }
+        //Checks if connection is still valid and active, if not the connection will be refreshed.
+        try {
+			if(!connection.isValid(0)){
+			connect();	
+			System.out.println("connection is not valid anymore");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
         return connection;
     }
     
@@ -85,7 +94,6 @@ public class Validation {
     public static User validate(String username, String password) {
         User user = null;
         try {
-        	connect();
             PreparedStatement ps = getConnection().prepareStatement(
                       " SELECT  * "
                     + " FROM    uber.user "
@@ -99,7 +107,7 @@ public class Validation {
                 user = new User();
                 user.setFrom(rs);
             }
-            ps.close();
+                
         } catch (SQLException e) {
             e.printStackTrace();
         }
