@@ -53,28 +53,40 @@ public class CalorieGoal extends core.MyServlet {
 		try {
 
 			ps = getConnection().prepareStatement(
-					"SELECT activities_name " + "FROM    uber.usage "
+					"SELECT activities_name, amount " + "FROM    uber.usage "
 							+ "WHERE user_iduser = ? "
 							+ "AND usagedate = current_date");
 			ps.setInt(1, iduser);
 			ResultSet rs2 = ps.executeQuery();
 			PreparedStatement ks2;
 			int activityColumn = activitykg.determineActivityColumn(iduser);
-			String column = "kg" + Integer.toString(activityColumn);
-			System.out.println("column: " + column);
+			//String column = "kg" + Integer.toString(activityColumn);
+			System.out.println("column: " + activityColumn);
 			while (rs2.next()) {
-				ks2 = getConnection().prepareStatement(
-						"SELECT ?, name " + "FROM uber.activities "
-								+ "WHERE name = ?");
-
-				ks2.setString(1, column);
-				ks2.setString(2, rs2.getString(1));
+				ks2 = null;
+				if(activityColumn == 59){
+					ks2 = getConnection().prepareStatement(	"SELECT kg59 " + "FROM uber.activities "
+							+ "WHERE name = ?");
+				}
+				if(activityColumn == 70){
+					ks2 = getConnection().prepareStatement(	"SELECT kg70 " + "FROM uber.activities "
+							+ "WHERE name = ?");
+				}
+				if(activityColumn == 81){
+					ks2 = getConnection().prepareStatement(	"SELECT kg81 " + "FROM uber.activities "
+							+ "WHERE name = ?");
+				}
+				if(activityColumn == 92){
+					ks2 = getConnection().prepareStatement(	"SELECT kg92 " + "FROM uber.activities "
+							+ "WHERE name = ?");
+				} 
+				ks2.setString(1, rs2.getString(1));
 				ResultSet rs3 = ks2.executeQuery();
 				System.out.println("start outputting activity");
 				while (rs3.next()) {
-				    System.out.println("calorie: " + rs3.getString(1));
-					totalCalorieBurned = totalCalorieBurned + rs3.getDouble(1);
-					String name = rs3.getString(2);
+					System.out.println("Calorie: " + rs3.getDouble(1));
+					totalCalorieBurned = totalCalorieBurned + (rs3.getDouble(1) * rs2.getDouble(2));
+					String name = rs2.getString(1);
 					System.out.println("activity: " + name);
 				}
 			}
@@ -134,5 +146,4 @@ public class CalorieGoal extends core.MyServlet {
 		System.out.println("remaining: " + remaining);
 		return remaining;
 	}
-
 }
