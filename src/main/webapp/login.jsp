@@ -1,4 +1,3 @@
-
 <jsp:include page="_header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
