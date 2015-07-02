@@ -28,23 +28,32 @@ final boolean authorized = user != null;
 
 <body>
   <header class="siteHeader container clearfix">
-    <a href="start">
+
+<% if (authorized) { %>    
+	<a href="webapp">
 		<img class="logo" src="images/Ubercoaching.png" alt="Ubercoaching">
 	</a>
     <nav class="nav">
       <ul>
-<% if (authorized) { %>
         <a href="webapp" class="buttonlink"><li>Personal Home</li></a>
         <a href="InAbout" class="buttonlink"><li>About</li></a>
         <a href="InContact" class="buttonlink"><li>Contact</li></a>
 		<a href="logout" class="confirm buttonlink"><li>Log Out</li></a>
+      </ul>
+    </nav>
 <% } else { %>
+	<a href="start">
+		<img class="logo" src="images/Ubercoaching.png" alt="Ubercoaching">
+	</a>
+    <nav class="nav">
+      <ul>
 		<a href="login" class="buttonlink"><li>Login</li></a>
         <a href="start" class="buttonlink"><li>Home</li></a>
        	<a href="calculator.jsp" class="buttonlink"> <li>Calculator</li></a>
         <a href="startAbout" class="buttonlink"><li>About</li></a>
         <a href="contact" class="buttonlink"><li>Contact</li></a>
-<% } %>
+        
       </ul>
     </nav>
+<% } %>
   </header>
