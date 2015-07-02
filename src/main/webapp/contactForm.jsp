@@ -1,15 +1,10 @@
 <%@include file="_header.jsp" %>
 	<main class="siteContent container">
 	<center>
-		<h3>
-			<b>Contact form</b>
-		</h3>
 
-		</head>
-		<body>
-			<form form method="post" id="ContactForm" action="/ubercoaching/contactForm.jsp" onSubmit="alert('Thank you for your feedback.');"  class="cd-form floating-labels">
+<div>
+			<form method="post" id="ContactForm" action="/ubercoaching/contactForm.jsp" onSubmit="alert('Thank you for your feedback.');"  class="cd-form floating-labels">
 				<fieldset>
-					</div>
 
 					<div class="icon">
 						<label class="cd-label" for="cd-name"><b>Name</b></label> <input
@@ -39,6 +34,7 @@
 			</form>
 
 			</div>
+			</center>
 	</main>
 
 	<footer class="siteFooter container">

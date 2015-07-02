@@ -37,7 +37,7 @@
 	<input type="text" name="weight" placeholder="Weight in Kg" class="mytext" required/> <br><br>
 	For more information and a better calculation, please also fill in your <b>waistline span</b>. <br><br>
 	<input type="text" name="width" placeholder="Waistline in cm" class="mytext"> <br><br>
-	<input type="submit" value="Submit">
+	<input type="submit" value="Submit" class="btn bg-small">
 	</form>
 	</div>
 	<div>
@@ -53,7 +53,7 @@
 			<p>For <b>when</b> do you want to set this goal?</p>
 			<input type="date" name="goalDate" value="" placeholder=" DD/MM/YYYY" class="mytext" required />
 		</p>
-		    <p><input type="submit" value="Set goal"></p>
+		    <p><input type="submit" value="Set goal" class="btn bg-small"></p>
 		</form>
 		
 	</div>

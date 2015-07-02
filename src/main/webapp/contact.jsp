@@ -16,7 +16,7 @@
 		</div>
 		</div>
 			<div class="float">
-		<iframe width="600" height="450" frameborder="2px" style="border:solid black"
+		<iframe width="600" height="450" style="border:solid black 2px"
 src="https://www.google.com/maps/embed/v1/place?q=762%20Sunnyvale%20Saratoga%20Road%2C%20Sunnyvale%2C%20Californi%C3%AB%2C%20Verenigde%20Staten&key=AIzaSyDCdkQq_Q2ZBf-Cl01vaEHF4p9-bwE3Onk"></iframe>
 		</div>
 	</div>

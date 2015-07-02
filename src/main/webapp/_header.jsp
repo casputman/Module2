@@ -34,16 +34,16 @@ final boolean authorized = user != null;
     <nav class="nav">
       <ul>
 <% if (authorized) { %>
-        <li><a href="webapp" class="buttonlink">Personal Home</a></li>
-        <li><a href="InAbout" class="buttonlink">About</a></li>
-        <li><a href="InContact" class="buttonlink">Contact</a></li>
-		<li><a href="logout" class="confirm buttonlink">Log Out</a></li>
+        <a href="webapp" class="buttonlink"><li>Personal Home</li></a>
+        <a href="InAbout" class="buttonlink"><li>About</li></a>
+        <a href="InContact" class="buttonlink"><li>Contact</li></a>
+		<a href="logout" class="confirm buttonlink"><li>Log Out</li></a>
 <% } else { %>
-		<li><a href="login" class="buttonlink">Login</a></li>
-        <li><a href="start" class="buttonlink">Home</a></li>
-        <li><a href="calculator.jsp" class="buttonlink">Calculator</a></li>
-        <li><a href="startAbout" class="buttonlink">About</a></li>
-        <li><a href="contact" class="buttonlink">Contact</a></li>
+		<a href="login" class="buttonlink"><li>Login</li></a>
+        <a href="start" class="buttonlink"><li>Home</li></a>
+       	<a href="calculator.jsp" class="buttonlink"> <li>Calculator</li></a>
+        <a href="startAbout" class="buttonlink"><li>About</li></a>
+        <a href="contact" class="buttonlink"><li>Contact</li></a>
 <% } %>
       </ul>
     </nav>

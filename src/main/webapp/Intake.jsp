@@ -11,7 +11,7 @@
 				<form id="tfnewsearch" method="GET" action="intake" autocomplete="on">
 					<input type="hidden" name="action" value="foodsearch" />
 					<input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" />
-					<input type="submit" value="Search food!" class="tfbutton" />
+					<input type="submit" value="Search food!" class="btn bg-small" />
 				</form>
 				<div class="tfclear"></div>
 			</div>
@@ -38,7 +38,7 @@
 							<input type="text" name="amount" value="1" class="nfinput" size="3">
 							X
 							<input type="submit"
-								value="<%=food.getAmount()%> <%=food.getUnit()%>: <%=food.getName()%>" class="tfbutton" />
+								value="<%=food.getAmount()%> <%=food.getUnit()%>: <%=food.getName()%>" class="btn bg-small" />
 						</form>
 					</li>
 					<%
@@ -85,7 +85,7 @@
 				<form id="tfnewsearch" method="GET" action="intake" autocomplete="on">
 					<input type="hidden" name="action" value="activitysearch" />
 					<input type="text" id="textinput" class="tftextinput" name="q" size="21" maxlength="120" />
-					<input type="submit" value="Search activity!" class="tfbutton" />
+					<input type="submit" value="Search activity!" class="btn bg-small" />
 				</form>
 				<div class="tfclear"></div>
 
@@ -113,7 +113,7 @@
 							<input type="hidden" name="action" value="usage" />
 							<input type="text" name="amount" value="1" class="nfinput" size="3" />
 							X
-							<input type="submit" type="text" name="activity" value="<%=activity.getName()%>" class="tfbutton" />
+							<input type="submit" type="text" name="activity" value="<%=activity.getName()%>" class="btn bg-small" />
 						</form>
 					</li>
 					<%
@@ -158,7 +158,7 @@
 							class="tftextinput" name="sleependhour" size="2" maxlength="2">
 						min: <input type="text" class="tftextinput" name="sleependmin"
 							size="2" maxlength="2"><br><br><input type="submit"
-							value="Submit" class="tfbutton">
+							value="Submit" class="btn bg-small">
 					</form>
 					<%
 						Object e = request.getAttribute("sleepdur");
@@ -194,7 +194,7 @@
 					<br><b>Unit of specified amount:</b>
 						<input type="text" class="tftextinput" name="unit" value="gr." required />
 					<br>
-					<br><input type="submit" value="Add food!" class="tfbutton" />
+					<br><input type="submit" value="Add food!" class="btn bg-small" />
 				</form>
 			</div>
 			<div>

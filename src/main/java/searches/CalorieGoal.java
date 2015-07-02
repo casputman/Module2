@@ -72,6 +72,7 @@ public class CalorieGoal extends core.MyServlet {
 				ResultSet rs3 = ks2.executeQuery();
 				System.out.println("start outputting activity");
 				while (rs3.next()) {
+				    System.out.println("calorie: " + rs3.getString(1));
 					totalCalorieBurned = totalCalorieBurned + rs3.getDouble(1);
 					String name = rs3.getString(2);
 					System.out.println("activity: " + name);
