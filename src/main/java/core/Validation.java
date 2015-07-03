@@ -55,7 +55,6 @@ public class Validation {
 			System.out.println("connection is not valid anymore");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
         return connection;
     }
