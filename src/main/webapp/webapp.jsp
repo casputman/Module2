@@ -20,8 +20,7 @@
 			<img class="columnLogo" src="images/statistics.jpg" alt="statistics">
 		</a>
         <h3><b>Statistics</b></h3>
-
-        <p>It is very hard and tedious to keep count of every calorie, but we make it easy.</p>
+        <p>Get insight in your progress and see how the &Uuml;ber-coaching community is faring. </p>
 		</br>
         <a href="statistics" class="btn bg-small">PROCEED &raquo;</a>
       </div>
@@ -32,7 +31,10 @@
 		</a>
         <h3><b>Forum</b></h3>
 
-        <p>We keep track of your average calorie intake and inform you of the best course of action.</p>
+        <p>Need help losing weight? 
+        <br>Do you want advise about a healthy eating pattern? 
+        <br>The Forum is the place for all kinds of questions.
+        </p>
 		</br>
         <a href="forum" class="btn bg-small">PROCEED &raquo;</a>
       </div>
