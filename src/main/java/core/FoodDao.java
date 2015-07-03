@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FoodDao {
     
-    private static final int MAX_SEARCH_RESULTS = 100;
+    private static final int MAX_SEARCH_RESULTS = 5;
 
     /**
      * Performs a food search in the global list of foods and in the user's personal list. 

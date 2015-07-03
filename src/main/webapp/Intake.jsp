@@ -67,7 +67,7 @@
 						<%
 						}
 						%>
-					<tr><td>Totaal aantal caloriën vandaag:</td><td><%=totalCalorieIntake%></td></tr>
+					<tr><td>Totaal aantal calori&euml;n vandaag:</td><td><%=totalCalorieIntake%></td></tr>
 					<%
 					}
 					%>
@@ -138,7 +138,7 @@
 			        		<%
 					    }
 					    %>
-				    <tr><td>Totaal aantal verbruikte caloriën vandaag:</td><td><%=totalCalorieUsage%></td></tr>
+				    <tr><td>Totaal aantal verbruikte calori&euml;n vandaag:</td><td><%=totalCalorieUsage%></td></tr>
 				    <%
 					}
 					%>
@@ -154,7 +154,7 @@
 						From hour: <input type="text" class="tftextinput"
 							name="sleepstarthour" size="2" maxlength="2"> min: <input
 							type="text" class="tftextinput" name="sleepstartmin" size="2"
-							maxlength="2"> <br><br> Until hour: <input type="text"
+							maxlength="2"> <br><br> <span>Until hour:  </span><input type="text"
 							class="tftextinput" name="sleependhour" size="2" maxlength="2">
 						min: <input type="text" class="tftextinput" name="sleependmin"
 							size="2" maxlength="2"><br><br><input type="submit"

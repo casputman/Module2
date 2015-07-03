@@ -97,7 +97,6 @@ public class IntakeServlet extends core.MyServlet{
                     final double calorie = Double.parseDouble(getRequest().getParameter("calorie"));
                     final double amount  = Double.parseDouble(getRequest().getParameter("amount"));
                     final String unit = getRequest().getParameter("unit");
-                    
                     final Food food = new Food();
                     food.setIduser(iduser);
                     food.setName(name);
