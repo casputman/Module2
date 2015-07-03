@@ -150,15 +150,15 @@
 					<b>Enter your hours of sleep here:</b>
 				</p>
 				<div id="tfheader">
-					<form id="sleepform" method="POST" action="sleep">
-						From hour: <input type="text" class="tftextinput"
-							name="sleepstarthour" size="2" maxlength="2"> min: <input
-							type="text" class="tftextinput" name="sleepstartmin" size="2"
-							maxlength="2"> <br><br> <span>Until hour:  </span><input type="text"
-							class="tftextinput" name="sleependhour" size="2" maxlength="2">
-						min: <input type="text" class="tftextinput" name="sleependmin"
-							size="2" maxlength="2"><br><br><input type="submit"
-							value="Submit" class="btn bg-small">
+					<form id="sleepform" method="POST" action="intake">
+						<input type="hidden" name="action" value="sleep"/>
+						From hour: <input type="text" class="tftextinput" name="sleepstarthour" size="2" maxlength="2"> min: 
+						<input type="text" class="tftextinput" name="sleepstartmin" size="2" maxlength="2"> 
+						<br><br> <span>Until hour:  </span>
+						<input type="text" class="tftextinput" name="sleependhour" size="2" maxlength="2">
+						min: <input type="text" class="tftextinput" name="sleependmin" size="2" maxlength="2"><br><br>
+						<input type="submit" value="Submit" class="btn bg-small">
+						
 					</form>
 					<%
 						Object e = request.getAttribute("sleepdur");

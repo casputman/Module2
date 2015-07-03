@@ -1,4 +1,5 @@
 <%@include file="_header.jsp" %>
+<center>
 	<div class="calculator">
 		<h3>
 			<b>CALCULATOR</b>
@@ -19,6 +20,7 @@
 			<b><INPUT TYPE="submit" VALUE="Calculate your fat percentage!"></b>
 		</FORM>
 	</div>
+	</center>
 	<footer class="siteFooter container">
 		<p>Copyright &copy; 2015 by &Uuml;ber-coaching</p>
 	</footer>

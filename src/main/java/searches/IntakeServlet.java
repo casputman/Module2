@@ -18,6 +18,7 @@ import core.Validation;
 
 public class IntakeServlet extends core.MyServlet{
     private static final long serialVersionUID = 1L;
+    private String times = null;
 
     /**
      * Any GET requests concerning the intake.
@@ -38,6 +39,10 @@ public class IntakeServlet extends core.MyServlet{
             // Always get the current food intakes.
             final List<Intake> foodIntake = FoodDao.getFoodIntakeToday(iduser);
             request.setAttribute("foodIntake", foodIntake);
+            
+            if (times != null) { 
+            request.setAttribute("sleepdur", times);
+            }
             
             // Always get the current activity usages.
             final List<Usage> activityUsage = ActivityDao.getActivityUsageToday(iduser);
@@ -78,7 +83,6 @@ public class IntakeServlet extends core.MyServlet{
                 return;
             }
             final int iduser = ((User) request.getSession().getAttribute("user")).getIdUser();
-            
             SleepAdd sleepAdd = new SleepAdd();
             switch (getAction()) {
             case "intake":
@@ -161,12 +165,12 @@ public class IntakeServlet extends core.MyServlet{
                 int sleepdurationhour = (int) sleepDuration;
                 double sleepdurationmin = (int) Math.round((sleepDuration - sleepdurationhour) * 60);
                 System.out.println("hours : " + sleepdurationhour + " minuten: " + sleepdurationmin);
-                String times = ("you have slept: " + sleepdurationhour + " hours and " + sleepdurationmin + " minutes");
-                request.setAttribute("sleepdur", times);
-                forwardTo("/Intake");
+                times = ("you have slept: " + sleepdurationhour + " hours and " + sleepdurationmin + " minutes");
+                
+                redirectTo("intake");
                 break;
             }
-        } 
+        }
     }
 }
 
