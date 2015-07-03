@@ -9,10 +9,10 @@
   <main class="siteContent container">
 	<h1>Mathematics of losing weight</h1>
 
-	<p>Every other year there is another hype about losing weight and a healthy life. Last year it was eating organic food, 
+	<p>Every other year there is another hype about losing weight and a healthy living. Last year it was eating organic food, 
 	this year it is a gluten free diet and who knows what it will be next year. One thing that will not change is the simple math that calories 
-	you do not burn will be turned into fat. On this basis we to help everyone lose, gain or stay on weight. Because we do not know a lot about
-	fitness but we know a lot about math.</p>
+	you do not burn are turned into fat. On this basis we can help everyone lose, gain or stay on weight. We do not know a lot about
+	fitness, but we know a lot about math. Register now to take a look at all of the awesome features this website can offer, and maybe we can turn your life upside down.</p>
   </main>
 
   <footer class="siteFooter container">

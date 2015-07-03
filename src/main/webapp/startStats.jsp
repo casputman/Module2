@@ -5,8 +5,8 @@
   </div>
   <main class="siteContent container">
 <h1>Statistics about your weight</h1>
-<p>what was your average weight loss in the last month? Which days do you eat more? Which day should you be more careful with what you eat? 
-All these questions and more are answered clearly with all kind of statistics about your progress and diet.</p>
+<p>What was your average weight loss in the last month? Which days do you eat more often than average? Which day should you be more careful with what you eat? 
+All these questions and more are answered clearly with all kind of statistics about your progress and diet. Register now to take a look at all of the awesome features this website can offer, and maybe we can turn your life upside down.</p>
   </main>
 
   <footer class="siteFooter container">
