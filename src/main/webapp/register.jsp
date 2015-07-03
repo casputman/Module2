@@ -42,7 +42,7 @@ final String genderV = gender.equals("v") ? " checked=\"checked\"" : "";
 		</p>
 		<p><b>To help you with your health we first need to know a little bit about you:</b>
 		<p>
-			<input type="number" name="length" value="<%=length%>" placeholder=" Length" class="mytext" required/>
+			<input type="number" name="length" value="<%=length%>" placeholder=" Length in cm" class="mytext" required/>
 		</p>
 		<p>
 			<input type="number" name="age" value="<%=age%>" placeholder=" Age" class="mytext" required/>

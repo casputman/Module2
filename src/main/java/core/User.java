@@ -136,15 +136,22 @@ public class User {
 	 * @return       the weight column
 	 */
 	public static String getWeightColumn(double weight) {
-        if (weight >= 92) {
-            return "kg92";
-        } else if (weight >= 81) {
-            return "kg81";
-        } else if (weight >= 70) {
-            return "kg70";
-        } else {
-            return "kg59";
-        }
+		System.out.println(weight);
+		double activityweight59 = Math.abs(weight - 59);
+		double activityweight70 = Math.abs(weight - 70);
+		double activityweight81 = Math.abs(weight - 81);
+		double activityweight92 = Math.abs(weight - 92);
+		System.out.println("59: " + activityweight59);
+		System.out.println("70: " + activityweight70);
+		if(activityweight59 <= activityweight70 ){
+			return "kg59";
+		} else if (activityweight70 <=  activityweight81){
+			return "kg70";
+		} else if (activityweight81 <= activityweight92){
+			return "kg81";
+		} else {
+			return "kg92";
+		}
 	}
     
     /**
@@ -162,7 +169,8 @@ public class User {
                     + " FROM    uber.weight "
                     + " WHERE   user_iduser = ? "
                     + "   AND   weightdate <= ? "
-                    + " ORDER BY weightdate DESC ");
+                    + " ORDER BY weightdate DESC, "
+                    + " idweight DESC ");
             ps.setInt(1, getIdUser());
             ps.setDate(2, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(date)));
             final ResultSet rs = ps.executeQuery();
