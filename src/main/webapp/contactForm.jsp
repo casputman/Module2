@@ -13,7 +13,7 @@
 
 					<div class="icon">
 						<label class="cd-label" for="cd-company"><b>Subject</b></label> <input
-							class="company" type="text" name="cd-company" id="cd-company">
+							class="company" type="text" name="cd-company" id="cd-company" required>
 					</div>
 
 					<div class="icon">
