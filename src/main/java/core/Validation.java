@@ -50,7 +50,7 @@ public class Validation {
         }
         //Checks if connection is still valid and active, if not the connection will be refreshed.
         try {
-			if(!connection.isValid(0)){
+			if(!connection.isValid(1)){
 			connect();	
 			System.out.println("connection is not valid anymore");
 			}
