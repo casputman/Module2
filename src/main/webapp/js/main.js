@@ -225,6 +225,7 @@ function ajaxInternalServerError() {
 	alert("The server encountered an internal error.");
 }
 function rnd(iNumber, iDecimals) {
+	iDecimals = iDecimals||1;
 	var aux = Math.pow(10, iDecimals);
 	return Math.round(iNumber * aux) / aux;
 }
