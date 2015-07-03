@@ -656,4 +656,15 @@ FLoating labels
 	text-align: center;
 	margin-top: 3%;
 }
+
+.rightfloat {
+	float: left;
+	width: 50%;
+	
+	}
+
+.float {
+	float: left;
+	width: 50%;
+	}	
 }
