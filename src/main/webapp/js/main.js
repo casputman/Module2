@@ -1,6 +1,5 @@
 
 // Default ajax settings.
-
 $.ajaxSetup({
 	method: "get",
 	dataType: "json"
@@ -21,6 +20,9 @@ $(document).ajaxSuccess(function(jsonData, textStatus, jqXHR) {
 	}
 });
 
+// Settings.
+var locale = "en-EN";
+
 	
 $(function(){
 	
@@ -31,7 +33,7 @@ $(function(){
 	
 });
 
-google.load('visualization', '1.0', {'packages':['corechart']});
+google.load('visualization', '1.0', {'packages':['corechart'], 'language': locale});
 google.setOnLoadCallback(function(){
 
 	// Statistics page.
@@ -69,25 +71,25 @@ google.setOnLoadCallback(function(){
 		}
 		
 		if (jsonData.data.length == 0) {
-			$("#chart_bmi").html("U heeft uw BMI nog niet berekend.");
+			$("#chart_bmi").html("No BMI data available yet.");
 			return;
 		}
 		
 		// Define columns.
 		var data = {
 			cols: [
-		       {label: "Datum", type: "date"},
-		       {label: "Uw BMI", type: "number"},
-		       {label: "Gemiddeld BMI", type: "number"}
+		       {label: "Date", type: "date"},
+		       {label: "Your BMI", type: "number"},
+		       {label: "Average BMI of all users", type: "number"}
 	        ],
 	        rows: new Array()
 		};
 		// Put received data in the right format.
 		for (var i = 0; i < jsonData.data.length; i++) {
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
-								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
-			                   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
+								f: new Date(jsonData.data[i][0]).toLocaleString(locale, {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1], f: "" + rnd(jsonData.data[i][1])},
+			                   {v: jsonData.data[i][2], f: "" + rnd(jsonData.data[i][2])}]};
 		}
 		
 		// Create chart.
@@ -108,16 +110,16 @@ google.setOnLoadCallback(function(){
 		}
 		
 		if (jsonData.data.length == 0) {
-			$("#chart_fat").html("U heeft uw vetpercentage nog niet berekend.");
+			$("#chart_fat").html("No fat percentage data available yet.");
 			return;
 		}
 		
 		// Define columns.
 		var data = {
 			cols: [
-		       {label: "Datum", type: "date"},
-		       {label: "Uw vetpercentage", type: "number"},
-		       {label: "Gemiddeld vetpercentage", type: "number"}
+		       {label: "Date", type: "date"},
+		       {label: "Your fat percentage", type: "number"},
+		       {label: "Average fat percentage of all users", type: "number"}
 	        ],
 	        rows: new Array()
 		};
@@ -126,15 +128,15 @@ google.setOnLoadCallback(function(){
 		for (var i = 0; i < jsonData.data.length; i++) {
 
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
-								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-							   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
-							   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
+								f: new Date(jsonData.data[i][0]).toLocaleString(locale, {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+							   {v: jsonData.data[i][1], f: "" + rnd(jsonData.data[i][1])},
+							   {v: jsonData.data[i][2], f: "" + rnd(jsonData.data[i][2])}]};
 		}
 		
 		// Create chart.
 		var dataTable = new google.visualization.DataTable(data);
 		var chart = new google.visualization.LineChart($('#chart_fat')[0]);
-		options.title = "Vetpercentage";
+		options.title = "Fat percentage";
         chart.draw(dataTable, options);
 	});
 	
@@ -145,37 +147,73 @@ google.setOnLoadCallback(function(){
 		url: "rest/statistics/calorie"
 	})
 	.done(function(jsonData) {
-		
 		if (jsonData.code != 200) {
 			return;
 		}
-		
 		if (jsonData.data.length == 0) {
-			$("#chart_bmi").html("Er is nog geen calorie data beschkbaar.");
+			$("#chart_calorie").html("No calorie data available yet.");
 			return;
 		}
 		
 		// Define columns.
 		var data = {
 			cols: [
-		       {label: "Datum", type: "date"},
-		       {label: "Calorie-inname", type: "number"},
-		       {label: "Caloriegebruik", type: "number"}
+		       {label: "Date", type: "date"},
+		       {label: "Calorie intake", type: "number"},
+		       {label: "Calorie usage", type: "number"}
 	        ],
 	        rows: new Array()
 		};
 		// Put received data in the right format.
 		for (var i = 0; i < jsonData.data.length; i++) {
 			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
-								f: new Date(jsonData.data[i][0]).toLocaleString("nl-NL", {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
-			                   {v: jsonData.data[i][1], f: "" + (Math.round(jsonData.data[i][1] * 10) / 10)},
-			                   {v: jsonData.data[i][2], f: "" + (Math.round(jsonData.data[i][2] * 10) / 10)}]};
+								f: new Date(jsonData.data[i][0]).toLocaleString(locale, {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1], f: "" + rnd(jsonData.data[i][1])},
+			                   {v: jsonData.data[i][2], f: "" + rnd(jsonData.data[i][2])}]};
 		}
 		
 		// Create chart.
 		var dataTable = new google.visualization.DataTable(data);
 		var chart = new google.visualization.LineChart($('#chart_calorie')[0]);
-		options.title = "Uw calorie-inname en -gebruik";
+		options.title = "Your calorie intake and usage";
+        chart.draw(dataTable, options);
+	});
+
+	
+	// Get calorie statistics.
+	$.ajax({
+		url: "rest/statistics/sleep"
+	})
+	.done(function(jsonData) {
+		if (jsonData.code != 200) {
+			return;
+		}
+		if (jsonData.data.length == 0) {
+			$("#chart_sleep").html("No sleep data is available yet.");
+			return;
+		}
+		
+		// Define columns.
+		var data = {
+			cols: [
+		       {label: "Date", type: "date"},
+		       {label: "Your hours of sleep", type: "number"},
+		       {label: "Average hours of sleep of all users", type: "number"}
+	        ],
+	        rows: new Array()
+		};
+		// Put received data in the right format.
+		for (var i = 0; i < jsonData.data.length; i++) {
+			data.rows[i] = {c:[{v: new Date(jsonData.data[i][0]),
+								f: new Date(jsonData.data[i][0]).toLocaleString(locale, {month: "long", weekday: "long", year: "numeric", day: "numeric" })},
+			                   {v: jsonData.data[i][1], f: "" + rnd(jsonData.data[i][1])},
+			                   {v: jsonData.data[i][2], f: "" + rnd(jsonData.data[i][2])}]};
+		}
+		
+		// Create chart.
+		var dataTable = new google.visualization.DataTable(data);
+		var chart = new google.visualization.LineChart($('#chart_sleep')[0]);
+		options.title = "Hours of sleep";
         chart.draw(dataTable, options);
 	});
 });
@@ -185,4 +223,8 @@ function ajaxAuthorizationError() {
 }
 function ajaxInternalServerError() {
 	alert("The server encountered an internal error.");
+}
+function rnd(iNumber, iDecimals) {
+	var aux = Math.pow(10, iDecimals);
+	return Math.round(iNumber * aux) / aux;
 }

@@ -175,15 +175,15 @@ public class Statistics {
             final ResultSet rs2 = ps2.executeQuery();
             while (rs2.next()) {
                 final PreparedStatement ps3 = Validation.getConnection().prepareStatement(
-                        "SELECT avg(fatpercentage) "
-                        + "FROM uber.fat f, ( "
-                        + "    SELECT  user_iduser, max(\"Date\") as maxDate "
-                        + "    FROM    uber.fat "
-                        + "    WHERE   \"Date\" <= ? "
-                        + "    GROUP BY user_iduser "
-                        + ") r "
-                        + "WHERE   f.user_iduser = r.user_iduser "
-                        + "  AND   f.\"Date\" = r.maxDate ");
+                          " SELECT  avg(fatpercentage) "
+                        + " FROM    uber.fat f, ( "
+                        + "     SELECT  user_iduser, max(\"Date\") as maxDate "
+                        + "     FROM    uber.fat "
+                        + "     WHERE   \"Date\" <= ? "
+                        + "     GROUP BY user_iduser "
+                        + " ) r "
+                        + " WHERE   f.user_iduser = r.user_iduser "
+                        + "   AND   f.\"Date\" = r.maxDate ");
                 ps3.setDate(1, rs2.getDate(1));
                 final ResultSet rs3 = ps3.executeQuery();
                 if (!rs3.next()) {
@@ -300,6 +300,91 @@ public class Statistics {
             }
             
             // Next: calorie netto usage
+                
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return getInternalServerError();
+        }
+        
+        // Now cast the data map to a simple list.
+        final ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+        for (Map.Entry<Integer, ArrayList<Object>> entry : data.entrySet()) {
+            dataList.add(entry.getValue());
+        }
+        
+        map.put("data", dataList);
+        
+        // Send back to client.
+        try {
+            return new ObjectMapper().writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            return getInternalServerError();
+        }
+    }
+    
+
+    @GET
+    @Path("sleep")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String doJsonGetSleep() {
+        // Check validation.
+        final String validationErrorOutput;
+        if ((validationErrorOutput = checkValidation()) != null) {
+            return validationErrorOutput;
+        }
+        final Map<String, Object> map = new LinkedHashMap<>();
+        map.put("code", 200);
+        
+        final TreeMap<Integer, ArrayList<Object>> data = new TreeMap<Integer, ArrayList<Object>>(); 
+        final int iduser = ((User) request.getAttribute("user")).getIdUser();
+        
+        try {
+            // Current average user's sleep hours.
+            final PreparedStatement ps1 = Validation.getConnection().prepareStatement(
+                      " SELECT  sleepdate as \"date\", sleep "
+                    + " FROM    uber.sleep "
+                    + " WHERE   user_iduser = ? ");
+            ps1.setInt(1, iduser);
+            final ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                final int key = Integer.parseInt(rs1.getString("date").replaceAll("[^\\d]", ""));
+                final ArrayList<Object> dataRow = new ArrayList<>();
+                dataRow.add(rs1.getString("date"));
+                dataRow.add(rs1.getDouble("sleep"));
+                dataRow.add(null);
+                data.put(key, dataRow);
+            }
+            
+            
+            // Average sleep hours.
+            final PreparedStatement ps2 = Validation.getConnection().prepareStatement(
+                    " SELECT sleepdate as \"Date\" FROM uber.sleep ORDER BY sleepdate ASC; ");
+            final ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                final int key = Integer.parseInt(rs2.getString("Date").replaceAll("[^\\d]", ""));
+                final PreparedStatement ps3 = Validation.getConnection().prepareStatement(
+                          " SELECT avg(per_user_avg) "
+                        + " FROM ( "
+                        + "     SELECT  avg(sleep) as per_user_avg "
+                        + "     FROM    uber.sleep "
+                        + "     WHERE   sleepdate <= ? "
+                        + "     GROUP BY user_iduser "
+                        + " ) a; ");
+                ps3.setDate(1, rs2.getDate(1));
+                final ResultSet rs3 = ps3.executeQuery();
+                if (!rs3.next()) {
+                    continue;
+                }
+                if (data.containsKey(key)) {
+                    data.get(key).set(2, rs3.getDouble(1));
+                } else {
+                    final ArrayList<Object> rowData = new ArrayList<Object>();
+                    rowData.add(rs2.getString("Date"));
+                    rowData.add(null);
+                    rowData.add(rs3.getDouble(1));
+                    data.put(key, rowData);
+                }
+            }
                 
         } catch (SQLException e) {
             e.printStackTrace();
