@@ -15,6 +15,8 @@ public class Calculator {
 }
 	public int sommetje(){
 		return (this.getal1 + this.getal2);
-	
+	}
+	public int returnTwo(){
+		return 2;
 	}
 }
